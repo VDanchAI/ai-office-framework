@@ -217,9 +217,9 @@ The framework is built for **Anthropic Claude** (Projects). Adaptation to other 
 
 ---
 
-## Need customization?
+## Collaboration
 
-Here you'll find architecture and templates. If you need a ready-made office for your business or adaptation to another platform — get in touch.
+Architecture and templates are here. If you need a ready-made office for your business or adaptation to another platform — get in touch.
 
 → **[Contact](#contact)**
 
