@@ -1,0 +1,91 @@
+{
+  "_comment": [
+    "SIMPLIFIED DEMO of the Copywriter's hierarchical router.",
+    "The real router has 43 sections, complex trigger patterns,",
+    "and multi-level cascading. This shows the STRUCTURE only.",
+    "See TEMPLATE_ROUTER.json for a full hierarchical template."
+  ],
+
+  "router_version": "demo",
+  "router_type": "hierarchical_master",
+  "kb_name": "Copywriter_Knowledge_Base",
+  "total_sections": 43,
+  "total_domains": 4,
+
+  "architecture": {
+    "type": "hierarchical",
+    "domains": 4,
+    "routing": "Master Router → Sub-Router → Section Anchor"
+  },
+
+  "ai_instructions": {
+    "routing_strategy": [
+      "STAGE 1: Master Router matches query to a domain",
+      "STAGE 2: Sub-Router finds the exact section",
+      "Multi-domain: if query spans domains, route to ALL relevant"
+    ],
+    "fallback": "CORE_COPYWRITING domain, S1 (River Syntax)"
+  },
+
+  "domains": {
+    "CORE_COPYWRITING": {
+      "description": "Writing style, techniques, hooks, platforms, AI detection",
+      "section_count": 26,
+      "priority": 10,
+      "when_to_use": "Any question about writing, style, persuasion, platforms",
+      "context_tags": ["copywriting", "style", "hooks", "AI detection", "platforms"]
+    },
+    "NARRATIVE_THERAPY": {
+      "description": "Therapeutic narrative techniques adapted for marketing",
+      "section_count": 6,
+      "priority": 8,
+      "when_to_use": "Deep emotional content, transformation stories, problem-solution narratives",
+      "context_tags": ["narrative", "therapy", "externalization", "re-authoring"]
+    },
+    "PERSUASION": {
+      "description": "Psychology-based influence and conversion techniques",
+      "section_count": 6,
+      "priority": 7,
+      "when_to_use": "Influence, trust building, sales psychology, conversion",
+      "context_tags": ["persuasion", "Cialdini", "trust", "conversion", "biases"]
+    },
+    "RHETORICAL_MASTERY": {
+      "description": "Classical and modern rhetoric for digital content",
+      "section_count": 5,
+      "priority": 6,
+      "when_to_use": "Provocative writing, metaphors, rhetorical devices",
+      "context_tags": ["rhetoric", "metaphor", "provocation", "classical"]
+    }
+  },
+
+  "sub_router_demo": {
+    "_comment": "Showing 3 sections from CORE_COPYWRITING as example",
+    "domain": "CORE_COPYWRITING",
+    "sections": [
+      {
+        "id": "S1",
+        "title": "River Syntax",
+        "anchor": "#S1_RIVER_SYNTAX",
+        "triggers": ["style", "rhythm", "sentence structure", "how to write", "author voice"],
+        "description": "Author's signature writing rhythm and flow",
+        "priority": 10
+      },
+      {
+        "id": "S10",
+        "title": "Hook Formulas",
+        "anchor": "#S10_HOOKS",
+        "triggers": ["hook", "opening line", "first sentence", "attention", "начало поста"],
+        "description": "Opening patterns that capture attention",
+        "priority": 8
+      },
+      {
+        "id": "S16",
+        "title": "AI Detection Mechanics",
+        "anchor": "#S16_AI_DETECTION",
+        "triggers": ["AI detection", "GPTZero", "звучит как AI", "обнаружение", "humanize"],
+        "description": "How AI detectors work and how to avoid flagging",
+        "priority": 8
+      }
+    ]
+  }
+}

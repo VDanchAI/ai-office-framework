@@ -1,0 +1,80 @@
+{
+  "_comment": "DEMO FILE — Simplified flat router showing structure only. Actual triggers, weights, and section content are not included. Router version: v5.2. This pattern is used across AI Office KB files with fewer than ~20 sections.",
+
+  "router": {
+    "type": "flat",
+    "version": "5.2",
+    "kb_version": "2.0",
+    "total_sections": 8,
+    "selection_method": "keyword_and_intent_match",
+    "fallback_section": "QUICK_REFERENCE"
+  },
+
+  "sections": [
+    {
+      "id": "FORMULAS",
+      "title": "Core Metrics Formulas",
+      "triggers": [
+        "how to calculate",
+        "formula for",
+        "what is CAC",
+        "what is LTV",
+        "conversion rate formula",
+        "churn calculation",
+        "ROAS",
+        "ROI formula"
+      ],
+      "_note": "Loaded when user asks how to calculate a specific metric. Most frequently accessed section."
+    },
+    {
+      "id": "BENCHMARKS",
+      "title": "Industry Benchmarks",
+      "triggers": [
+        "is this a good result",
+        "industry average",
+        "benchmark",
+        "normal open rate",
+        "typical conversion",
+        "compare to market",
+        "how does this compare"
+      ],
+      "_note": "Loaded when user needs context for their numbers. Always used with CIRI Context step."
+    },
+    {
+      "id": "RED_FLAGS",
+      "title": "Warning Signs in Data",
+      "triggers": [
+        "something is wrong",
+        "metrics dropped",
+        "sudden change",
+        "spike",
+        "drop",
+        "anomaly",
+        "alert",
+        "should I be worried",
+        "what does this mean"
+      ],
+      "_note": "Loaded when query suggests a problem or unexpected change in data. Contains hard thresholds."
+    },
+    {
+      "id": "QUICK_REFERENCE",
+      "title": "Quick Reference",
+      "triggers": [
+        "quick",
+        "what is",
+        "remind me",
+        "definition",
+        "simple question",
+        "just tell me"
+      ],
+      "_note": "Fallback section for short factual questions. Intentionally overlaps with other sections for speed. Also used as default when no other section matches."
+    }
+  ],
+
+  "_sections_not_shown": [
+    "ATTRIBUTION",
+    "DASHBOARDS",
+    "REPORTS",
+    "FUNNELS"
+  ]
+}

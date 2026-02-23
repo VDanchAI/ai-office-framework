@@ -1,0 +1,158 @@
+{
+  "router_version": "5.2",
+  "kb_version": "5.0",
+  "type": "hierarchical",
+  "description": "Two-stage router: domain classifier first, section router second. Priority weights resolve cross-domain queries.",
+
+  "domains": [
+    {
+      "id": "D1",
+      "name": "THINKING_CORE",
+      "priority": 10,
+      "section_count": 5,
+      "trigger_signals": ["decision", "reasoning", "bias", "assumption", "think", "logic", "probability", "uncertainty"],
+      "sections": [
+        {
+          "id": "D1_S1",
+          "name": "first_principles",
+          "description": "Decomposition of complex problems to foundational truths. Identifies what is assumed vs. what is known.",
+          "trigger_signals": ["first principles", "decompose", "why does this actually work", "underlying assumption"],
+          "example_query": "Why do we assume our pricing model is correct?",
+          "example_activation": "Query contains assumption challenge about a foundational business parameter → D1_S1"
+        },
+        {
+          "id": "D1_S2",
+          "name": "bayesian_thinking",
+          "description": "Probability updating under new evidence. Prior → likelihood → posterior. Calibration of confidence.",
+          "trigger_signals": ["probability", "confidence", "update", "new information", "what are the odds", "how sure"],
+          "example_query": "We got one negative customer interview. Should we change direction?",
+          "example_activation": "Query involves updating a belief based on a single data point → D1_S2"
+        },
+        {
+          "id": "D1_S3",
+          "name": "decision_under_uncertainty",
+          "description": "Decision frameworks for incomplete information: expected value, regret minimization, reversibility assessment.",
+          "trigger_signals": ["decision", "choose", "option", "uncertain", "risk", "which path"],
+          "example_query": "Should we launch in Q1 or wait for the data from the pilot?",
+          "example_activation": "Query is a binary or multi-option decision with uncertainty → D1_S3"
+        },
+        {
+          "id": "D1_S4",
+          "name": "cognitive_biases",
+          "description": "Recognition and countermeasures for systematic reasoning errors: confirmation bias, sunk cost, availability heuristic, planning fallacy.",
+          "trigger_signals": ["bias", "blind spot", "are we missing something", "challenge us", "devil's advocate"],
+          "example_query": "We're all very excited about this idea. What might we be missing?",
+          "example_activation": "Query is explicitly requesting assumption challenge or bias check → D1_S4"
+        },
+        {
+          "id": "D1_S5",
+          "name": "reasoning_frameworks",
+          "description": "Inductive, deductive, abductive, and analogical reasoning. When to use each. How to spot invalid arguments.",
+          "trigger_signals": ["reasoning", "argument", "logic", "prove", "evidence", "analogy"],
+          "example_query": "The competitor did X and succeeded. Does that mean we should do X?",
+          "example_activation": "Query involves analogical reasoning from a single case → D1_S5"
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "name": "STRATEGY_EXECUTION",
+      "priority": 9,
+      "section_count": 7,
+      "trigger_signals": ["strategy", "framework", "SWOT", "OKR", "prioritize", "growth", "competitive", "market", "business model"],
+      "sections": [
+        { "id": "D2_S1", "name": "strategic_frameworks", "description": "SWOT (grounded), Porter's Five Forces, Blue Ocean, Business Model Canvas, JTBD" },
+        { "id": "D2_S2", "name": "prioritization", "description": "RICE, MoSCoW, Kano — with guidance on when each is appropriate and what inputs they require" },
+        { "id": "D2_S3", "name": "goals_systems", "description": "OKR methodology, Balanced Scorecard, goal hierarchy design" },
+        { "id": "D2_S4", "name": "growth_mechanics", "description": "Acquisition, activation, retention, expansion — including growth loops vs. funnels" },
+        { "id": "D2_S5", "name": "competitive_dynamics", "description": "Competitive positioning, moat analysis, response prediction" },
+        { "id": "D2_S6", "name": "resource_allocation", "description": "Portfolio theory applied to initiatives, 70/20/10, opportunity cost framing" },
+        { "id": "D2_S7", "name": "scenario_planning", "description": "Scenario construction, stress-testing, pre-mortem, signal monitoring" }
+      ]
+    },
+    {
+      "id": "D3",
+      "name": "INNOVATION",
+      "priority": 7,
+      "section_count": 4,
+      "trigger_signals": ["innovation", "MVP", "experiment", "validate", "hypothesis", "creative", "new idea", "design thinking"],
+      "sections": [
+        { "id": "D3_S1", "name": "lean_startup", "description": "Build-measure-learn, validated learning, pivot vs. persevere" },
+        { "id": "D3_S2", "name": "mvp_design", "description": "MVP scoping, fake door tests, concierge MVP, success criteria definition" },
+        { "id": "D3_S3", "name": "creativity_techniques", "description": "SCAMPER, lateral thinking, constraint-based ideation, analogical transfer" },
+        { "id": "D3_S4", "name": "design_thinking", "description": "Empathy → Define → Ideate → Prototype → Test cycle" }
+      ]
+    },
+    {
+      "id": "D4",
+      "name": "ORGANIZATIONAL",
+      "priority": 7,
+      "section_count": 6,
+      "trigger_signals": ["team", "organization", "culture", "feedback", "communication", "change", "resistance", "coaching", "negotiation"],
+      "sections": [
+        { "id": "D4_S1", "name": "coaching", "description": "GROW model, situational leadership, when to coach vs. direct" },
+        { "id": "D4_S2", "name": "systems_thinking", "description": "Feedback loops, archetypes (fixes that fail, shifting the burden), leverage points" },
+        { "id": "D4_S3", "name": "communication", "description": "Pyramid principle, message architecture, audience calibration" },
+        { "id": "D4_S4", "name": "feedback_design", "description": "SBI model, cadence design, psychological safety conditions" },
+        { "id": "D4_S5", "name": "negotiation", "description": "Principled negotiation, BATNA, anchoring, integrative vs. distributive" },
+        { "id": "D4_S6", "name": "change_dynamics", "description": "Kotter's 8 steps, resistance patterns, coalition building" }
+      ]
+    },
+    {
+      "id": "D5",
+      "name": "INFLUENCE_MEANING",
+      "priority": 6,
+      "section_count": 4,
+      "trigger_signals": ["influence", "persuasion", "stakeholder", "meaning", "purpose", "motivation", "ikigai", "stoicism"],
+      "sections": [
+        { "id": "D5_S1", "name": "influence_persuasion", "description": "Cialdini principles, narrative framing, emotional vs. rational levers" },
+        { "id": "D5_S2", "name": "stakeholder_alignment", "description": "Stakeholder mapping, alignment sequencing, managing resistance" },
+        { "id": "D5_S3", "name": "meaning_purpose", "description": "Purpose frameworks, connecting work to meaning, Ikigai application" },
+        { "id": "D5_S4", "name": "stoic_orientation", "description": "Stoicism as strategic tool: dichotomy of control, negative visualization, equanimity under pressure" }
+      ]
+    },
+    {
+      "id": "D6",
+      "name": "AI_GOVERNANCE",
+      "priority": 8,
+      "section_count": 1,
+      "trigger_signals": ["AI", "agent", "LLM", "automation", "build vs buy", "AI strategy", "governance", "AI risk"],
+      "sections": [
+        {
+          "id": "D6_S1",
+          "name": "ai_strategy_governance",
+          "description": "AI strategy for organizations, agent frameworks and orchestration patterns, build vs. buy vs. integrate decision criteria, governance and accountability structures",
+          "trigger_signals": ["AI strategy", "should we build", "AI governance", "which AI tool", "AI risk", "agent architecture"],
+          "example_query": "Should we build our own AI assistant or use an off-the-shelf solution?",
+          "example_activation": "Query is a build vs. buy decision for AI tooling → D6_S1"
+        }
+      ]
+    }
+  ],
+
+  "routing_rules": {
+    "single_domain_match": "Route directly to domain, then section",
+    "multi_domain_match": "Use priority weights — highest priority domain is primary, others are supplementary",
+    "no_domain_match": "Default to D1 (THINKING_CORE) — the thinking framework applies universally",
+    "d1_override": "D1 is always checked when query involves a decision or reasoning challenge, regardless of primary domain match"
+  },
+
+  "cross_domain_examples": [
+    {
+      "query": "Our team is resisting the AI tools rollout. How do we handle this?",
+      "primary_domain": "D4",
+      "primary_section": "D4_S6",
+      "supplementary_domain": "D6",
+      "supplementary_section": "D6_S1",
+      "note": "Organizational change (D4) is primary; AI context (D6) is supplementary"
+    },
+    {
+      "query": "We're excited about this new market. Are we being rational?",
+      "primary_domain": "D1",
+      "primary_section": "D1_S4",
+      "supplementary_domain": "D2",
+      "supplementary_section": "D2_S5",
+      "note": "Bias check (D1) is triggered first; competitive analysis (D2) is supplementary"
+    }
+  ]
+}
