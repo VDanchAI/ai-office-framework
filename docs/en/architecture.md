@@ -2,7 +2,7 @@
 
 ## What is an AI Office?
 
-An AI Office is a system of specialized AI bots, each with a defined role, working together to cover the full scope of marketing and content operations. Instead of one general-purpose assistant that does everything poorly, you get 10 focused specialists that each do their domain well.
+AI Office is a system of 10 specialized AI bots for marketing and content. Instead of one general-purpose assistant that does everything poorly — focused specialists, each deep in their domain.
 
 Each bot = one Claude Project with its own instructions, knowledge base, and behavioral rules. Together, they form a virtual team.
 
@@ -10,13 +10,13 @@ Each bot = one Claude Project with its own instructions, knowledge base, and beh
 
 **One bot per function. Deep expertise over broad coverage.**
 
-A copywriter that actually writes like a human. An analyst that never delivers data without a recommendation. A marketer that argues against bad strategies before executing them. A visionary that tells you uncomfortable truths about your plans.
+A copywriter that writes like a human. An analyst that never delivers numbers without a recommendation. A marketer that argues with the idea first, then executes. A visionary that says what you don't want to hear.
 
 These aren't generic assistants with different names. Each bot has:
-- Its own **Knowledge Base** (domain expertise, techniques, frameworks)
-- Its own **Project Instructions** (behavioral rules, iron constraints, workflows)
-- A shared **Universal Core** (common protocols all bots follow)
-- Optional **Add-ons** (specialized knowledge loaded when needed)
+- Its own **Knowledge Base** (expertise, techniques, frameworks)
+- Its own **instructions** (rules, constraints, workflows)
+- A shared **core** (protocols for all bots)
+- **Add-ons** (extra knowledge per task)
 
 ## The Document Stack
 
@@ -37,8 +37,8 @@ Every bot in the AI Office loads documents in this order:
 │  3. Knowledge Base + Router                 │
 │     WHAT it knows (domain expertise)        │
 │     Router = navigation system (JSON)       │
-│     Sections accessed by anchor, not loaded  │
-│     in full                                 │
+│     Only the needed section is loaded,       │
+│     not the entire KB                       │
 ├─────────────────────────────────────────────┤
 │  4. Add-ons (optional)                      │
 │     Extra knowledge for specific tasks      │
@@ -65,10 +65,9 @@ When sources conflict, higher priority wins:
 Bots don't load their entire Knowledge Base into context. That would waste tokens and dilute focus. Instead:
 
 1. **User asks a question**
-2. **Router** (JSON block at the top of the KB) maps the query to a section
-3. **Bot jumps to that section** using its anchor
-4. **Only that section is loaded** into context
-5. **Bot generates a response** from that section + its instructions
+2. **Router** (JSON at the top of the KB) finds the needed section
+3. **Bot loads only that section** into context
+4. **Response is generated** from that section + instructions
 
 Two router architectures:
 
@@ -85,23 +84,23 @@ Two router architectures:
 The AI Office is built on **Claude Projects** (Anthropic). Each bot = one Claude Project.
 
 **Why Claude Projects:**
-- Project-level instructions persist across conversations
+- Instructions persist across conversations
 - Knowledge files are loaded into the project permanently
-- Each project is isolated — bots don't leak into each other
-- Memory persists across sessions within a project
+- Projects are isolated — bots don't leak into each other
+- Memory works across sessions within a project
 
-**Adaptation to other platforms** (GPT, API-based systems) is possible but requires adjustments to the document loading mechanism and router implementation.
+Can be adapted to other platforms (GPT, API-based systems), but you'll need to rework document loading and router implementation.
 
 ## What Makes This Different
 
 | Approach | Typical AI setup | AI Office |
 |----------|-----------------|-----------|
 | Roles | One bot does everything | 10 specialized bots |
-| Knowledge | Generic LLM knowledge | Curated KBs with 1,000-27,000 lines of domain expertise |
-| Navigation | Full KB loaded (wasted context) | Router-based: load only what's needed |
-| Behavior | "Helpful assistant" | Defined personality: argues, challenges, has opinions |
-| Quality | Hope for the best | Self-check protocols, iron rules, D.A.O.S. quality cycle |
-| Collaboration | Manual copy-paste | Structured handoffs with REQUEST format |
+| Knowledge | Generic LLM knowledge | Hand-built KBs (1,000–27,000 lines per role) |
+| Navigation | Full KB loaded (wasted context) | Router loads only the needed section |
+| Behavior | "Helpful assistant" | Personality: argues, challenges, has opinions |
+| Quality | Hope for the best | Self-check, iron rules, D.A.O.S. quality cycle |
+| Collaboration | Manual copy-paste | Task handoffs via REQUEST format |
 
 → See [Roles Overview](roles-overview.md) for all 10 roles.
 → See [How Roles Interact](how-roles-interact.md) for collaboration patterns.

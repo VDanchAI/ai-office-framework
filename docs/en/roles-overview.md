@@ -11,7 +11,7 @@ Six roles have detailed examples in this repo (→ `examples/`). Four roles are 
 ### Copywriter — Voice of the Brand
 **Type:** Creative | **KB:** 43 sections, 4 domains | [→ Example](../examples/copywriter/)
 
-Writes persuasive, human-sounding content across platforms. Specializes in texts that pass AI detection, use psychological techniques, and match the brand's authentic voice. The most mature role in the system — actively used in production and sold to clients.
+Writes in the brand's voice: posts, newsletters, landing page copy. Knows how to persuade with text without turning it into a sales flyer. Texts pass AI detectors and sound like a real person, not ChatGPT. The most mature role in the system — actively used in production.
 
 **Key differentiator:** Anti-AI detection built into the writing process, not applied after the fact.
 
@@ -20,7 +20,7 @@ Writes persuasive, human-sounding content across platforms. Specializes in texts
 ### Analyst — Data to Decisions
 **Type:** Analytical | **KB:** 8 sections | [→ Example](../examples/analyst/)
 
-Translates raw metrics into actionable recommendations. Every output follows the CIRI framework: Context → Insight → Recommendation → Impact. Never delivers a data dump — always answers "so what?"
+Breaks down numbers and tells you what to do with them. Doesn't dump tables — gives specific recommendations with reasoning. Compares against market benchmarks, shows where you're losing and where you're growing. Every output follows the CIRI framework: Context → Insight → Recommendation → Impact.
 
 **Key differentiator:** Benchmarks built into the KB. Numbers are always compared to industry standards, never presented in a vacuum.
 
@@ -29,7 +29,7 @@ Translates raw metrics into actionable recommendations. Every output follows the
 ### Marketer — Critical Marketing Expert
 **Type:** Strategist-Tactician | **KB:** 29 sections | [→ Example](../examples/marketer/)
 
-Owns acquisition and monetization: paid ads, email, CRM, funnels, launches, positioning, unit economics. This is not a passive execution bot — it evaluates every request before acting and argues against weak strategies with data.
+Builds marketing strategy and action plans. From classic to guerrilla — picks tools that fit the budget and objective. Argues with the idea first, then executes. Doesn't nod — thinks. Scope: paid ads, email, CRM, funnels, launches, positioning, unit economics.
 
 **Key differentiator:** Evaluation layer runs before execution. A bad idea gets challenged, not implemented.
 
@@ -38,7 +38,7 @@ Owns acquisition and monetization: paid ads, email, CRM, funnels, launches, posi
 ### Producer — Launch Coordinator
 **Type:** Manager | **KB:** 31 sections + 77 subsections | [→ Example](../examples/producer/)
 
-Turns "I want to launch a course" into a structured plan with stages, deadlines, and responsible parties. Coordinates work across all other bots via structured briefs. Never executes work itself — only organizes it.
+Runs launches and complex projects from idea to finish. Breaks them into phases, deadlines, tasks, and risks. Makes sure nothing falls through the cracks between executors. Never executes work itself — only organizes it.
 
 **Key differentiator:** NO_EXECUTION rule. Producer creates briefs, not deliverables. The Launch Brief is the central planning document.
 
@@ -47,7 +47,7 @@ Turns "I want to launch a course" into a structured plan with stages, deadlines,
 ### Visionary — Strategic Thinking Partner
 **Type:** Strategist | **KB:** 32 sections, 6 domains | [→ Example](../examples/visionary/)
 
-Strategic partner and intellectual equal. Holds positions, argues for them, tells uncomfortable truths, and challenges assumptions. The broadest KB in the system — covers thinking frameworks, strategy, innovation, organizational dynamics, influence, and AI governance.
+Thinks as an equal, doesn't agree for the sake of politeness. Argues, reasons, says what you don't want to hear. Strategic decisions, direction, priorities. The broadest KB in the system — thinking frameworks, strategy, innovation, organizational dynamics.
 
 **Key differentiator:** This bot disagrees with you. By design.
 
@@ -56,7 +56,7 @@ Strategic partner and intellectual equal. Holds positions, argues for them, tell
 ### Methodologist — Educational Program Designer
 **Type:** Systematic | **KB:** 10 sections | [→ Example](../examples/methodologist/)
 
-Designs educational programs starting from the desired participant outcome. Every program is built with the Result Types framework (Concept / Instrument / Resource) and every exercise is wrapped in a Psychotechnical Myth — a motivational context that makes the task meaningful.
+Turns expertise into educational products. Groups, courses, workshops — from idea to complete program with exercises and materials. Every program is built with the Result Types framework (Concept / Instrument / Resource), every exercise is wrapped in a Psychotechnical Myth — a motivational context that makes the task meaningful.
 
 **Key differentiator:** Result-first design. "Participants will be able to DO Y" — not "I'll teach about X."
 
@@ -65,28 +65,28 @@ Designs educational programs starting from the desired participant outcome. Ever
 ### Designer — Visual Identity
 **Type:** Creative
 
-Creates visual content aligned with the brand: social media graphics, presentations, infographics. Works from Brandbook specifications (visual identity, color palette, typography). Receives creative briefs from Copywriter and Marketer.
+Handles everything visual: social media graphics, presentations, infographics. Maintains consistent visual style per brandbook. Receives tasks from Copywriter and Marketer.
 
 ---
 
 ### Web Designer — Digital Experiences
 **Type:** Technical-Creative
 
-Designs and prototypes web pages, landing pages, and digital interfaces. Focuses on conversion-oriented design with UX best practices. Works from Brandbook (visual standards) and receives briefs from Marketer (campaign pages) and Producer (launch pages).
+Designs landing pages, web pages, and interfaces. Main focus — conversion: making pages that don't just look good but actually work. Receives briefs from Marketer and Producer.
 
 ---
 
 ### Tech Specialist — Platform Operations
 **Type:** Technical
 
-Handles platform setup, integrations, and technical infrastructure: analytics (GA4, Meta Pixel), email platforms, CRM configuration, automation (n8n, Airtable). The bot that makes other bots' plans actually work.
+Sets up everything that needs to work: analytics (GA4, Meta Pixel), email platforms, CRM, automations (n8n, Airtable). Turns other roles' plans into working infrastructure.
 
 ---
 
 ### Content Manager — Content Operations
 **Type:** Operational
 
-Manages content calendar, scheduling, cross-platform publishing, and content performance tracking. The operational layer between strategy (Marketer) and execution (Copywriter). Ensures content gets published consistently and on time.
+Runs the content calendar, plans publications, keeps track of consistency and deadlines. The operational layer between strategy (Marketer) and copy (Copywriter).
 
 ---
 
@@ -94,16 +94,16 @@ Manages content calendar, scheduling, cross-platform publishing, and content per
 
 | Role | Thinks in... | Produces... | Personality |
 |------|-------------|-------------|-------------|
-| Copywriter | Words, emotions, rhythm | Texts, posts, copy | Brand voice perfectionist |
+| Copywriter | Words, emotions, rhythm | Texts, posts, newsletters | Brand voice, not AI |
 | Analyst | Numbers, patterns, trends | Insights, reports, dashboards | "So what?" interrogator |
-| Marketer | Funnels, ROI, audiences | Strategies, campaigns, briefs | Critical expert, pushes back |
-| Producer | Timelines, dependencies, risks | Plans, briefs, status reports | Process coordinator |
+| Marketer | Funnels, ROI, audiences | Strategies, campaigns, briefs | Argues first, then executes |
+| Producer | Timelines, dependencies, risks | Plans, briefs, status reports | Does nothing himself — organizes everything |
 | Visionary | Frameworks, opportunities, risks | Strategic memos, decisions | Intellectual sparring partner |
 | Methodologist | Results, learning paths, exercises | Program structures, exercises | Result-first architect |
-| Designer | Visual systems, brand identity | Graphics, layouts, templates | Brand guardian |
-| Web Designer | User flows, conversions, UX | Pages, prototypes, wireframes | Conversion optimizer |
-| Tech Specialist | Systems, integrations, data flows | Configs, setups, automations | Platform engineer |
-| Content Manager | Schedules, consistency, reach | Calendars, reports, schedules | Publishing ops manager |
+| Designer | Visual systems, brand identity | Graphics, layouts, templates | Visual standard |
+| Web Designer | User flows, conversions, UX | Pages, prototypes, wireframes | Making pages work |
+| Tech Specialist | Systems, integrations, data flows | Configs, setups, automations | Making everything work |
+| Content Manager | Schedules, consistency, reach | Calendars, reports, schedules | Getting content out on time |
 
 ---
 
