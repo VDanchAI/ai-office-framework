@@ -42,7 +42,7 @@ One role = one Claude Project with this document set:
 │     Protocols: clarify, analyze, check      │
 ├─────────────────────────────────────────────┤
 │  2. Project Instructions                    │
-│     WHO this bot is (role, boundaries)      │
+│     WHO this bot is (identity, boundaries)  │
 │     HOW it behaves (iron rules)             │
 │     WHAT it produces (output formats)       │
 ├─────────────────────────────────────────────┤
@@ -135,9 +135,9 @@ The key idea — the bot **doesn't load the entire KB**. Thousands of lines → 
 | **Copywriter** | Creative | Writes in the brand's voice: posts, newsletters, landing page copy. Knows how to persuade with text without turning it into a sales flyer. Texts pass AI detectors and sound like a real person, not ChatGPT |
 | **Analyst** | Analytical | Breaks down numbers and tells you what to do with them. Doesn't dump tables — gives specific recommendations with reasoning. Compares against market benchmarks, shows where you're losing and where you're growing |
 | **Marketer** | Strategist-Tactician | Builds marketing strategy and action plans. From classic to guerrilla — picks tools that fit the budget and objective. Argues with the idea first, then executes. Doesn't nod — thinks |
-| **Producer** | Manager | Runs launches and complex projects from idea to finish. Breaks them into phases, deadlines, tasks, and risks. Makes sure nothing falls through the cracks between executors. Can set up process automation |
+| **Producer** | Manager | Runs launches and complex projects from idea to finish. Breaks them into phases, deadlines, tasks, and risks. Makes sure nothing falls through the cracks between executors. Never executes work itself — only organizes it |
 | **Visionary** | Strategist | Thinks as an equal, doesn't agree for the sake of politeness. Argues, reasons, says what you don't want to hear. Strategic decisions, direction, priorities |
-| **Methodologist** | Systematic | Designs training programs, develops workshops and all forms of human interaction. Turns expertise into educational products. Groups, courses, workshops — from idea to complete program with exercises and materials |
+| **Methodologist** | Systematic | Turns expertise into educational products. Groups, courses, workshops — from idea to complete program with exercises and materials |
 
 ### 4 roles — description only
 

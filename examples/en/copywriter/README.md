@@ -2,7 +2,7 @@
 
 **Type:** Creative
 **Role:** Voice of the brand in every text
-**Maturity:** Production — actively used, sold to clients
+**Maturity:** Production — actively used
 
 ## What This Bot Does
 
