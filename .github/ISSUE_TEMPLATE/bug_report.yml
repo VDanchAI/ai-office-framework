@@ -1,0 +1,53 @@
+name: Bug Report
+description: Found an error in templates, examples, or documentation
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! This helps improve the framework.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Where did you find the issue?
+      options:
+        - Templates
+        - Examples (Copywriter)
+        - Examples (Analyst)
+        - Examples (Marketer)
+        - Examples (Producer)
+        - Examples (Visionary)
+        - Examples (Methodologist)
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's wrong?
+      placeholder: Describe the issue clearly
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should it be instead?
+    validations:
+      required: false
+
+  - type: textarea
+    id: file
+    attributes:
+      label: File path
+      description: Which file(s) are affected?
+      placeholder: "e.g., templates/TEMPLATE_KB.md"
+    validations:
+      required: false
