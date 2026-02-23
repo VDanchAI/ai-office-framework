@@ -2,7 +2,7 @@
 
 **AI Agent Builder — assemble a bot team tailored to your tasks**
 
-> From Claude to GPT — adapts to any platform
+> From Claude to GPT — and beyond
 
 > 10 roles. Unified architecture. Built on Claude Projects.
 
