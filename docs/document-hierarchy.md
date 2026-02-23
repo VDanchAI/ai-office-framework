@@ -27,7 +27,7 @@ The Universal Core is the shared protocol loaded into every Claude Project, for 
 | Core Protocols | Clarify, Think, Expert Mode, Self-Check, Context Tracking |
 | Communication Rules | Tone, format, response structure |
 | Technical Operations | File handling, code output, tool use |
-| Quality Protocol (D.A.O.S.) | Define → Analyze → Output → Self-check |
+| Quality Protocol (D.A.O.S.) | Core quality assurance cycle |
 
 **Versioning:** One file, maintained centrally. All bots use the same version. When the Core is updated, all bots inherit the update automatically — no per-bot changes needed.
 
