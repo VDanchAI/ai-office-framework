@@ -1,6 +1,6 @@
 # AI Office Framework
 
-**A system of specialized AI bots for marketing and content**
+**AI Agent Builder — assemble a bot team tailored to your tasks**
 
 > 10 roles. Unified architecture. Built on Claude Projects.
 
