@@ -1,111 +1,111 @@
-# Roles Overview
+# Обзор ролей
 
-The AI Office has 10 roles. Each is a standalone Claude Project with its own Knowledge Base, instructions, and behavioral rules.
+В ИИ Офисе 10 ролей. Каждая — самостоятельный Claude Project со своей базой знаний, инструкциями и правилами поведения.
 
-Six roles have detailed examples in this repo (→ `examples/`). Four roles are described below without structural breakdowns.
-
----
-
-## The 10 Roles
-
-### Copywriter — Voice of the Brand
-**Type:** Creative | **KB:** 43 sections, 4 domains | [→ Example](../examples/copywriter/)
-
-Writes persuasive, human-sounding content across platforms. Specializes in texts that pass AI detection, use psychological techniques, and match the brand's authentic voice. The most mature role in the system — actively used in production and sold to clients.
-
-**Key differentiator:** Anti-AI detection built into the writing process, not applied after the fact.
+Шесть ролей представлены с детальными примерами в этом репозитории (→ `examples/`). Четыре роли описаны ниже без структурного разбора.
 
 ---
 
-### Analyst — Data to Decisions
-**Type:** Analytical | **KB:** 8 sections | [→ Example](../examples/analyst/)
+## 10 ролей
 
-Translates raw metrics into actionable recommendations. Every output follows the CIRI framework: Context → Insight → Recommendation → Impact. Never delivers a data dump — always answers "so what?"
+### Копирайтер — Голос бренда
+**Тип:** Творческий | **KB:** 43 секции, 4 домена | [→ Пример](../examples/copywriter/)
 
-**Key differentiator:** Benchmarks built into the KB. Numbers are always compared to industry standards, never presented in a vacuum.
+Пишет убедительные, человекозвучащие тексты для разных платформ. Специализируется на текстах, которые проходят AI-детекторы, используют психологические техники и передают аутентичный голос бренда. Самая зрелая роль в системе — активно используется в продакшне и продаётся клиентам.
 
----
-
-### Marketer — Critical Marketing Expert
-**Type:** Strategist-Tactician | **KB:** 29 sections | [→ Example](../examples/marketer/)
-
-Owns acquisition and monetization: paid ads, email, CRM, funnels, launches, positioning, unit economics. This is not a passive execution bot — it evaluates every request before acting and argues against weak strategies with data.
-
-**Key differentiator:** Evaluation layer runs before execution. A bad idea gets challenged, not implemented.
+**Главный отличительный признак:** Антидетекция ИИ встроена в процесс написания, а не применяется постфактум.
 
 ---
 
-### Producer — Launch Coordinator
-**Type:** Manager | **KB:** 31 sections + 77 subsections | [→ Example](../examples/producer/)
+### Аналитик — От данных к решениям
+**Тип:** Аналитический | **KB:** 8 секций | [→ Пример](../examples/analyst/)
 
-Turns "I want to launch a course" into a structured plan with stages, deadlines, and responsible parties. Coordinates work across all other bots via structured briefs. Never executes work itself — only organizes it.
+Переводит сырые метрики в конкретные рекомендации. Каждый результат следует фреймворку CIRI: Контекст → Инсайт → Рекомендация → Эффект. Никогда не выдаёт свалку данных — всегда отвечает на вопрос «и что с этим делать?»
 
-**Key differentiator:** NO_EXECUTION rule. Producer creates briefs, not deliverables. The Launch Brief is the central planning document.
-
----
-
-### Visionary — Strategic Thinking Partner
-**Type:** Strategist | **KB:** 32 sections, 6 domains | [→ Example](../examples/visionary/)
-
-Strategic partner and intellectual equal. Holds positions, argues for them, tells uncomfortable truths, and challenges assumptions. The broadest KB in the system — covers thinking frameworks, strategy, innovation, organizational dynamics, influence, and AI governance.
-
-**Key differentiator:** This bot disagrees with you. By design.
+**Главный отличительный признак:** Бенчмарки встроены в KB. Цифры всегда сравниваются с отраслевыми стандартами, никогда не подаются в вакууме.
 
 ---
 
-### Methodologist — Educational Program Designer
-**Type:** Systematic | **KB:** 10 sections | [→ Example](../examples/methodologist/)
+### Маркетолог — Критический эксперт по маркетингу
+**Тип:** Стратег-тактик | **KB:** 29 секций | [→ Пример](../examples/marketer/)
 
-Designs educational programs starting from the desired participant outcome. Every program is built with the Result Types framework (Concept / Instrument / Resource) and every exercise is wrapped in a Psychotechnical Myth — a motivational context that makes the task meaningful.
+Отвечает за привлечение и монетизацию: платная реклама, email, CRM, воронки, запуски, позиционирование, юнит-экономика. Это не пассивный исполнитель — он оценивает каждый запрос перед действием и аргументированно возражает против слабых стратегий.
 
-**Key differentiator:** Result-first design. "Participants will be able to DO Y" — not "I'll teach about X."
-
----
-
-### Designer — Visual Identity
-**Type:** Creative
-
-Creates visual content aligned with the brand: social media graphics, presentations, infographics. Works from Brandbook specifications (visual identity, color palette, typography). Receives creative briefs from Copywriter and Marketer.
+**Главный отличительный признак:** Слой оценки запускается до исполнения. Плохая идея получит возражение, а не реализацию.
 
 ---
 
-### Web Designer — Digital Experiences
-**Type:** Technical-Creative
+### Продюсер — Координатор запусков
+**Тип:** Менеджер | **KB:** 31 секция + 77 подсекций | [→ Пример](../examples/producer/)
 
-Designs and prototypes web pages, landing pages, and digital interfaces. Focuses on conversion-oriented design with UX best practices. Works from Brandbook (visual standards) and receives briefs from Marketer (campaign pages) and Producer (launch pages).
+Превращает «хочу запустить курс» в структурированный план со стадиями, дедлайнами и ответственными. Координирует работу всех остальных ботов через структурированные брифы. Сам ничего не исполняет — только организует.
 
----
-
-### Tech Specialist — Platform Operations
-**Type:** Technical
-
-Handles platform setup, integrations, and technical infrastructure: analytics (GA4, Meta Pixel), email platforms, CRM configuration, automation (n8n, Airtable). The bot that makes other bots' plans actually work.
+**Главный отличительный признак:** Правило NO_EXECUTION. Продюсер создаёт брифы, а не конечные материалы. Launch Brief — центральный документ планирования.
 
 ---
 
-### Content Manager — Content Operations
-**Type:** Operational
+### Визионер — Партнёр по стратегическому мышлению
+**Тип:** Стратег | **KB:** 32 секции, 6 доменов | [→ Пример](../examples/visionary/)
 
-Manages content calendar, scheduling, cross-platform publishing, and content performance tracking. The operational layer between strategy (Marketer) and execution (Copywriter). Ensures content gets published consistently and on time.
+Стратегический партнёр и интеллектуальный равный. Отстаивает позиции, говорит неудобную правду и ставит под сомнение допущения. Самая широкая KB в системе — охватывает мыслительные фреймворки, стратегию, инновации, организационную динамику, влияние и управление ИИ.
 
----
-
-## Role Comparison
-
-| Role | Thinks in... | Produces... | Personality |
-|------|-------------|-------------|-------------|
-| Copywriter | Words, emotions, rhythm | Texts, posts, copy | Brand voice perfectionist |
-| Analyst | Numbers, patterns, trends | Insights, reports, dashboards | "So what?" interrogator |
-| Marketer | Funnels, ROI, audiences | Strategies, campaigns, briefs | Critical expert, pushes back |
-| Producer | Timelines, dependencies, risks | Plans, briefs, status reports | Process coordinator |
-| Visionary | Frameworks, opportunities, risks | Strategic memos, decisions | Intellectual sparring partner |
-| Methodologist | Results, learning paths, exercises | Program structures, exercises | Result-first architect |
-| Designer | Visual systems, brand identity | Graphics, layouts, templates | Brand guardian |
-| Web Designer | User flows, conversions, UX | Pages, prototypes, wireframes | Conversion optimizer |
-| Tech Specialist | Systems, integrations, data flows | Configs, setups, automations | Platform engineer |
-| Content Manager | Schedules, consistency, reach | Calendars, reports, schedules | Publishing ops manager |
+**Главный отличительный признак:** Этот бот не соглашается с вами. По замыслу.
 
 ---
 
-→ See [How Roles Interact](how-roles-interact.md) for collaboration patterns.
-→ See [Architecture](architecture.md) for how the system is built.
+### Методолог — Разработчик образовательных программ
+**Тип:** Системный | **KB:** 10 секций | [→ Пример](../examples/methodologist/)
+
+Проектирует образовательные программы, отталкиваясь от желаемого результата участника. Каждая программа строится по фреймворку Result Types (Концепция / Инструмент / Ресурс), а каждое упражнение оборачивается в Психотехнический Миф — мотивационный контекст, который делает задание осмысленным.
+
+**Главный отличительный признак:** Проектирование от результата. «Участники смогут ДЕЛАТЬ Y» — не «я расскажу о X».
+
+---
+
+### Дизайнер — Визуальная идентичность
+**Тип:** Творческий
+
+Создаёт визуальный контент в соответствии с брендом: графика для соцсетей, презентации, инфографика. Работает по спецификациям Brandbook (визуальная идентичность, цветовая палитра, типографика). Получает креативные брифы от Копирайтера и Маркетолога.
+
+---
+
+### Веб-дизайнер — Цифровые интерфейсы
+**Тип:** Технически-творческий
+
+Проектирует и прототипирует веб-страницы, лендинги и цифровые интерфейсы. Фокусируется на конверсионном дизайне с соблюдением UX best practices. Работает по Brandbook (визуальные стандарты), получает брифы от Маркетолога (страницы кампаний) и Продюсера (страницы запусков).
+
+---
+
+### Технический специалист — Платформенные операции
+**Тип:** Технический
+
+Занимается настройкой платформ, интеграциями и технической инфраструктурой: аналитика (GA4, Meta Pixel), email-платформы, настройка CRM, автоматизация (n8n, Airtable). Бот, который превращает планы остальных ботов в работающую реальность.
+
+---
+
+### Контент-менеджер — Контентные операции
+**Тип:** Операционный
+
+Управляет контент-календарём, планированием, публикациями на разных платформах и отслеживанием эффективности контента. Операционный слой между стратегией (Маркетолог) и исполнением (Копирайтер). Обеспечивает регулярные и своевременные публикации.
+
+---
+
+## Сравнение ролей
+
+| Роль | Мыслит в категориях... | Производит... | Характер |
+|------|------------------------|---------------|----------|
+| Копирайтер | Слова, эмоции, ритм | Тексты, посты, копирайт | Перфекционист голоса бренда |
+| Аналитик | Цифры, паттерны, тренды | Инсайты, отчёты, дашборды | «И что с этим делать?» |
+| Маркетолог | Воронки, ROI, аудитории | Стратегии, кампании, брифы | Критический эксперт, возражает |
+| Продюсер | Таймлайны, зависимости, риски | Планы, брифы, статус-отчёты | Координатор процессов |
+| Визионер | Фреймворки, возможности, риски | Стратегические меморандумы, решения | Интеллектуальный спарринг-партнёр |
+| Методолог | Результаты, учебные пути, упражнения | Структуры программ, упражнения | Архитектор от результата |
+| Дизайнер | Визуальные системы, идентичность бренда | Графика, макеты, шаблоны | Хранитель бренда |
+| Веб-дизайнер | Пользовательские сценарии, конверсии, UX | Страницы, прототипы, вайрфреймы | Оптимизатор конверсий |
+| Технический специалист | Системы, интеграции, потоки данных | Конфиги, настройки, автоматизации | Платформенный инженер |
+| Контент-менеджер | Расписания, регулярность, охват | Календари, отчёты, графики | Менеджер публикаций |
+
+---
+
+→ См. [Как роли взаимодействуют](how-roles-interact.md) — паттерны совместной работы.
+→ См. [Архитектура](architecture.md) — как устроена система.

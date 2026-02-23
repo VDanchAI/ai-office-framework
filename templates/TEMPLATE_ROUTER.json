@@ -1,19 +1,19 @@
 {
   "_comment": [
-    "HIERARCHICAL ROUTER TEMPLATE",
-    "Use this when your KB has 20+ sections.",
-    "Architecture: Master Router (domain level) → Sub-Routers (section level).",
-    "Stage 1: Master decides which domain the query belongs to.",
-    "Stage 2: Sub-Router finds the exact section within that domain.",
+    "ШАБЛОН ИЕРАРХИЧЕСКОГО РОУТЕРА",
+    "Используйте, когда ваша KB содержит 20+ секций.",
+    "Архитектура: Мастер-роутер (уровень домена) → Под-роутеры (уровень секций).",
+    "Этап 1: Мастер определяет, к какому домену относится запрос.",
+    "Этап 2: Под-роутер находит точную секцию внутри этого домена.",
     "",
-    "For KBs under 20 sections, use the flat router inside TEMPLATE_KB.md instead.",
+    "Для KB менее 20 секций используйте плоский роутер внутри TEMPLATE_KB.md.",
     "",
-    "HOW TO USE THIS TEMPLATE:",
-    "1. Define your domains (3-5 thematic groups of sections)",
-    "2. Fill in the Master Router below (domain-level routing)",
-    "3. Create Sub-Routers for each domain (section-level routing)",
-    "4. Embed the complete JSON at the top of your KB file under ## ROUTER",
-    "5. Ensure every anchor in the router matches a heading in KB content"
+    "КАК ИСПОЛЬЗОВАТЬ ЭТОТ ШАБЛОН:",
+    "1. Определите ваши домены (3–5 тематических групп секций)",
+    "2. Заполните Мастер-роутер ниже (маршрутизация на уровне доменов)",
+    "3. Создайте под-роутеры для каждого домена (маршрутизация на уровне секций)",
+    "4. Встройте полный JSON в начало файла KB под заголовком ## ROUTER",
+    "5. Убедитесь, что каждый якорь в роутере соответствует заголовку в контенте KB"
   ],
 
   "router_version": "1.0.0",
@@ -28,82 +28,82 @@
     "type": "hierarchical",
     "domains": 3,
     "sub_routers": 3,
-    "master_routing": "Domain-level decision → delegate to Sub-Router",
+    "master_routing": "Решение на уровне домена → делегирование под-роутеру",
     "benefits": [
-      "Scalable to hundreds of sections",
-      "Clear domain separation",
-      "Faster routing (two-stage)",
-      "Independent domain evolution"
+      "Масштабируется до сотен секций",
+      "Чёткое разделение доменов",
+      "Быстрая маршрутизация (два этапа)",
+      "Независимое развитие доменов"
     ]
   },
 
   "maintenance": {
     "changelog": [
-      "1.0.0 - Initial router setup"
+      "1.0.0 - Начальная настройка роутера"
     ],
     "update_instructions": {
       "when_section_added_to_existing_domain": [
-        "1. Add anchor in KB content",
-        "2. Update appropriate Sub-Router (not Master)",
-        "3. Update domain section_count in Master",
-        "4. Increment Sub-Router version +0.1"
+        "1. Добавить якорь в контент KB",
+        "2. Обновить соответствующий под-роутер (не Мастер)",
+        "3. Обновить section_count домена в Мастере",
+        "4. Увеличить версию под-роутера на +0.1"
       ],
       "when_new_domain_added": [
-        "1. Create new Sub-Router for domain",
-        "2. Add domain to Master Router",
-        "3. Add domain to ai_decision_tree",
-        "4. Increment Master version +1.0"
+        "1. Создать новый под-роутер для домена",
+        "2. Добавить домен в Мастер-роутер",
+        "3. Добавить домен в ai_decision_tree",
+        "4. Увеличить версию Мастера на +1.0"
       ]
     }
   },
 
   "ai_instructions": {
     "routing_strategy": [
-      "STAGE 1 (Master): Determine which domain the query belongs to",
-      "STAGE 2 (Sub-Router): Find the exact section within that domain",
-      "If query spans multiple domains: route to ALL relevant domains",
-      "If uncertain: use fallback"
+      "ЭТАП 1 (Мастер): Определить, к какому домену относится запрос",
+      "ЭТАП 2 (Под-роутер): Найти точную секцию внутри этого домена",
+      "Если запрос охватывает несколько доменов: направить ВО ВСЕ релевантные домены",
+      "При неопределённости: использовать фоллбэк"
     ],
     "execution_order": [
-      "1. Analyze query intent and context",
-      "2. Match against domain descriptions and context_tags",
-      "3. If matched → read that domain's Sub-Router",
-      "4. Sub-Router matches query to specific section(s)",
-      "5. Jump to section anchor(s), read content",
-      "6. If no match → apply fallback"
+      "1. Проанализировать намерение и контекст запроса",
+      "2. Сопоставить с описаниями доменов и context_tags",
+      "3. Если совпадение найдено → прочитать под-роутер этого домена",
+      "4. Под-роутер сопоставляет запрос с конкретной секцией (секциями)",
+      "5. Перейти к якорю (якорям) секции, прочитать контент",
+      "6. Если совпадений нет → применить фоллбэк"
     ],
-    "fallback": "Route to DOMAIN_A (foundational domain)"
+    "fallback": "Направить в DOMAIN_A (фундаментальный домен)"
   },
 
   "domains": {
     "DOMAIN_A": {
-      "description": "Core expertise — foundational skills and knowledge",
+      "description": "Ключевая экспертиза — фундаментальные навыки и знания",
       "sections": ["S1", "S2", "S3", "S4", "S5", "S6"],
       "section_count": 6,
       "sub_router": "domain_a_router",
       "priority": 10,
-      "when_to_use": "Any query about [core topic], [basic skill], [fundamental concept]",
-      "context_tags": ["tag1", "tag2", "tag3", "tag4"]
+      "when_to_use": "Любой запрос о [базовой теме], [базовом навыке], [фундаментальной концепции]",
+      "context_tags": ["тег1", "тег2", "тег3", "тег4"]
     },
 
     "DOMAIN_B": {
-      "description": "Specialized expertise — advanced techniques",
+      "description": "Специализированная экспертиза — продвинутые техники",
       "sections": ["S7", "S8", "S9", "S10", "S11", "S12"],
       "section_count": 6,
       "sub_router": "domain_b_router",
       "priority": 8,
-      "when_to_use": "Queries about [advanced topic], [specialized technique]",
-      "context_tags": ["tag5", "tag6", "tag7"]
+      "when_to_use": "Запросы о [продвинутой теме], [специализированной технике]",
+      "context_tags": ["тег5", "тег6", "тег7"]
     },
 
     "DOMAIN_C": {
-      "description": "Applied expertise — practical application",
+      "description": "Прикладная экспертиза — практическое применение",
       "sections": ["S13", "S14", "S15", "S16", "S17", "S18"],
       "section_count": 6,
       "sub_router": "domain_c_router",
       "priority": 6,
-      "when_to_use": "Queries about [practical application], [real-world use]",
-      "context_tags": ["tag8", "tag9", "tag10"]
+      "when_to_use": "Запросы о [практическом применении], [использовании в реальных условиях]",
+      "context_tags": ["тег8", "тег9", "тег10"]
     }
   },
 
@@ -115,50 +115,50 @@
       "sections": [
         {
           "id": "S1",
-          "title": "[Foundations]",
+          "title": "[Основы]",
           "anchor": "#S1_FOUNDATIONS",
-          "triggers": ["keyword1", "keyword2", "phrase one"],
-          "description": "Core principles and fundamentals",
+          "triggers": ["ключевое_слово1", "ключевое_слово2", "фраза первая"],
+          "description": "Базовые принципы и фундаментальные знания",
           "priority": 10
         },
         {
           "id": "S2",
-          "title": "[Key Skill]",
+          "title": "[Ключевой навык]",
           "anchor": "#S2_KEY_SKILL",
-          "triggers": ["keyword3", "keyword4"],
-          "description": "Primary skill set",
+          "triggers": ["ключевое_слово3", "ключевое_слово4"],
+          "description": "Основной набор навыков",
           "priority": 8
         },
         {
           "id": "S3",
-          "title": "[Methods]",
+          "title": "[Методы]",
           "anchor": "#S3_METHODS",
-          "triggers": ["keyword5", "keyword6"],
-          "description": "Methods and approaches",
+          "triggers": ["ключевое_слово5", "ключевое_слово6"],
+          "description": "Методы и подходы",
           "priority": 6
         },
         {
           "id": "S4",
-          "title": "[Rules]",
+          "title": "[Правила]",
           "anchor": "#S4_RULES",
-          "triggers": ["keyword7", "keyword8"],
-          "description": "Domain-specific rules",
+          "triggers": ["ключевое_слово7", "ключевое_слово8"],
+          "description": "Правила, специфичные для домена",
           "priority": 6
         },
         {
           "id": "S5",
-          "title": "[Formats]",
+          "title": "[Форматы]",
           "anchor": "#S5_FORMATS",
-          "triggers": ["keyword9", "keyword10"],
-          "description": "Output formats and templates",
+          "triggers": ["ключевое_слово9", "ключевое_слово10"],
+          "description": "Форматы результатов и шаблоны",
           "priority": 4
         },
         {
           "id": "S6",
-          "title": "[Examples]",
+          "title": "[Примеры]",
           "anchor": "#S6_EXAMPLES",
-          "triggers": ["keyword11", "keyword12", "example", "show me"],
-          "description": "Examples and references",
+          "triggers": ["ключевое_слово11", "ключевое_слово12", "пример", "покажи"],
+          "description": "Примеры и справочные материалы",
           "priority": 4
         }
       ]
@@ -167,14 +167,14 @@
     "domain_b_router": {
       "version": "1.0",
       "domain": "DOMAIN_B",
-      "_comment": "Fill in following the same pattern as domain_a_router",
+      "_comment": "Заполните по аналогии с domain_a_router",
       "sections": []
     },
 
     "domain_c_router": {
       "version": "1.0",
       "domain": "DOMAIN_C",
-      "_comment": "Fill in following the same pattern as domain_a_router",
+      "_comment": "Заполните по аналогии с domain_a_router",
       "sections": []
     }
   }

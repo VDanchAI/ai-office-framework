@@ -2,8 +2,8 @@
   "router": {
     "version": "5.2",
     "type": "flat",
-    "description": "Single-level dispatch. Input maps directly to section(s). No nested routing, no priority queue. Multiple sections activate in parallel when task spans domains.",
-    "note": "This is a structural demo showing 4 of 10 sections. Full router covers all KB sections."
+    "description": "Однослойная диспетчеризация. Ввод отображается напрямую на секцию(ии). Без вложенной маршрутизации, без очереди приоритетов. Несколько секций активируются параллельно, когда задача охватывает несколько доменов.",
+    "note": "Это структурное демо, показывающее 4 из 10 секций. Полный роутер охватывает все секции KB."
   },
 
   "sections_demo": [
@@ -19,8 +19,8 @@
         "check the result statement"
       ],
       "always_active": true,
-      "note": "Activates on every design task regardless of other triggers. Result typing is mandatory before structure begins.",
-      "output": "Typed result: Concept | Instrument | Resource + rationale"
+      "note": "Активируется при каждой задаче проектирования вне зависимости от других триггеров. Типизация результата обязательна до начала работы над структурой.",
+      "output": "Типизированный результат: Concept | Instrument | Resource + обоснование"
     },
 
     {
@@ -35,8 +35,8 @@
         "why would they do this exercise"
       ],
       "always_active": true,
-      "note": "Activates on every exercise design task. No exercise is produced without a myth frame. Iron rule.",
-      "output": "Exercise card: myth narrative + task + debrief structure"
+      "note": "Активируется при каждой задаче дизайна упражнений. Ни одно упражнение не создаётся без мифового фрейма. Железное правило.",
+      "output": "Карточка упражнения: нарратив мифа + задача + структура дебрифа"
     },
 
     {
@@ -54,8 +54,8 @@
       ],
       "always_active": false,
       "activates_with": ["RESULT_TYPES", "TEMPLATES"],
-      "note": "Format selection is always downstream of result typing. Activates after RESULT_TYPES confirms the outcome type.",
-      "output": "Format recommendation with structure template and result-type compatibility note"
+      "note": "Выбор формата всегда следует после типизации результата. Активируется после того, как RESULT_TYPES подтверждает тип результата.",
+      "output": "Рекомендация формата со структурным шаблоном и примечанием о совместимости с типом результата"
     },
 
     {
@@ -73,32 +73,32 @@
       ],
       "always_active": false,
       "activates_with": ["CHECKLISTS"],
-      "note": "Diagnostic section. Activated when a program is already designed and showing failure signals, or when a request arrives with a pre-built structure that needs review.",
-      "output": "Antipattern identification + correction algorithm + redesign entry point"
+      "note": "Диагностическая секция. Активируется, когда программа уже спроектирована и показывает признаки сбоя, или когда запрос поступает с готовой структурой, требующей проверки.",
+      "output": "Идентификация антипаттерна + алгоритм коррекции + точка входа в перепроектирование"
     }
   ],
 
   "dispatch_logic": {
-    "description": "How the router resolves a real request",
+    "description": "Как роутер обрабатывает реальный запрос",
     "steps": [
-      "1. Receive task text",
-      "2. Match against trigger_patterns across all sections (parallel scan)",
-      "3. Collect all matching section IDs",
-      "4. Add always_active sections (RESULT_TYPES, PSYCHOTECHNICAL_MYTH) if not already present",
-      "5. Activate all matched sections simultaneously",
-      "6. Compose response from activated sections"
+      "1. Получить текст задачи",
+      "2. Сопоставить с trigger_patterns по всем секциям (параллельное сканирование)",
+      "3. Собрать все совпавшие идентификаторы секций",
+      "4. Добавить always_active секции (RESULT_TYPES, PSYCHOTECHNICAL_MYTH), если они ещё не присутствуют",
+      "5. Активировать все совпавшие секции одновременно",
+      "6. Составить ответ из активированных секций"
     ],
-    "conflict_resolution": "No conflicts in flat architecture. All activated sections contribute independently. Synthesis is the role's responsibility, not the router's."
+    "conflict_resolution": "Конфликтов в плоской архитектуре нет. Все активированные секции вносят вклад независимо. Синтез — ответственность роли, а не роутера."
   },
 
   "example_dispatch": {
-    "input": "I want to create an exercise for my webinar where participants practice giving feedback",
+    "input": "Хочу создать упражнение для своего вебинара, где участники практикуют подачу обратной связи",
     "matched_sections": [
       "RESULT_TYPES",
       "PSYCHOTECHNICAL_MYTH",
       "FORMAT_STRUCTURES"
     ],
-    "reasoning": "Exercise creation → PSYCHOTECHNICAL_MYTH. Webinar context → FORMAT_STRUCTURES. Result typing mandatory → RESULT_TYPES always active.",
-    "first_action": "Clarify result type before exercise design. Is 'giving feedback' a Concept (understand what good feedback is), Instrument (apply a specific feedback model), or Resource (habitual practice)? Answer changes exercise design."
+    "reasoning": "Создание упражнения → PSYCHOTECHNICAL_MYTH. Контекст вебинара → FORMAT_STRUCTURES. Типизация результата обязательна → RESULT_TYPES всегда активен.",
+    "first_action": "Прояснить тип результата до дизайна упражнения. Является ли «подача обратной связи» Concept (понять, что такое хорошая обратная связь), Instrument (применять конкретную модель обратной связи) или Resource (привычная практика)? Ответ меняет дизайн упражнения."
   }
 }

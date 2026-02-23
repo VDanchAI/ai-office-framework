@@ -1,62 +1,62 @@
 {
   "router_version": "5.2",
   "architecture": "flat",
-  "description": "Simplified flat router demo — 4 sections shown out of 31 total. Each entry maps a section key to its metadata and subsection index. Subsection content is stored inline in the KB file; the router holds only the lookup map.",
+  "description": "Упрощённое демо плоского роутера — показаны 4 секции из 31. Каждая запись сопоставляет ключ секции с её метаданными и индексом подсекций. Контент подсекций хранится инлайн в файле KB; роутер содержит только таблицу поиска.",
   "resolution_order": ["exact_key_match", "subsection_key_match", "priority_rank_fallback"],
   "sections": {
     "LAUNCH_PHASES": {
-      "description": "Pre-launch, launch, and post-launch stage definitions with checklists and transition conditions",
+      "description": "Определения этапов пре-лонча, лонча и пост-лонча с чеклистами и условиями перехода",
       "subsections": {
         "PRE_LAUNCH": {
-          "description": "Stages and checkpoints before the cart opens: audience warm-up, content seeding, channel preparation"
+          "description": "Этапы и контрольные точки до открытия корзины: прогрев аудитории, посев контента, подготовка каналов"
         },
         "LAUNCH_DAY": {
-          "description": "Launch day sequence: timing, channel fire order, escalation triggers"
+          "description": "Последовательность дня запуска: тайминг, порядок запуска каналов, триггеры эскалации"
         },
         "POST_LAUNCH": {
-          "description": "Post-launch stages: delivery, upsell window, retrospective, metrics collection"
+          "description": "Этапы после запуска: доставка, окно upsell, ретроспектива, сбор метрик"
         }
       }
     },
     "BACKWARD_PLANNING": {
-      "description": "Timeline construction from fixed deadline backward. Critical path identification and dependency mapping rules.",
+      "description": "Построение таймлайна от фиксированного дедлайна назад. Правила определения критического пути и картирования зависимостей.",
       "subsections": {
         "CRITICAL_PATH": {
-          "description": "How to identify which tasks block the deadline. Critical path definition and calculation method."
+          "description": "Как определить, какие задачи блокируют дедлайн. Определение критического пути и метод расчёта."
         },
         "DEPENDENCY_MAP": {
-          "description": "Dependency types (hard/soft), mapping format, and rules for sequencing bot delegations"
+          "description": "Типы зависимостей (жёсткие/мягкие), формат картирования и правила последовательности делегирования ботам"
         },
         "BUFFER_RULES": {
-          "description": "Where to place time buffers in the plan. Minimum buffer sizes by stage type."
+          "description": "Где размещать временные буферы в плане. Минимальные размеры буфера по типам этапов."
         }
       }
     },
     "BOT_COORDINATION": {
-      "description": "Rules for delegating tasks to specialist bots. Brief creation protocol, handoff format, sequencing logic.",
+      "description": "Правила делегирования задач специализированным ботам. Протокол создания брифов, формат передачи, логика последовательности.",
       "subsections": {
         "BRIEF_FORMAT": {
-          "description": "Required and optional fields in a delegation brief. Field definitions and validation rules."
+          "description": "Обязательные и необязательные поля брифа на делегирование. Определения полей и правила валидации."
         },
         "DELEGATION_SEQUENCE": {
-          "description": "Which bots are briefed in which order. Dependency-driven sequencing rules."
+          "description": "Каким ботам ставятся задачи в каком порядке. Правила последовательности на основе зависимостей."
         },
         "REBRIEF_TRIGGERS": {
-          "description": "Conditions that require updating or replacing an existing brief rather than appending to it."
+          "description": "Условия, требующие обновления или замены существующего брифа вместо добавления к нему."
         }
       }
     },
     "COMMON_MISTAKES": {
-      "description": "Risk patterns observed across launches. Early warning signals and mitigation approaches.",
+      "description": "Паттерны рисков, наблюдаемые в запусках. Сигналы раннего предупреждения и подходы к митигации.",
       "subsections": {
         "TIMELINE_RISKS": {
-          "description": "Most common causes of timeline slippage. Detection signals and escalation thresholds."
+          "description": "Наиболее частые причины срыва сроков. Сигналы обнаружения и пороги эскалации."
         },
         "COORDINATION_FAILURES": {
-          "description": "Failure modes in multi-bot coordination: conflicting briefs, missed handoffs, scope drift."
+          "description": "Сценарии провалов при координации нескольких ботов: конфликтующие брифы, пропущенные передачи, расширение области задач."
         },
         "SCOPE_CREEP": {
-          "description": "How scope creep enters launches, how to detect it early, and how Producer responds without executing."
+          "description": "Как расширение области задач проникает в запуски, как обнаружить его на раннем этапе и как Продюсер реагирует, не исполняя работу сам."
         }
       }
     }

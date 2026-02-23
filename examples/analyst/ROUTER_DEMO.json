@@ -1,5 +1,5 @@
 {
-  "_comment": "DEMO FILE — Simplified flat router showing structure only. Actual triggers, weights, and section content are not included. Router version: v5.2. This pattern is used across AI Office KB files with fewer than ~20 sections.",
+  "_comment": "ДЕМО-ФАЙЛ — Упрощённый плоский роутер, показывающий только структуру. Реальные триггеры, веса и содержимое секций не включены. Версия роутера: v5.2. Этот паттерн используется во всех файлах KB ИИ-офиса с менее чем ~20 секциями.",
 
   "router": {
     "type": "flat",
@@ -13,61 +13,61 @@
   "sections": [
     {
       "id": "FORMULAS",
-      "title": "Core Metrics Formulas",
+      "title": "Формулы ключевых метрик",
       "triggers": [
-        "how to calculate",
-        "formula for",
-        "what is CAC",
-        "what is LTV",
-        "conversion rate formula",
-        "churn calculation",
+        "как рассчитать",
+        "формула для",
+        "что такое CAC",
+        "что такое LTV",
+        "формула коэффициента конверсии",
+        "расчёт churn",
         "ROAS",
-        "ROI formula"
+        "формула ROI"
       ],
-      "_note": "Loaded when user asks how to calculate a specific metric. Most frequently accessed section."
+      "_note": "Загружается, когда пользователь спрашивает, как рассчитать конкретную метрику. Наиболее часто запрашиваемая секция."
     },
     {
       "id": "BENCHMARKS",
-      "title": "Industry Benchmarks",
+      "title": "Отраслевые бенчмарки",
       "triggers": [
-        "is this a good result",
-        "industry average",
-        "benchmark",
-        "normal open rate",
-        "typical conversion",
-        "compare to market",
-        "how does this compare"
+        "это хороший результат",
+        "средние по отрасли",
+        "бенчмарк",
+        "нормальная открываемость",
+        "типичная конверсия",
+        "сравнить с рынком",
+        "как это соотносится"
       ],
-      "_note": "Loaded when user needs context for their numbers. Always used with CIRI Context step."
+      "_note": "Загружается, когда пользователю нужен контекст для его показателей. Всегда используется совместно с шагом Context фреймворка CIRI."
     },
     {
       "id": "RED_FLAGS",
-      "title": "Warning Signs in Data",
+      "title": "Тревожные сигналы в данных",
       "triggers": [
-        "something is wrong",
-        "metrics dropped",
-        "sudden change",
-        "spike",
-        "drop",
-        "anomaly",
-        "alert",
-        "should I be worried",
-        "what does this mean"
+        "что-то не так",
+        "метрики упали",
+        "резкое изменение",
+        "скачок",
+        "падение",
+        "аномалия",
+        "алерт",
+        "стоит ли беспокоиться",
+        "что это значит"
       ],
-      "_note": "Loaded when query suggests a problem or unexpected change in data. Contains hard thresholds."
+      "_note": "Загружается, когда запрос указывает на проблему или неожиданное изменение данных. Содержит жёсткие пороговые значения."
     },
     {
       "id": "QUICK_REFERENCE",
-      "title": "Quick Reference",
+      "title": "Быстрый справочник",
       "triggers": [
-        "quick",
-        "what is",
-        "remind me",
-        "definition",
-        "simple question",
-        "just tell me"
+        "быстро",
+        "что такое",
+        "напомни",
+        "определение",
+        "простой вопрос",
+        "просто скажи"
       ],
-      "_note": "Fallback section for short factual questions. Intentionally overlaps with other sections for speed. Also used as default when no other section matches."
+      "_note": "Резервная секция для коротких фактических вопросов. Намеренно перекрывается с другими секциями ради скорости. Также используется по умолчанию, когда ни одна другая секция не совпадает."
     }
   ],
 

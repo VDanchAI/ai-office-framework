@@ -1,182 +1,182 @@
-# Document Hierarchy
+# Иерархия документов
 
-This document explains how documents are structured, loaded, and interact in the AI Office framework. Read [architecture.md](./architecture.md) first for a system-level overview.
+Этот документ объясняет, как документы структурированы, загружаются и взаимодействуют в фреймворке ИИ офиса. Сначала прочитайте [architecture.md](./architecture.md) для понимания системы на верхнем уровне.
 
 ---
 
-## 1. The Four Document Types
+## 1. Четыре типа документов
 
-Every bot in the system uses a combination of up to four document types. Each type has a distinct role and scope.
+Каждый бот в системе использует комбинацию из до четырёх типов документов. У каждого типа — своя роль и область применения.
 
 ---
 
 ### Universal Core
 
-**File pattern:** `UNIVERSAL_CORE_v[X]_[Y].md`
-**Template:** `templates/TEMPLATE_CORE.md`
+**Паттерн имени файла:** `UNIVERSAL_CORE_v[X]_[Y].md`
+**Шаблон:** `templates/TEMPLATE_CORE.md`
 
-The Universal Core is the shared protocol loaded into every Claude Project, for every bot, without exception. It defines how bots think and communicate — not what they know or who they are.
+Universal Core — общий протокол, который загружается в каждый Claude Project, для каждого бота, без исключений. Он определяет, как боты думают и общаются, — а не что они знают и кем являются.
 
-**What it contains:**
+**Что содержит:**
 
-| Section | Purpose |
+| Секция | Назначение |
 |---|---|
-| Loading Order | Sequence in which documents are loaded at session start |
-| Session Start | Required actions when a new conversation begins |
-| KB Navigation | How to use the Router to locate and read KB sections |
-| Core Protocols | Clarify, Think, Expert Mode, Self-Check, Context Tracking |
-| Communication Rules | Tone, format, response structure |
-| Technical Operations | File handling, code output, tool use |
-| Quality Protocol (D.A.O.S.) | Core quality assurance cycle |
+| Loading Order | Последовательность загрузки документов при старте сессии |
+| Session Start | Обязательные действия в начале нового разговора |
+| KB Navigation | Как использовать роутер для поиска и чтения секций KB |
+| Core Protocols | Clarify, Think, Expert Mode, самопроверка, отслеживание контекста |
+| Communication Rules | Тон, формат, структура ответа |
+| Technical Operations | Работа с файлами, вывод кода, использование инструментов |
+| Quality Protocol (D.A.O.S.) | Основной цикл контроля качества |
 
-**Versioning:** One file, maintained centrally. All bots use the same version. When the Core is updated, all bots inherit the update automatically — no per-bot changes needed.
+**Версионирование:** Один файл, поддерживается централизованно. Все боты используют одну версию. При обновлении Core все боты автоматически получают обновление — изменения на уровне отдельных ботов не нужны.
 
 ---
 
-### Knowledge Base (KB)
+### База знаний (KB)
 
-**File pattern:** `[Role]_Knowledge_Base_v[X]_[Y].md`
-**Template:** `templates/TEMPLATE_KB.md`
+**Паттерн имени файла:** `[Role]_Knowledge_Base_v[X]_[Y].md`
+**Шаблон:** `templates/TEMPLATE_KB.md`
 
-The KB contains domain expertise for a specific role. Each bot has one main KB. Project-specific KBs can be added when a bot needs context that is scoped to a particular client or engagement.
+KB содержит экспертизу по домену для конкретной роли. У каждого бота есть одна основная KB. Проектные KB можно добавлять, когда боту нужен контекст, ограниченный конкретным клиентом или проектом.
 
-**Internal structure:**
+**Внутренняя структура:**
 
 ```
 [Role]_Knowledge_Base_v[X]_[Y].md
 │
-├── Router (JSON block at the top of the file)
-│   └── Index of all sections with triggers and anchors
+├── Роутер (JSON-блок в начале файла)
+│   └── Индекс всех секций с триггерами и якорями
 │
-└── Sections (markdown content below the Router)
+└── Секции (markdown-контент под роутером)
     ├── #S1_TOPIC_NAME
     ├── #S2_TOPIC_NAME
     └── ...
 ```
 
-The Router is always at the top. Sections follow below it, each identified by a unique anchor in the format `#S[number]_[TOPIC_NAME]`.
+Роутер всегда располагается в начале. Секции идут ниже — каждая идентифицируется уникальным якорем в формате `#S[number]_[TOPIC_NAME]`.
 
-**Size range across the system:**
+**Размеры KB в системе:**
 
-| Bot | KB Size |
+| Бот | Размер KB |
 |---|---|
-| Analyst | ~1,300 lines |
-| Copywriter | ~4,500 lines |
-| Marketer | ~27,000 lines |
+| Аналитик | ~1 300 строк |
+| Копирайтер | ~4 500 строк |
+| Маркетолог | ~27 000 строк |
 
-KBs this large cannot be read in full at query time. The Router exists precisely to avoid that — only the matching section is ever loaded.
+KB такого размера невозможно читать целиком при каждом запросе. Роутер существует именно для того, чтобы этого избежать — загружается только совпадающая секция.
 
-**Router types** — see Section 4 for full details.
+**Типы роутеров** — подробности в Секции 4.
 
 ---
 
-### Project Instructions
+### Инструкции
 
-**File pattern:** `[Role]_Project_Instructions_v[X]_[Y].md`
-**Template:** `templates/TEMPLATE_INSTRUCTIONS.md`
+**Паттерн имени файла:** `[Role]_Project_Instructions_v[X]_[Y].md`
+**Шаблон:** `templates/TEMPLATE_INSTRUCTIONS.md`
 
-Project Instructions define who the bot is, what it does, and how it behaves. This is the role definition document, loaded as the "custom instructions" field in a Claude Project.
+Инструкции определяют, кто такой бот, что он делает и как себя ведёт. Это документ ролевого определения, загружаемый в поле «custom instructions» Claude Project.
 
-**Standard sections:**
+**Стандартные секции:**
 
-| Section | What it defines |
+| Секция | Что определяет |
 |---|---|
-| Mandatory First Action | What the bot does before anything else in a session |
-| Core Integration | How to locate and load the Universal Core and KB |
-| Identity | Role name, persona, voice |
-| Scope | What this bot handles vs. what it refers elsewhere |
-| Iron Rules | Absolute constraints that cannot be overridden |
-| Workflow | Step-by-step process for the bot's primary tasks |
-| Output Formats | How responses are structured and formatted |
-| KB Usage | When and how to consult the KB |
-| Collaboration | How this bot interacts with other bots in the system |
+| Mandatory First Action | Что бот делает в первую очередь при старте сессии |
+| Core Integration | Как найти и загрузить Universal Core и KB |
+| Identity | Название роли, персона, голос |
+| Scope | Что этот бот обрабатывает и что передаёт другим |
+| Железные правила | Абсолютные ограничения, которые нельзя переопределить |
+| Workflow | Пошаговый процесс для основных задач бота |
+| Output Formats | Как структурируются и форматируются ответы |
+| KB Usage | Когда и как обращаться к KB |
+| Collaboration | Как этот бот взаимодействует с другими ботами в системе |
 
-Each bot's Project Instructions are unique. Two bots may share a Universal Core but will always have distinct Project Instructions.
+Инструкции каждого бота уникальны. Два бота могут использовать один Universal Core, но их инструкции всегда различаются.
 
 ---
 
-### Add-ons
+### Аддоны
 
-**File pattern:** `[Addon_Name]_v[X]_[Y].md`
-**Template:** `templates/TEMPLATE_ADDON.md`
+**Паттерн имени файла:** `[Addon_Name]_v[X]_[Y].md`
+**Шаблон:** `templates/TEMPLATE_ADDON.md`
 
-Add-ons extend a bot's expertise in a specific area without modifying its core KB. They are optional, loaded on demand, and can be shared across multiple bots.
+Аддоны расширяют экспертизу бота в конкретной области, не изменяя основную KB. Они опциональны, загружаются по требованию и могут использоваться несколькими ботами одновременно.
 
-**Characteristics:**
-- Each add-on has its own mini-Router and sections (same structure as a KB, smaller scale)
-- Not permanently loaded — only brought in when the task requires them
-- Can belong to one bot or be shared across several (e.g., a Brandbook Voice module used by both Copywriter and Marketer)
+**Характеристики:**
+- У каждого аддона есть свой мини-роутер и секции (та же структура, что у KB, но меньшего масштаба)
+- Не загружаются постоянно — подключаются только когда задача требует их
+- Могут принадлежать одному боту или быть общими для нескольких (например, модуль Brandbook Voice, используемый и Копирайтером, и Маркетологом)
 
-**Examples of add-ons in use:**
+**Примеры аддонов:**
 
-| Add-on | Used by |
+| Аддон | Используется |
 |---|---|
-| Social Media Specs | Copywriter, SMM Manager |
-| Brandbook Voice | Copywriter, Marketer, PR Bot |
-| Platform Restrictions | Marketer, Ad Manager |
+| Social Media Specs | Копирайтер, SMM-менеджер |
+| Brandbook Voice | Копирайтер, Маркетолог, PR-бот |
+| Platform Restrictions | Маркетолог, Ad Manager |
 
 ---
 
-## 2. Loading Order
+## 2. Порядок загрузки
 
-Documents are loaded in a fixed sequence at the start of every session. This order is defined in the Universal Core and must never be changed.
+Документы загружаются в фиксированной последовательности при старте каждой сессии. Этот порядок определён в Universal Core и не может быть изменён.
 
 ```
-Session Start
+Старт сессии
 │
-├── Step 1: Universal Core          ← always first, no exceptions
+├── Шаг 1: Universal Core          ← всегда первым, без исключений
 │
-├── Step 2: Project Instructions    ← role identity and behavior rules
+├── Шаг 2: Инструкции              ← ролевая идентичность и правила поведения
 │
-├── Step 3: KB Router ONLY          ← the index, not the content
+├── Шаг 3: Только роутер KB        ← индекс, не контент
 │
-├── Step 4: KB Section              ← only the section matching the query
-│           (loaded per query, not upfront)
+├── Шаг 4: Секция KB               ← только секция, совпадающая с запросом
+│           (загружается под каждый запрос, не заранее)
 │
-└── Step 5: Add-ons                 ← only if the task requires them
-            (loaded per task, not permanently)
+└── Шаг 5: Аддоны                  ← только если задача требует их
+            (загружаются под конкретную задачу, не постоянно)
 ```
 
-**KEY RULE: Never load the entire KB.**
+**КЛЮЧЕВОЕ ПРАВИЛО: Никогда не загружать KB целиком.**
 
-The KB Router is loaded once at session start. When a query arrives, the bot matches it against the Router's triggers, identifies the relevant section anchor, and reads only that section. The rest of the KB is never loaded into context.
+Роутер KB загружается один раз при старте сессии. Когда поступает запрос, бот сопоставляет его с триггерами роутера, определяет якорь нужной секции и читает только её. Остальная часть KB никогда не попадает в контекст.
 
-This is not a suggestion — it is a hard constraint enforced by the Universal Core. Loading the full KB on large files (e.g., 27,000 lines) would exhaust context and degrade performance.
+Это не рекомендация — это жёсткое ограничение, закреплённое в Universal Core. Загрузка полной KB на больших файлах (например, 27 000 строк) исчерпает контекст и деградирует производительность.
 
 ---
 
-## 3. Priority Hierarchy
+## 3. Иерархия приоритетов
 
-When documents conflict — for example, if Project Instructions say one thing and the Universal Core says another — priority determines which wins. Higher number = higher priority.
+Когда документы противоречат друг другу — например, инструкции говорят одно, а Universal Core другое — приоритет определяет, что побеждает. Чем выше номер — тем выше приоритет.
 
-| Priority | Document / Rule Type | Example |
+| Приоритет | Тип документа / правила | Пример |
 |---|---|---|
-| 0 | Default Claude behavior | General assistant defaults |
-| 1 | Add-ons | Platform-specific formatting rules |
-| 2 | KB content | Domain knowledge, factual content |
-| 3 | Project Instructions | Role scope, output format, persona |
-| 4 | Universal Core | Core protocols, D.A.O.S., session rules |
-| 5 | Iron Rules | Hard limits that cannot be overridden by anything |
+| 0 | Поведение Claude по умолчанию | Стандартные настройки общего ассистента |
+| 1 | Аддоны | Правила форматирования для конкретной платформы |
+| 2 | Контент KB | Доменные знания, фактический контент |
+| 3 | Инструкции | Область роли, формат вывода, персона |
+| 4 | Universal Core | Основные протоколы, D.A.O.S., правила сессии |
+| 5 | Железные правила | Жёсткие ограничения, которые ничто не может переопределить |
 
-**Conflict resolution:** When two documents contradict each other, the one with the higher priority number wins. No exceptions.
+**Разрешение конфликтов:** Когда два документа противоречат друг другу, побеждает тот, у которого выше номер приоритета. Без исключений.
 
-Iron Rules (Priority 5) exist in Project Instructions as explicit constraints. They override everything, including the Universal Core. Example: "Never generate content in language X" is an Iron Rule — it beats any general-purpose instruction from the Core.
-
----
-
-## 4. Router Deep Dive
-
-The Router is a JSON block at the top of every KB file. It is the navigation index. The bot reads the Router first, finds the right section, then reads only that section.
-
-There are two Router types depending on KB size.
+Железные правила (приоритет 5) задаются в инструкциях как явные ограничения. Они переопределяют всё, включая Universal Core. Пример: «Никогда не генерировать контент на языке X» — это железное правило, оно сильнее любой инструкции из Core.
 
 ---
 
-### Flat Router
+## 4. Роутер: детальный разбор
 
-Used when the KB has fewer than 20 sections.
+Роутер — это JSON-блок в начале каждого файла KB. Это навигационный индекс. Бот сначала читает роутер, находит нужную секцию, затем читает только её.
 
-**Structure:**
+Существует два типа роутеров в зависимости от размера KB.
+
+---
+
+### Плоский роутер
+
+Используется, когда в KB менее 20 секций.
+
+**Структура:**
 
 ```json
 {
@@ -203,76 +203,76 @@ Used when the KB has fewer than 20 sections.
 }
 ```
 
-**Lookup flow:**
+**Процесс поиска:**
 
 ```
-Query received
+Получен запрос
      │
      ▼
-Match query terms against triggers in each section entry
+Сопоставить термины запроса с триггерами каждой секции
      │
      ▼
-Identify best match → get anchor value
+Определить лучшее совпадение → получить значение якоря
      │
      ▼
-Jump to that anchor in the KB body
+Перейти к этому якорю в теле KB
      │
      ▼
-Read section content
+Прочитать контент секции
 ```
 
-Each section entry contains:
-- `id` — short identifier (S1, S2, ...)
-- `title` — human-readable name
-- `anchor` — the markdown anchor to jump to (`#S1_AUDIENCE_RESEARCH`)
-- `triggers` — keywords that cause this section to be selected
-- `description` — one-line summary of what the section covers
-- `priority` — used when multiple sections match (higher priority section wins)
+Каждая запись секции содержит:
+- `id` — короткий идентификатор (S1, S2, ...)
+- `title` — человекочитаемое название
+- `anchor` — markdown-якорь для перехода (`#S1_AUDIENCE_RESEARCH`)
+- `triggers` — ключевые слова, по которым выбирается эта секция
+- `description` — однострочное описание содержимого секции
+- `priority` — используется когда совпадают несколько секций (побеждает секция с более высоким приоритетом)
 
 ---
 
-### Hierarchical Router
+### Иерархический роутер
 
-Used when the KB has 20 or more sections. A single flat list becomes unwieldy at that scale — matching degrades and the Router itself becomes large enough to slow context loading.
+Используется когда в KB 20 и более секций. Плоский список на таком масштабе становится неудобным — качество сопоставления падает, и сам роутер становится достаточно большим, чтобы замедлить загрузку контекста.
 
-The Hierarchical Router introduces two levels: a Master Router at the domain level, and Sub-Routers at the section level.
+Иерархический роутер вводит два уровня: мастер-роутер на уровне домена и суб-роутеры на уровне секций.
 
-**Structure:**
-
-```
-Master Router (domain level)
-├── Domain: Audience & Research
-│   └── Sub-Router → sections S1–S6
-├── Domain: Content Strategy
-│   └── Sub-Router → sections S7–S14
-├── Domain: Campaign Management
-│   └── Sub-Router → sections S15–S22
-└── Domain: Analytics & Reporting
-    └── Sub-Router → sections S23–S28
-```
-
-**Two-stage lookup:**
+**Структура:**
 
 ```
-Query received
-     │
-     ▼
-Stage 1: Match against Master Router domain triggers
-     │
-     ▼
-Identify domain → load that domain's Sub-Router
-     │
-     ▼
-Stage 2: Match against Sub-Router section triggers
-     │
-     ▼
-Identify section → get anchor
-     │
-     ▼
-Jump to anchor → read section
+Мастер-роутер (уровень домена)
+├── Домен: Audience & Research
+│   └── Суб-роутер → секции S1–S6
+├── Домен: Content Strategy
+│   └── Суб-роутер → секции S7–S14
+├── Домен: Campaign Management
+│   └── Суб-роутер → секции S15–S22
+└── Домен: Analytics & Reporting
+    └── Суб-роутер → секции S23–S28
 ```
 
-**Master Router entry (example):**
+**Двухэтапный поиск:**
+
+```
+Получен запрос
+     │
+     ▼
+Этап 1: Сопоставить с триггерами доменов мастер-роутера
+     │
+     ▼
+Определить домен → загрузить суб-роутер этого домена
+     │
+     ▼
+Этап 2: Сопоставить с триггерами секций суб-роутера
+     │
+     ▼
+Определить секцию → получить якорь
+     │
+     ▼
+Перейти к якорю → прочитать секцию
+```
+
+**Запись мастер-роутера (пример):**
 
 ```json
 {
@@ -284,7 +284,7 @@ Jump to anchor → read section
 }
 ```
 
-**Sub-Router entry (example):**
+**Запись суб-роутера (пример):**
 
 ```json
 {
@@ -296,61 +296,61 @@ Jump to anchor → read section
 }
 ```
 
-The Sub-Router itself is stored as a section within the KB body (at its own anchor), not as a separate file. This keeps the KB self-contained.
+Суб-роутер хранится как секция внутри тела KB (со своим якорем), а не как отдельный файл. Это позволяет KB оставаться самодостаточной.
 
 ---
 
-## 5. Versioning
+## 5. Версионирование
 
-All files use a two-part version number in the filename.
+Все файлы используют двухчастный номер версии в имени файла.
 
-**Format:** `v[MAJOR]_[MINOR]`
+**Формат:** `v[MAJOR]_[MINOR]`
 
-| Version part | When it increments | Example change |
+| Часть версии | Когда увеличивается | Пример изменения |
 |---|---|---|
-| MAJOR | Structural changes | New sections added, sections removed, Router reorganized |
-| MINOR | Content changes | Edits within existing sections, new examples, corrections |
+| MAJOR | Структурные изменения | Добавлены или удалены секции, реорганизован роутер |
+| MINOR | Изменения контента | Правки внутри существующих секций, новые примеры, исправления |
 
-**Examples:**
-- `Marketer_Knowledge_Base_v3_0.md` → `v3_1.md` after adding examples to an existing section
-- `Marketer_Knowledge_Base_v3_1.md` → `v4_0.md` after adding three new sections and reorganizing the Router
+**Примеры:**
+- `Marketer_Knowledge_Base_v3_0.md` → `v3_1.md` после добавления примеров в существующую секцию
+- `Marketer_Knowledge_Base_v3_1.md` → `v4_0.md` после добавления трёх новых секций и реорганизации роутера
 
-**Bot behavior:** When multiple versions of a file exist, the bot selects the highest version automatically. No manual version pinning is needed.
+**Поведение бота:** Если существует несколько версий файла, бот автоматически выбирает наивысшую версию. Ручная фиксация версии не нужна.
 
-**Router version:** The Router tracks its own version inside the JSON block (`"router_version": "1.2"`), independently from the KB file version. The Router version increments when the Router structure changes — new sections added to the index, trigger lists updated, domain groupings changed — even if no KB body content changed.
+**Версия роутера:** Роутер отслеживает собственную версию внутри JSON-блока (`"router_version": "1.2"`) — независимо от версии файла KB. Версия роутера увеличивается при изменении структуры роутера — добавлении новых секций в индекс, обновлении списков триггеров, изменении группировки по доменам — даже если контент тела KB не изменился.
 
 ---
 
-## 6. File Naming Convention
+## 6. Соглашение об именовании файлов
 
-All files follow a consistent naming pattern. No spaces — use underscores.
+Все файлы следуют единому паттерну именования. Без пробелов — только подчёркивания.
 
 ```
 Universal Core:
   UNIVERSAL_CORE_v[X]_[Y].md
-  Example: UNIVERSAL_CORE_v2_1.md
+  Пример: UNIVERSAL_CORE_v2_1.md
 
-Knowledge Base:
+База знаний:
   [Role]_Knowledge_Base_v[X]_[Y].md
-  Example: Marketer_Knowledge_Base_v4_2.md
-  Example: Analyst_Knowledge_Base_v1_3.md
+  Пример: Marketer_Knowledge_Base_v4_2.md
+  Пример: Analyst_Knowledge_Base_v1_3.md
 
-Project Instructions:
+Инструкции:
   [Role]_Project_Instructions_v[X]_[Y].md
-  Example: Copywriter_Project_Instructions_v2_0.md
+  Пример: Copywriter_Project_Instructions_v2_0.md
 
-Add-ons:
+Аддоны:
   [Addon_Name]_v[X]_[Y].md
-  Example: Brandbook_Voice_v1_2.md
-  Example: Social_Media_Specs_v3_0.md
-  Example: Platform_Restrictions_v1_1.md
+  Пример: Brandbook_Voice_v1_2.md
+  Пример: Social_Media_Specs_v3_0.md
+  Пример: Platform_Restrictions_v1_1.md
 ```
 
-**Role names** match the bot role exactly as defined in the system — no abbreviations, no variations. If the bot is called "Copywriter" in the system, the file is `Copywriter_Knowledge_Base_v...`, not `CW_KB_v...` or `Copy_KB_v...`.
+**Названия ролей** точно совпадают с ролью бота, определённой в системе — без сокращений и вариаций. Если бот называется «Copywriter» в системе, файл — `Copywriter_Knowledge_Base_v...`, а не `CW_KB_v...` или `Copy_KB_v...`.
 
 ---
 
-## Document Interaction Overview
+## Обзор взаимодействия документов
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -359,7 +359,8 @@ Add-ons:
 │  Custom Instructions:                                   │
 │  ┌──────────────────────────────────────────────────┐  │
 │  │  [Role]_Project_Instructions_v[X]_[Y].md         │  │
-│  │  (loaded once, defines identity + behavior)      │  │
+│  │  (загружается один раз, определяет идентичность  │  │
+│  │   и поведение)                                   │  │
 │  └──────────────────────────────────────────────────┘  │
 │                                                         │
 │  Knowledge Sources:                                     │
@@ -367,23 +368,24 @@ Add-ons:
 │  │  UNIVERSAL_CORE  │  │  [Role]_Knowledge_Base   │   │
 │  │  v[X]_[Y].md     │  │  v[X]_[Y].md             │   │
 │  │                  │  │                           │   │
-│  │  (always loaded) │  │  Router → loaded at start │   │
-│  │                  │  │  Sections → per query     │   │
+│  │  (всегда         │  │  Роутер → загружается     │   │
+│  │   загружается)   │  │  при старте               │   │
+│  │                  │  │  Секции → под запрос      │   │
 │  └──────────────────┘  └──────────────────────────┘   │
 │                                                         │
-│  On-demand:                                             │
+│  По требованию:                                         │
 │  ┌──────────────────┐  ┌──────────────────────────┐   │
 │  │  [Addon]         │  │  [Project_KB]            │   │
 │  │  v[X]_[Y].md     │  │  v[X]_[Y].md             │   │
-│  │  (task-specific) │  │  (engagement-specific)   │   │
+│  │  (под задачу)    │  │  (под проект/клиента)    │   │
 │  └──────────────────┘  └──────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Related Documents
+## Связанные документы
 
-- [architecture.md](./architecture.md) — system-level overview, bot roles, interaction model
-- [roles-overview.md](./roles-overview.md) — per-bot role descriptions
-- [../templates/](../templates/) — file templates for all four document types
+- [architecture.md](./architecture.md) — системный обзор, роли ботов, модель взаимодействия
+- [roles-overview.md](./roles-overview.md) — описание ролей каждого бота
+- [../templates/](../templates/) — шаблоны файлов для всех четырёх типов документов

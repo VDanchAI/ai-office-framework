@@ -1,127 +1,127 @@
-# Instructions Structure — Analyst Instructions v2.4
+# Структура инструкций — Analyst Instructions v2.4
 
-**Version:** 2.4
-**Sections:** 9 (numbered 0–8)
-**Core dependency:** Yes (loads shared AI Office Core on startup)
+**Версия:** 2.4
+**Секций:** 9 (пронумерованы 0–8)
+**Зависимость от Core:** Да (загружает общий Core ИИ-офиса при запуске)
 
 ---
 
-## Section map
+## Карта секций
 
-| # | Title | Purpose |
+| # | Название | Назначение |
 |---|---|---|
-| 0 | Mandatory First Action | Bootstraps the bot — loads Core before anything else |
-| 1 | Integration with Core | Defines priority hierarchy between Core and Analyst-specific rules |
-| 2 | Core Identity | Role definition, prime directive, My Card |
-| 3 | Scope | What this bot handles + delegation table |
-| 4 | Iron Rules | Hard constraints that cannot be overridden |
-| 5 | Data Sources | Where data comes from, how to request it |
-| 6 | Analysis Workflow | Step-by-step process from input to output |
-| 7 | Output Formats | Insight card, report, dashboard brief structures |
-| 8 | Collaboration | Handoff rules and routing to other bots |
+| 0 | Обязательное первое действие | Инициализирует бота — загружает Core раньше всего остального |
+| 1 | Интеграция с Core | Определяет иерархию приоритетов между Core и правилами Аналитика |
+| 2 | Основная идентичность | Определение роли, главная директива, Моя карточка |
+| 3 | Область задач | Что обрабатывает этот бот + таблица делегирования |
+| 4 | Железные правила | Жёсткие ограничения, которые нельзя переопределить |
+| 5 | Источники данных | Откуда берутся данные, как их запрашивать |
+| 6 | Рабочий процесс анализа | Пошаговый процесс от входных данных до вывода |
+| 7 | Форматы вывода | Структуры карточки инсайта, отчёта, дашборд-брифа |
+| 8 | Взаимодействие | Правила передачи задач и маршрутизации к другим ботам |
 
 ---
 
-## Section details
+## Детали секций
 
-### Section 0 — Mandatory First Action
-**Purpose:** Ensures the shared Core is loaded before the bot does anything.
-**Key elements:**
-- Explicit load instruction for Core file
-- Blocks any response until Core is confirmed loaded
-- Prevents the bot from running in a degraded state
-
----
-
-### Section 1 — Integration with Core
-**Purpose:** Establishes what happens when Analyst rules and Core rules conflict.
-**Key elements:**
-- Priority hierarchy (Core > Analyst-specific, with defined exceptions)
-- List of Analyst overrides that take precedence over Core defaults
-- Merge rules for overlapping behaviors
+### Секция 0 — Обязательное первое действие
+**Назначение:** Гарантирует загрузку общего Core до начала любых действий бота.
+**Ключевые элементы:**
+- Явная инструкция загрузки файла Core
+- Блокирует любой ответ до подтверждения загрузки Core
+- Предотвращает работу бота в деградированном состоянии
 
 ---
 
-### Section 2 — Core Identity
-**Purpose:** Defines who this bot is and how it introduces itself.
-**Key elements:**
-- Role name and one-line description
-- Prime directive (verbatim): "Every insight must answer 'so what?'. Data without recommendation is a report, not analysis."
-- Philosophy statement: translator from data language to decision language
-- My Card — the self-introduction block shown on first interaction
+### Секция 1 — Интеграция с Core
+**Назначение:** Устанавливает, что происходит при конфликте правил Аналитика и Core.
+**Ключевые элементы:**
+- Иерархия приоритетов (Core > специфичные для Аналитика, с определёнными исключениями)
+- Список переопределений Аналитика, имеющих приоритет над значениями Core по умолчанию
+- Правила слияния для перекрывающихся поведений
 
 ---
 
-### Section 3 — Scope
-**Purpose:** Clear boundaries on what this bot handles and what it does not.
-**Key elements:**
-- Covered domains table (Social Media, Email, Funnel, Content ROI, Retention)
-- Delegation table — maps out-of-scope requests to the correct bot
-- Boundary cases (what to do when a request is partially in-scope)
+### Секция 2 — Основная идентичность
+**Назначение:** Определяет, кто такой этот бот и как он представляется.
+**Ключевые элементы:**
+- Название роли и однострочное описание
+- Главная директива (дословно): «Каждый инсайт должен отвечать на вопрос "и что с этим делать?". Данные без рекомендации — это отчёт, не анализ.»
+- Философское утверждение: переводчик с языка данных на язык решений
+- Моя карточка — блок самопредставления, показываемый при первом взаимодействии
 
 ---
 
-### Section 4 — Iron Rules
-**Purpose:** Hard constraints enforced on every output, no exceptions.
-**Key elements:**
-- No data dumps — raw numbers are never delivered without interpretation
-- CIRI always — every analytical output follows Context → Insight → Recommendation → Impact
-- Never invent numbers — if data is missing, the bot says so and requests it
-- Actionable or nothing — if no recommendation is possible, the bot explains why
-- Additional guardrails specific to the analytical role
+### Секция 3 — Область задач
+**Назначение:** Чёткие границы того, что обрабатывает этот бот, а что нет.
+**Ключевые элементы:**
+- Таблица охватываемых доменов (Социальные сети, Email, Воронка, ROI контента, Удержание)
+- Таблица делегирования — отображает запросы вне области задач на правильного бота
+- Пограничные случаи (что делать, если запрос частично в области задач)
 
 ---
 
-### Section 5 — Data Sources
-**Purpose:** Defines where data comes from and how the bot requests missing data.
-**Key elements:**
-- Accepted data source types (user-provided, platform exports, prior conversation)
-- REQUEST format — standardized structure the bot uses when it needs data from the user
-- Handling incomplete data sets
-- What the bot does when data quality is insufficient for analysis
+### Секция 4 — Железные правила
+**Назначение:** Жёсткие ограничения, применяемые к каждому выводу без исключений.
+**Ключевые элементы:**
+- Никаких дампов данных — сырые числа никогда не выдаются без интерпретации
+- CIRI всегда — каждый аналитический вывод следует схеме Context → Insight → Recommendation → Impact
+- Никогда не выдумывать числа — если данных нет, бот говорит об этом и запрашивает их
+- Действенное или ничего — если рекомендация невозможна, бот объясняет почему
+- Дополнительные ограничения, специфичные для аналитической роли
 
 ---
 
-### Section 6 — Analysis Workflow
-**Purpose:** Step-by-step process the bot follows from receiving a query to delivering output.
-**Key elements:**
-- Receive → Clarify → Gather Data → Analyze → Apply CIRI → Deliver
-- Decision points at each stage (when to proceed, when to ask)
-- How KB sections are selected during the Analyze step
-- Quality check before delivery
+### Секция 5 — Источники данных
+**Назначение:** Определяет, откуда берутся данные и как бот запрашивает недостающие.
+**Ключевые элементы:**
+- Принимаемые типы источников данных (предоставленные пользователем, экспорты платформ, предыдущий диалог)
+- Формат REQUEST — стандартизированная структура, используемая ботом при необходимости данных от пользователя
+- Работа с неполными наборами данных
+- Что делает бот, когда качество данных недостаточно для анализа
 
 ---
 
-### Section 7 — Output Formats
-**Purpose:** Templates and structure for the three main output types.
-**Key elements:**
-- **Insight Card** — single-metric or single-question analysis (compact CIRI)
-- **Report** — multi-metric structured analysis with sections
-- **Dashboard Brief** — recommendations for dashboard layout and KPI selection
-- Formatting rules (when to use tables, when to use bullets, length guidelines)
+### Секция 6 — Рабочий процесс анализа
+**Назначение:** Пошаговый процесс, которому следует бот от получения запроса до выдачи результата.
+**Ключевые элементы:**
+- Получить → Уточнить → Собрать данные → Проанализировать → Применить CIRI → Выдать
+- Точки принятия решений на каждом этапе (когда продолжать, когда спрашивать)
+- Как секции KB выбираются на этапе Анализа
+- Проверка качества перед выдачей
 
 ---
 
-### Section 8 — Collaboration
-**Purpose:** Rules for handing off to other bots in the AI Office.
-**Key elements:**
-- Handoff trigger conditions (when to route vs. when to stay)
-- Handoff message format — what information to pass to the receiving bot
-- Receiving handoff — how to process incoming context from other bots
-- Loop prevention — rules to avoid bouncing requests between bots
+### Секция 7 — Форматы вывода
+**Назначение:** Шаблоны и структура для трёх основных типов вывода.
+**Ключевые элементы:**
+- **Карточка инсайта** — анализ одной метрики или одного вопроса (компактный CIRI)
+- **Отчёт** — структурированный многометрический анализ с секциями
+- **Дашборд-бриф** — рекомендации по компоновке дашборда и выбору KPI
+- Правила форматирования (когда использовать таблицы, когда списки, рекомендации по длине)
 
 ---
 
-## Design patterns
+### Секция 8 — Взаимодействие
+**Назначение:** Правила передачи задач другим ботам ИИ-офиса.
+**Ключевые элементы:**
+- Условия триггера передачи (когда маршрутизировать, когда оставаться)
+- Формат сообщения о передаче — какую информацию передавать принимающему боту
+- Получение передачи — как обрабатывать входящий контекст от других ботов
+- Предотвращение зацикливания — правила, исключающие отбивание запросов между ботами
 
-### CIRI enforcement
-CIRI is enforced in two places: Section 4 (Iron Rules, as a hard constraint) and Section 7 (Output Formats, as a structural template). The duplication is intentional — Iron Rules say "always do CIRI," Output Formats show "here is what CIRI looks like."
+---
 
-### Data source protocol
-The REQUEST format in Section 5 is a standardized block the bot uses consistently. This makes it easy for users to recognize when the bot needs data and what format to provide it in.
+## Паттерны проектирования
 
-### Delegation network
-Section 3 (Scope) and Section 8 (Collaboration) work together. Section 3 defines the boundaries; Section 8 defines what happens at those boundaries. The delegation table in Section 3 is mirrored by the handoff rules in Section 8.
+### Обеспечение CIRI
+CIRI обеспечивается в двух местах: Секция 4 (Железные правила, как жёсткое ограничение) и Секция 7 (Форматы вывода, как структурный шаблон). Дублирование намеренно — Железные правила говорят «всегда делать CIRI», Форматы вывода показывают «вот как выглядит CIRI».
 
-### Section 0 as a safety mechanism
-Loading Core as a mandatory first action (Section 0) is a structural pattern used across all AI Office bots. It ensures shared rules — including ethical constraints and office-wide protocols — are always active regardless of which bot-specific instructions follow.
+### Протокол источников данных
+Формат REQUEST в Секции 5 — стандартизированный блок, который бот использует последовательно. Это позволяет пользователям легко распознавать, когда бот нуждается в данных и в каком формате их предоставлять.
+
+### Сеть делегирования
+Секция 3 (Область задач) и Секция 8 (Взаимодействие) работают в связке. Секция 3 определяет границы; Секция 8 определяет, что происходит на этих границах. Таблица делегирования в Секции 3 отражается правилами передачи в Секции 8.
+
+### Секция 0 как механизм безопасности
+Загрузка Core как обязательного первого действия (Секция 0) — структурный паттерн, используемый во всех ботах ИИ-офиса. Он гарантирует, что общие правила — включая этические ограничения и офисные протоколы — всегда активны, независимо от того, какие специфичные для бота инструкции следуют далее.

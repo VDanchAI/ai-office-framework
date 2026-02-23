@@ -2,7 +2,7 @@
   "router_version": "5.2",
   "kb_version": "5.0",
   "type": "hierarchical",
-  "description": "Two-stage router: domain classifier first, section router second. Priority weights resolve cross-domain queries.",
+  "description": "Двухэтапный роутер: сначала классификатор доменов, затем роутер секций. Весовые коэффициенты приоритетов разрешают межоменальные запросы.",
 
   "domains": [
     {
@@ -15,42 +15,42 @@
         {
           "id": "D1_S1",
           "name": "first_principles",
-          "description": "Decomposition of complex problems to foundational truths. Identifies what is assumed vs. what is known.",
+          "description": "Декомпозиция сложных проблем до фундаментальных истин. Определяет, что является допущением, а что — известным фактом.",
           "trigger_signals": ["first principles", "decompose", "why does this actually work", "underlying assumption"],
-          "example_query": "Why do we assume our pricing model is correct?",
-          "example_activation": "Query contains assumption challenge about a foundational business parameter → D1_S1"
+          "example_query": "Почему мы считаем нашу модель ценообразования правильной?",
+          "example_activation": "Запрос содержит оспаривание допущения о фундаментальном бизнес-параметре → D1_S1"
         },
         {
           "id": "D1_S2",
           "name": "bayesian_thinking",
-          "description": "Probability updating under new evidence. Prior → likelihood → posterior. Calibration of confidence.",
+          "description": "Обновление вероятностей при появлении новых данных. Prior → likelihood → posterior. Калибровка уверенности.",
           "trigger_signals": ["probability", "confidence", "update", "new information", "what are the odds", "how sure"],
-          "example_query": "We got one negative customer interview. Should we change direction?",
-          "example_activation": "Query involves updating a belief based on a single data point → D1_S2"
+          "example_query": "Мы получили одно негативное интервью с клиентом. Стоит ли менять курс?",
+          "example_activation": "Запрос предполагает обновление убеждения на основе единственного источника данных → D1_S2"
         },
         {
           "id": "D1_S3",
           "name": "decision_under_uncertainty",
-          "description": "Decision frameworks for incomplete information: expected value, regret minimization, reversibility assessment.",
+          "description": "Фреймворки принятия решений при неполной информации: ожидаемая ценность, минимизация сожаления, оценка обратимости.",
           "trigger_signals": ["decision", "choose", "option", "uncertain", "risk", "which path"],
-          "example_query": "Should we launch in Q1 or wait for the data from the pilot?",
-          "example_activation": "Query is a binary or multi-option decision with uncertainty → D1_S3"
+          "example_query": "Запускаться в Q1 или подождать данных от пилота?",
+          "example_activation": "Запрос — бинарное или многовариантное решение в условиях неопределённости → D1_S3"
         },
         {
           "id": "D1_S4",
           "name": "cognitive_biases",
-          "description": "Recognition and countermeasures for systematic reasoning errors: confirmation bias, sunk cost, availability heuristic, planning fallacy.",
+          "description": "Распознавание и контрмеры для систематических ошибок мышления: предвзятость подтверждения, невозвратные затраты, эвристика доступности, ошибка планирования.",
           "trigger_signals": ["bias", "blind spot", "are we missing something", "challenge us", "devil's advocate"],
-          "example_query": "We're all very excited about this idea. What might we be missing?",
-          "example_activation": "Query is explicitly requesting assumption challenge or bias check → D1_S4"
+          "example_query": "Мы все в восторге от этой идеи. Что мы можем упускать?",
+          "example_activation": "Запрос явно запрашивает проверку допущений или когнитивных искажений → D1_S4"
         },
         {
           "id": "D1_S5",
           "name": "reasoning_frameworks",
-          "description": "Inductive, deductive, abductive, and analogical reasoning. When to use each. How to spot invalid arguments.",
+          "description": "Индуктивные, дедуктивные, абдуктивные и аналогические рассуждения. Когда применять каждое. Как распознавать некорректные аргументы.",
           "trigger_signals": ["reasoning", "argument", "logic", "prove", "evidence", "analogy"],
-          "example_query": "The competitor did X and succeeded. Does that mean we should do X?",
-          "example_activation": "Query involves analogical reasoning from a single case → D1_S5"
+          "example_query": "Конкурент сделал X и преуспел. Означает ли это, что нам тоже нужно делать X?",
+          "example_activation": "Запрос содержит аналогическое рассуждение на основе единственного случая → D1_S5"
         }
       ]
     },
@@ -61,13 +61,13 @@
       "section_count": 7,
       "trigger_signals": ["strategy", "framework", "SWOT", "OKR", "prioritize", "growth", "competitive", "market", "business model"],
       "sections": [
-        { "id": "D2_S1", "name": "strategic_frameworks", "description": "SWOT (grounded), Porter's Five Forces, Blue Ocean, Business Model Canvas, JTBD" },
-        { "id": "D2_S2", "name": "prioritization", "description": "RICE, MoSCoW, Kano — with guidance on when each is appropriate and what inputs they require" },
-        { "id": "D2_S3", "name": "goals_systems", "description": "OKR methodology, Balanced Scorecard, goal hierarchy design" },
-        { "id": "D2_S4", "name": "growth_mechanics", "description": "Acquisition, activation, retention, expansion — including growth loops vs. funnels" },
-        { "id": "D2_S5", "name": "competitive_dynamics", "description": "Competitive positioning, moat analysis, response prediction" },
-        { "id": "D2_S6", "name": "resource_allocation", "description": "Portfolio theory applied to initiatives, 70/20/10, opportunity cost framing" },
-        { "id": "D2_S7", "name": "scenario_planning", "description": "Scenario construction, stress-testing, pre-mortem, signal monitoring" }
+        { "id": "D2_S1", "name": "strategic_frameworks", "description": "SWOT (с содержанием), Пять сил Портера, Blue Ocean, Business Model Canvas, JTBD" },
+        { "id": "D2_S2", "name": "prioritization", "description": "RICE, MoSCoW, Кано — с указанием, когда применять каждый и какие входные данные требуются" },
+        { "id": "D2_S3", "name": "goals_systems", "description": "Методология OKR, Balanced Scorecard, проектирование иерархии целей" },
+        { "id": "D2_S4", "name": "growth_mechanics", "description": "Привлечение, активация, удержание, расширение — включая петли роста против воронок" },
+        { "id": "D2_S5", "name": "competitive_dynamics", "description": "Конкурентное позиционирование, анализ рвов, предсказание ответных действий" },
+        { "id": "D2_S6", "name": "resource_allocation", "description": "Портфельная теория применительно к инициативам, 70/20/10, фрейминг альтернативных издержек" },
+        { "id": "D2_S7", "name": "scenario_planning", "description": "Построение сценариев, стресс-тестирование, пре-мортем, мониторинг сигналов" }
       ]
     },
     {
@@ -77,10 +77,10 @@
       "section_count": 4,
       "trigger_signals": ["innovation", "MVP", "experiment", "validate", "hypothesis", "creative", "new idea", "design thinking"],
       "sections": [
-        { "id": "D3_S1", "name": "lean_startup", "description": "Build-measure-learn, validated learning, pivot vs. persevere" },
-        { "id": "D3_S2", "name": "mvp_design", "description": "MVP scoping, fake door tests, concierge MVP, success criteria definition" },
-        { "id": "D3_S3", "name": "creativity_techniques", "description": "SCAMPER, lateral thinking, constraint-based ideation, analogical transfer" },
-        { "id": "D3_S4", "name": "design_thinking", "description": "Empathy → Define → Ideate → Prototype → Test cycle" }
+        { "id": "D3_S1", "name": "lean_startup", "description": "Построить-измерить-научиться, подтверждённое обучение, pivot vs. persevere" },
+        { "id": "D3_S2", "name": "mvp_design", "description": "Скопинг MVP, тесты «фальшивой двери», консьерж-MVP, определение критериев успеха" },
+        { "id": "D3_S3", "name": "creativity_techniques", "description": "SCAMPER, латеральное мышление, идеация через ограничения, аналогический перенос" },
+        { "id": "D3_S4", "name": "design_thinking", "description": "Цикл: эмпатия → определение → генерация идей → прототипирование → тестирование" }
       ]
     },
     {
@@ -90,12 +90,12 @@
       "section_count": 6,
       "trigger_signals": ["team", "organization", "culture", "feedback", "communication", "change", "resistance", "coaching", "negotiation"],
       "sections": [
-        { "id": "D4_S1", "name": "coaching", "description": "GROW model, situational leadership, when to coach vs. direct" },
-        { "id": "D4_S2", "name": "systems_thinking", "description": "Feedback loops, archetypes (fixes that fail, shifting the burden), leverage points" },
-        { "id": "D4_S3", "name": "communication", "description": "Pyramid principle, message architecture, audience calibration" },
-        { "id": "D4_S4", "name": "feedback_design", "description": "SBI model, cadence design, psychological safety conditions" },
-        { "id": "D4_S5", "name": "negotiation", "description": "Principled negotiation, BATNA, anchoring, integrative vs. distributive" },
-        { "id": "D4_S6", "name": "change_dynamics", "description": "Kotter's 8 steps, resistance patterns, coalition building" }
+        { "id": "D4_S1", "name": "coaching", "description": "Модель GROW, ситуативное лидерство, когда коучить, а когда направлять" },
+        { "id": "D4_S2", "name": "systems_thinking", "description": "Петли обратной связи, архетипы (заплатки, смещение бремени), точки рычага" },
+        { "id": "D4_S3", "name": "communication", "description": "Принцип пирамиды, архитектура сообщений, адаптация под аудиторию" },
+        { "id": "D4_S4", "name": "feedback_design", "description": "Модель SBI, проектирование ритма, условия психологической безопасности" },
+        { "id": "D4_S5", "name": "negotiation", "description": "Принципиальные переговоры, BATNA, якорение, интегративное vs. дистрибутивное" },
+        { "id": "D4_S6", "name": "change_dynamics", "description": "8 шагов Коттера, паттерны сопротивления, формирование коалиций" }
       ]
     },
     {
@@ -105,10 +105,10 @@
       "section_count": 4,
       "trigger_signals": ["influence", "persuasion", "stakeholder", "meaning", "purpose", "motivation", "ikigai", "stoicism"],
       "sections": [
-        { "id": "D5_S1", "name": "influence_persuasion", "description": "Cialdini principles, narrative framing, emotional vs. rational levers" },
-        { "id": "D5_S2", "name": "stakeholder_alignment", "description": "Stakeholder mapping, alignment sequencing, managing resistance" },
-        { "id": "D5_S3", "name": "meaning_purpose", "description": "Purpose frameworks, connecting work to meaning, Ikigai application" },
-        { "id": "D5_S4", "name": "stoic_orientation", "description": "Stoicism as strategic tool: dichotomy of control, negative visualization, equanimity under pressure" }
+        { "id": "D5_S1", "name": "influence_persuasion", "description": "Принципы Чалдини, нарративный фрейминг, эмоциональные vs. рациональные рычаги" },
+        { "id": "D5_S2", "name": "stakeholder_alignment", "description": "Картирование стейкхолдеров, последовательность выравнивания, управление сопротивлением" },
+        { "id": "D5_S3", "name": "meaning_purpose", "description": "Фреймворки смысла, связь работы со смыслом, применение Ikigai" },
+        { "id": "D5_S4", "name": "stoic_orientation", "description": "Стоицизм как стратегический инструмент: дихотомия контроля, негативная визуализация, невозмутимость под давлением" }
       ]
     },
     {
@@ -121,38 +121,38 @@
         {
           "id": "D6_S1",
           "name": "ai_strategy_governance",
-          "description": "AI strategy for organizations, agent frameworks and orchestration patterns, build vs. buy vs. integrate decision criteria, governance and accountability structures",
+          "description": "Стратегия ИИ для организаций, фреймворки агентов и паттерны оркестрации, критерии выбора build vs. buy vs. integrate, структуры управления и ответственности",
           "trigger_signals": ["AI strategy", "should we build", "AI governance", "which AI tool", "AI risk", "agent architecture"],
-          "example_query": "Should we build our own AI assistant or use an off-the-shelf solution?",
-          "example_activation": "Query is a build vs. buy decision for AI tooling → D6_S1"
+          "example_query": "Создавать собственного ИИ-ассистента или использовать готовое решение?",
+          "example_activation": "Запрос — решение build vs. buy для ИИ-инструментария → D6_S1"
         }
       ]
     }
   ],
 
   "routing_rules": {
-    "single_domain_match": "Route directly to domain, then section",
-    "multi_domain_match": "Use priority weights — highest priority domain is primary, others are supplementary",
-    "no_domain_match": "Default to D1 (THINKING_CORE) — the thinking framework applies universally",
-    "d1_override": "D1 is always checked when query involves a decision or reasoning challenge, regardless of primary domain match"
+    "single_domain_match": "Маршрутизировать напрямую в домен, затем в секцию",
+    "multi_domain_match": "Использовать весовые коэффициенты приоритетов — домен с наивысшим приоритетом является основным, остальные — дополнительными",
+    "no_domain_match": "По умолчанию D1 (THINKING_CORE) — фреймворк мышления применим универсально",
+    "d1_override": "D1 всегда проверяется, когда запрос касается решения или оспаривания рассуждений, независимо от основного совпадения домена"
   },
 
   "cross_domain_examples": [
     {
-      "query": "Our team is resisting the AI tools rollout. How do we handle this?",
+      "query": "Наша команда сопротивляется внедрению ИИ-инструментов. Как с этим работать?",
       "primary_domain": "D4",
       "primary_section": "D4_S6",
       "supplementary_domain": "D6",
       "supplementary_section": "D6_S1",
-      "note": "Organizational change (D4) is primary; AI context (D6) is supplementary"
+      "note": "Организационные изменения (D4) — основной домен; контекст ИИ (D6) — дополнительный"
     },
     {
-      "query": "We're excited about this new market. Are we being rational?",
+      "query": "Мы все в восторге от нового рынка. Мы рассуждаем рационально?",
       "primary_domain": "D1",
       "primary_section": "D1_S4",
       "supplementary_domain": "D2",
       "supplementary_section": "D2_S5",
-      "note": "Bias check (D1) is triggered first; competitive analysis (D2) is supplementary"
+      "note": "Проверка на когнитивные искажения (D1) — триггерируется первой; конкурентный анализ (D2) — дополнительный"
     }
   ]
 }

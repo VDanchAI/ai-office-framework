@@ -1,32 +1,32 @@
-# [BOT_NAME] — Knowledge Base v1.0
+# [BOT_NAME] — База знаний v1.0
 
-**Version:** 1.0
-**Date:** YYYY-MM-DD
+**Версия:** 1.0
+**Дата:** YYYY-MM-DD
 
-> This is the Knowledge Base for your bot — the core repository of domain expertise.
-> Structure: ROUTER (JSON, at the top) → Sections (content, accessed by anchor).
-> The bot NEVER loads the entire KB. It reads the Router, finds the right section, jumps to it.
+> Это база знаний вашего бота — основное хранилище экспертизы в домене.
+> Структура: ROUTER (JSON, в начале) → секции (контент, доступ по якорю).
+> Бот НИКОГДА не загружает всю KB целиком. Он читает роутер, находит нужную секцию и переходит к ней.
 
 ---
 
 ## ROUTER
 
 <!--
-  The Router is the navigation system for your KB.
-  It maps user queries to specific sections using triggers (keywords/phrases).
-  The bot reads ONLY this JSON block first, then jumps to the matched section.
+  Роутер — это навигационная система вашей KB.
+  Он сопоставляет запросы пользователя с конкретными секциями с помощью триггеров (ключевых слов и фраз).
+  Бот читает ТОЛЬКО этот JSON-блок первым, затем переходит к сопоставленной секции.
 
-  TWO ARCHITECTURE OPTIONS:
+  ДВА ВАРИАНТА АРХИТЕКТУРЫ:
 
-  FLAT (recommended for KBs under 20 sections):
-    One router, all sections listed directly.
+  ПЛОСКИЙ (рекомендуется для KB менее 20 секций):
+    Один роутер, все секции перечислены напрямую.
 
-  HIERARCHICAL (for large KBs, 20+ sections):
-    Master Router → domain groupings → Sub-Routers per domain.
-    Each domain has its own section list.
-    Routing: Stage 1 (which domain?) → Stage 2 (which section within domain?)
+  ИЕРАРХИЧЕСКИЙ (для больших KB, 20+ секций):
+    Мастер-роутер → группировка по доменам → под-роутеры на домен.
+    Каждый домен имеет свой список секций.
+    Маршрутизация: Этап 1 (какой домен?) → Этап 2 (какая секция внутри домена?)
 
-  This template shows FLAT architecture. See TEMPLATE_ROUTER.json for hierarchical.
+  Этот шаблон показывает ПЛОСКУЮ архитектуру. Иерархическую смотрите в TEMPLATE_ROUTER.json.
 -->
 
 ```json
@@ -40,62 +40,62 @@
 
   "ai_instructions": {
     "routing_strategy": [
-      "1. Analyze user query intent",
-      "2. Match against section triggers (intent over exact keywords)",
-      "3. If matched → jump to anchor, read section",
-      "4. If multiple matches → read all matched sections",
-      "5. If no match → use fallback"
+      "1. Проанализируй намерение запроса пользователя",
+      "2. Сопоставь с триггерами секций (намерение важнее точных ключевых слов)",
+      "3. Если совпадение найдено → перейди к якорю, прочитай секцию",
+      "4. Если несколько совпадений → прочитай все совпавшие секции",
+      "5. Если совпадений нет → используй фоллбэк"
     ],
-    "fallback": "Route to S1 as the foundational section"
+    "fallback": "Направить в S1 как фундаментальную секцию"
   },
 
   "sections": [
     {
       "id": "S1",
-      "title": "Section 1 — [TOPIC]",
+      "title": "Секция 1 — [ТЕМА]",
       "anchor": "#S1_TOPIC",
-      "triggers": ["keyword1", "keyword2", "phrase one", "phrase two"],
-      "description": "What this section covers (one sentence)",
+      "triggers": ["ключевое_слово1", "ключевое_слово2", "фраза первая", "фраза вторая"],
+      "description": "Что охватывает эта секция (одно предложение)",
       "priority": 10
     },
     {
       "id": "S2",
-      "title": "Section 2 — [TOPIC]",
+      "title": "Секция 2 — [ТЕМА]",
       "anchor": "#S2_TOPIC",
-      "triggers": ["keyword3", "keyword4", "phrase three"],
-      "description": "What this section covers",
+      "triggers": ["ключевое_слово3", "ключевое_слово4", "фраза третья"],
+      "description": "Что охватывает эта секция",
       "priority": 8
     },
     {
       "id": "S3",
-      "title": "Section 3 — [TOPIC]",
+      "title": "Секция 3 — [ТЕМА]",
       "anchor": "#S3_TOPIC",
-      "triggers": ["keyword5", "keyword6"],
-      "description": "What this section covers",
+      "triggers": ["ключевое_слово5", "ключевое_слово6"],
+      "description": "Что охватывает эта секция",
       "priority": 6
     },
     {
       "id": "S4",
-      "title": "Section 4 — [TOPIC]",
+      "title": "Секция 4 — [ТЕМА]",
       "anchor": "#S4_TOPIC",
-      "triggers": ["keyword7", "keyword8"],
-      "description": "What this section covers",
+      "triggers": ["ключевое_слово7", "ключевое_слово8"],
+      "description": "Что охватывает эта секция",
       "priority": 6
     },
     {
       "id": "S5",
-      "title": "Section 5 — [TOPIC]",
+      "title": "Секция 5 — [ТЕМА]",
       "anchor": "#S5_TOPIC",
-      "triggers": ["keyword9", "keyword10"],
-      "description": "What this section covers",
+      "triggers": ["ключевое_слово9", "ключевое_слово10"],
+      "description": "Что охватывает эта секция",
       "priority": 4
     },
     {
       "id": "S6",
-      "title": "Section 6 — [TOPIC]",
+      "title": "Секция 6 — [ТЕМА]",
       "anchor": "#S6_TOPIC",
-      "triggers": ["keyword11", "keyword12"],
-      "description": "What this section covers",
+      "triggers": ["ключевое_слово11", "ключевое_слово12"],
+      "description": "Что охватывает эта секция",
       "priority": 4
     }
   ]
@@ -103,149 +103,149 @@
 ```
 
 <!--
-  ROUTER DESIGN TIPS:
+  СОВЕТЫ ПО ПРОЕКТИРОВАНИЮ РОУТЕРА:
 
-  TRIGGERS:
-  - Use both languages if your bot is bilingual
-  - Include common misspellings and synonyms
-  - Think about HOW users phrase requests, not just WHAT they ask
-  - 5-10 triggers per section is a good range
+  ТРИГГЕРЫ:
+  - Используйте оба языка, если бот двуязычный
+  - Включайте частые опечатки и синонимы
+  - Думайте о том, КАК пользователи формулируют запросы, а не только ЧТО спрашивают
+  - 5–10 триггеров на секцию — оптимально
 
-  PRIORITY:
-  - Higher number = checked first when multiple sections match
-  - Foundational sections get highest priority (10)
-  - Specialized sections get lower priority (4-6)
+  ПРИОРИТЕТ:
+  - Большее число = проверяется первым при совпадении нескольких секций
+  - Фундаментальные секции получают наивысший приоритет (10)
+  - Специализированные секции — низкий приоритет (4–6)
 
-  ANCHORS:
-  - Must match exactly: anchor in Router = heading ID in KB content
-  - Format: #S[NUMBER]_SHORT_NAME (e.g., #S1_FOUNDATIONS)
-  - Test every anchor after creating KB content
+  ЯКОРЯ:
+  - Должны совпадать точно: якорь в роутере = ID заголовка в контенте KB
+  - Формат: #S[НОМЕР]_КОРОТКОЕ_ИМЯ (например, #S1_FOUNDATIONS)
+  - Проверяйте каждый якорь после создания контента KB
 
-  SCALING:
-  - Under 20 sections → flat router (this template)
-  - 20-40 sections → consider hierarchical (group into 3-5 domains)
-  - 40+ sections → definitely hierarchical + sub-routers
+  МАСШТАБИРОВАНИЕ:
+  - До 20 секций → плоский роутер (этот шаблон)
+  - 20–40 секций → рассмотрите иерархический (сгруппируйте в 3–5 доменов)
+  - 40+ секций → обязательно иерархический + под-роутеры
 -->
 
 ---
 
 <!-- ============================================================ -->
-<!-- KB CONTENT — Each section accessed via its anchor              -->
+<!-- КОНТЕНТ KB — Каждая секция доступна через свой якорь          -->
 <!-- ============================================================ -->
 
 ## <a id="S1_TOPIC"></a>S1. [SECTION TITLE — FOUNDATIONS]
 
 <!--
-  FIRST SECTION = Foundation of this role's expertise.
-  This is the fallback section — bot routes here when nothing else matches.
-  Make it comprehensive: core principles, key concepts, fundamental rules.
+  ПЕРВАЯ СЕКЦИЯ = Основа экспертизы этой роли.
+  Это фоллбэк-секция — бот направляет сюда, когда ничего другого не подходит.
+  Сделайте её исчерпывающей: базовые принципы, ключевые концепции, фундаментальные правила.
 -->
 
-### Core Principles
+### Базовые принципы
 
-<!-- List 3-7 fundamental principles of this domain -->
+<!-- Перечислите 3–7 фундаментальных принципов этого домена -->
 
-1. **[Principle 1]** — [Brief explanation]
-2. **[Principle 2]** — [Brief explanation]
-3. **[Principle 3]** — [Brief explanation]
+1. **[Принцип 1]** — [Краткое объяснение]
+2. **[Принцип 2]** — [Краткое объяснение]
+3. **[Принцип 3]** — [Краткое объяснение]
 
-### Key Concepts
+### Ключевые концепции
 
-<!-- Define essential terms and concepts the bot needs to know -->
+<!-- Определите основные термины и концепции, которые должен знать бот -->
 
-| Concept | Definition | When to Apply |
-|---------|-----------|---------------|
-| [Term 1] | [What it means] | [When the bot should use this] |
-| [Term 2] | [What it means] | [When the bot should use this] |
-| [Term 3] | [What it means] | [When the bot should use this] |
+| Концепция | Определение | Когда применять |
+|-----------|-------------|-----------------|
+| [Термин 1] | [Что означает] | [Когда боту использовать] |
+| [Термин 2] | [Что означает] | [Когда боту использовать] |
+| [Термин 3] | [Что означает] | [Когда боту использовать] |
 
-### Rules
+### Правила
 
-<!-- Non-negotiable rules for this domain -->
+<!-- Обязательные правила для этого домена -->
 
-- ALWAYS: [rule]
-- ALWAYS: [rule]
-- NEVER: [rule]
-- NEVER: [rule]
+- ВСЕГДА: [правило]
+- ВСЕГДА: [правило]
+- НИКОГДА: [правило]
+- НИКОГДА: [правило]
 
 ---
 
 ## <a id="S2_TOPIC"></a>S2. [SECTION TITLE]
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Your content here. Structure options:
-  - Lists of techniques/methods
-  - Tables with parameters
-  - Step-by-step processes
-  - Examples with annotations
-  - Templates with fill-in sections
+<!-- Ваш контент здесь. Варианты структуры:
+  - Списки техник и методов
+  - Таблицы с параметрами
+  - Пошаговые процессы
+  - Примеры с аннотациями
+  - Шаблоны с полями для заполнения
 -->
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Continue structuring content logically -->
+<!-- Продолжайте структурировать контент логично -->
 
 ---
 
 ## <a id="S3_TOPIC"></a>S3. [SECTION TITLE]
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 ## <a id="S4_TOPIC"></a>S4. [SECTION TITLE]
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 ## <a id="S5_TOPIC"></a>S5. [SECTION TITLE]
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 ## <a id="S6_TOPIC"></a>S6. [SECTION TITLE]
 
-### [Subsection]
+### [Подсекция]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 <!--
-  KB CONTENT TIPS:
+  СОВЕТЫ ПО КОНТЕНТУ KB:
 
-  STRUCTURE EACH SECTION WITH:
-  - Clear purpose (what does this section teach the bot?)
-  - Actionable content (rules, techniques, templates — not theory)
-  - Examples where possible (the bot learns from examples)
-  - Cross-references to other sections when relevant: "See also: S3"
+  СТРУКТУРИРУЙТЕ КАЖДУЮ СЕКЦИЮ:
+  - С чёткой целью (чему эта секция учит бота?)
+  - С практическим контентом (правила, техники, шаблоны — не теория)
+  - С примерами, где возможно (бот учится на примерах)
+  - С перекрёстными ссылками на другие секции, когда уместно: «Смотрите также: S3»
 
-  WHAT MAKES A GOOD KB:
-  - Bot can find any answer in 1-2 section jumps
-  - Each section is self-contained (doesn't require reading other sections)
-  - Content is prescriptive (DO this, NOT that) rather than descriptive
-  - Examples show both good and bad outcomes
+  ЧТО ДЕЛАЕТ KB ХОРОШЕЙ:
+  - Бот может найти любой ответ за 1–2 перехода между секциями
+  - Каждая секция самодостаточна (не требует чтения других секций)
+  - Контент предписывающий (ДЕЛАЙ это, а НЕ то), а не описательный
+  - Примеры показывают и хорошие, и плохие результаты
 
-  VERSIONING:
-  - Increment MINOR for content additions/edits (v1.0 → v1.1)
-  - Increment MAJOR for structural changes (new sections, reorganization) (v1.1 → v2.0)
-  - Update Router version when sections change
-  - Keep changelog in Router JSON or at the end of this file
+  ВЕРСИОНИРОВАНИЕ:
+  - Увеличивайте MINOR при добавлении/редактировании контента (v1.0 → v1.1)
+  - Увеличивайте MAJOR при структурных изменениях (новые секции, реорганизация) (v1.1 → v2.0)
+  - Обновляйте версию роутера при изменении секций
+  - Ведите changelog в JSON роутера или в конце этого файла
 
-  SCALING:
-  - KB getting large (1000+ lines)? → Split into domains, add Sub-Routers
-  - Repeated content across sections? → Extract to a shared section, reference by anchor
-  - Too many sections? → Group related ones into a domain, create Sub-Router
-  - Need specialized depth? → Create Add-on KB (→ TEMPLATE_ADDON.md)
+  МАСШТАБИРОВАНИЕ:
+  - KB становится большой (1000+ строк)? → Разделите на домены, добавьте под-роутеры
+  - Повторяющийся контент в секциях? → Вынесите в общую секцию, ссылайтесь по якорю
+  - Слишком много секций? → Сгруппируйте связанные в домен, создайте под-роутер
+  - Нужна специализированная глубина? → Создайте аддон KB (→ TEMPLATE_ADDON.md)
 -->
 
-**END OF [BOT_NAME] KNOWLEDGE BASE**
+**КОНЕЦ БАЗЫ ЗНАНИЙ [BOT_NAME]**

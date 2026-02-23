@@ -1,57 +1,57 @@
-# Copywriter
+# Копирайтер
 
-**Type:** Creative
-**Role:** Voice of the brand in every text
-**Maturity:** Production — actively used, sold to clients
+**Тип:** Креативный
+**Роль:** Голос бренда в каждом тексте
+**Зрелость:** Production — активно используется, продаётся клиентам
 
-## What This Bot Does
+## Что делает этот бот
 
-Writes persuasive, human-sounding content across platforms. Specializes in texts that pass AI detection, use psychological techniques, and match the brand's authentic voice.
+Пишет убедительный, живой контент для разных площадок. Специализируется на текстах, которые проходят проверку на ИИ-детекторы, используют психологические техники и передают подлинный голос бренда.
 
-## Core Expertise
+## Ключевая экспертиза
 
-| Domain | Sections | What It Covers |
+| Домен | Секции | Что охватывает |
 |--------|----------|---------------|
-| **Core Copywriting** | 26 sections | Writing style, humanization, hooks, storytelling, persuasion, CTA formulas, AI detection bypass, platform specs |
-| **Narrative Therapy** | 6 sections | Externalization, re-authoring, alternative storylines — therapeutic writing techniques adapted for marketing |
-| **Persuasion** | 6 sections | Cialdini's principles, trust building, anti-marketing, emotional triggers, cognitive biases, conversion psychology |
-| **Rhetorical Mastery** | 5 sections | Provocative therapy, analogies & metaphors, rhetorical questions, classical rhetoric, semantic precision |
+| **Core Copywriting** | 26 секций | Стиль письма, очеловечивание, хуки, сторителлинг, убеждение, формулы CTA, обход ИИ-детекции, требования площадок |
+| **Narrative Therapy** | 6 секций | Экстернализация, переавторство, альтернативные сюжеты — техники терапевтического письма, адаптированные для маркетинга |
+| **Persuasion** | 6 секций | Принципы Чалдини, построение доверия, антимаркетинг, эмоциональные триггеры, когнитивные искажения, психология конверсии |
+| **Rhetorical Mastery** | 5 секций | Провокативная терапия, аналогии и метафоры, риторические вопросы, классическая риторика, семантическая точность |
 
-**Total: 43 sections across 4 domains | ~15,000 lines of Knowledge Base**
+**Итого: 43 секции в 4 доменах | ~15 000 строк базы знаний**
 
-## Key Differentiators
+## Ключевые отличия
 
-- **Anti-AI Detection:** Built-in techniques for producing text that reads as genuinely human
-- **Psycholinguistics:** Deep integration of influence psychology into copywriting
-- **Multi-Platform:** Platform-specific rules for LinkedIn, Facebook, Telegram
-- **Brand Voice Lock:** Writes in the brand owner's authentic voice, not generic "AI tone"
-- **Hierarchical Router:** Two-stage routing system handles 43 sections efficiently
+- **Обход ИИ-детекции:** Встроенные техники создания текста, который читается как написанный живым человеком
+- **Психолингвистика:** Глубокая интеграция психологии влияния в копирайтинг
+- **Мультиплатформенность:** Специфические правила для LinkedIn, Facebook, Telegram
+- **Фиксация голоса бренда:** Пишет голосом владельца бренда, а не обезличенным «тоном ИИ»
+- **Иерархический роутер:** Двухуровневая система маршрутизации эффективно обрабатывает 43 секции
 
-## Architecture
+## Архитектура
 
 ```
 Universal Core v6.0
     ↓
-Copywriter Knowledge Base v11.2    ← 4 domains, hierarchical router
+Copywriter Knowledge Base v11.2    ← 4 домена, иерархический роутер
     ↓
 Copywriter Project Instructions v6.1
     ↓
-Add-ons (loaded as needed):
-    ├── Social Media Specs v1.0         ← Platform-specific rules
-    ├── Russian Style Anti-AI Guide     ← Humanization techniques
-    ├── Milton Model Toolkit            ← Hypnotic language patterns
-    ├── Psycholinguistics Toolkit       ← Influence techniques
-    └── Platform Restrictions           ← Content policy rules
+Дополнения (загружаются по необходимости):
+    ├── Social Media Specs v1.0         ← Правила для конкретных площадок
+    ├── Russian Style Anti-AI Guide     ← Техники очеловечивания
+    ├── Milton Model Toolkit            ← Паттерны гипнотического языка
+    ├── Psycholinguistics Toolkit       ← Техники влияния
+    └── Platform Restrictions           ← Правила политики контента
 ```
 
-## What's NOT Here
+## Чего здесь НЕТ
 
-This example shows **structure and organization**, not the actual bot:
-- No real prompts or behavioral instructions
-- No actual KB content (techniques, formulas, examples)
-- No real router with trigger logic
-- No brand voice definitions
+Этот пример показывает **структуру и организацию**, а не реального бота:
+- Никаких реальных промптов или поведенческих инструкций
+- Никакого реального содержимого KB (техники, формулы, примеры)
+- Никакого реального роутера с логикой триггеров
+- Никаких определений голоса бренда
 
-→ See `KB_STRUCTURE.md` for how the Knowledge Base is organized
-→ See `INSTRUCTIONS_STRUCTURE.md` for how instructions are structured
-→ See `ROUTER_DEMO.json` for a simplified router example
+→ См. `KB_STRUCTURE.md` — организация базы знаний
+→ См. `INSTRUCTIONS_STRUCTURE.md` — структура инструкций
+→ См. `ROUTER_DEMO.json` — упрощённый пример роутера

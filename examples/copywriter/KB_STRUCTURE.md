@@ -1,137 +1,137 @@
-# Copywriter — Knowledge Base Structure
+# Копирайтер — Структура базы знаний
 
-> This document describes HOW the Copywriter's Knowledge Base is organized.
-> It shows section names, their purpose, and domain groupings.
-> The actual content (techniques, formulas, examples) is not included.
+> Этот документ описывает КАК организована база знаний Копирайтера.
+> Показаны названия секций, их назначение и группировка по доменам.
+> Фактическое содержимое (техники, формулы, примеры) не включено.
 
-## Architecture: Hierarchical Router
+## Архитектура: Иерархический роутер
 
-The KB uses a **hierarchical router** (Master + Sub-Routers) because it has 43 sections.
+KB использует **иерархический роутер** (Мастер + Суб-роутеры), поскольку содержит 43 секции.
 
 ```
-Master Router
-    ├── CORE_COPYWRITING (26 sections, priority: 10)
-    │   └── Sub-Router: core_copywriting_router
-    ├── NARRATIVE_THERAPY (6 sections, priority: 8)
-    │   └── Sub-Router: narrative_therapy_router
-    ├── PERSUASION (6 sections, priority: 7)
-    │   └── Sub-Router: persuasion_router
-    └── RHETORICAL_MASTERY (5 sections, priority: 6)
-        └── Sub-Router: rhetorical_mastery_router
+Мастер-роутер
+    ├── CORE_COPYWRITING (26 секций, приоритет: 10)
+    │   └── Суб-роутер: core_copywriting_router
+    ├── NARRATIVE_THERAPY (6 секций, приоритет: 8)
+    │   └── Суб-роутер: narrative_therapy_router
+    ├── PERSUASION (6 секций, приоритет: 7)
+    │   └── Суб-роутер: persuasion_router
+    └── RHETORICAL_MASTERY (5 секций, приоритет: 6)
+        └── Суб-роутер: rhetorical_mastery_router
 ```
 
-**Routing flow:**
-1. User asks a question
-2. Master Router → determines which domain
-3. Sub-Router → finds exact section within that domain
-4. Bot jumps to section anchor → reads content → generates response
+**Процесс маршрутизации:**
+1. Пользователь задаёт вопрос
+2. Мастер-роутер → определяет домен
+3. Суб-роутер → находит конкретную секцию внутри домена
+4. Бот переходит к якорю секции → читает содержимое → генерирует ответ
 
 ---
 
-## Domain 1: CORE_COPYWRITING (26 sections)
+## Домен 1: CORE_COPYWRITING (26 секций)
 
-The foundation. Covers everything from writing style to platform specifications.
+Фундамент. Охватывает всё — от стиля письма до требований площадок.
 
-| Section | Title | Purpose |
+| Секция | Название | Назначение |
 |---------|-------|---------|
-| S1 | River Syntax | Author's signature writing rhythm and sentence structure |
-| S2 | Humanization | Techniques for making AI-generated text sound human |
-| S3 | Three Registers | Formal / conversational / intimate voice switching |
-| S4 | Forbidden Vocabulary | Words and phrases the bot must never use |
-| S5 | Two-Layer Communication | Surface message + subtext layer |
-| S6 | Addressing Rules | How to address the reader (tone, pronouns) |
-| S7 | Self-Check Sequence | Quality verification before delivering text |
-| S8 | Chekhov Style | "Subtraction" writing — say more with less |
-| S10 | Hook Formulas | Opening lines that capture attention |
-| S11 | Storytelling Frameworks | Narrative structures for posts and articles |
-| S12 | Persuasion Techniques | Core persuasion mechanics in text |
-| S13 | Emotional Triggers | Activating specific emotions through writing |
-| S14 | Post Formats | Structural templates for different post types |
-| S15 | CTA Formulas | Call-to-action patterns and placement rules |
-| S16 | AI Detection Mechanics | How AI detectors work (to avoid detection) |
-| S17 | AI Sentence Patterns | Patterns that flag text as AI-generated |
-| S18 | Literary Masters | Writing techniques borrowed from literature |
-| S19 | Spontaneous Speech Markers | Markers that simulate natural human speech |
-| S20 | Psycholinguistics | Language influence techniques |
-| S21 | Russian Style Fundamentals | Russian-specific writing rules and patterns |
-| S22 | Russian Literary Masters | Techniques from Russian literary tradition |
-| S23 | LinkedIn — Specifications | Character limits, fold rules, hashtag rules |
-| S24 | LinkedIn — Formats | Post format templates and writing rules |
-| S25 | LinkedIn — Soft Selling & CTA | Non-aggressive selling techniques for LinkedIn |
-| S26 | Platform Restrictions | Content policy rules per platform |
-| S46 | Copy Fundamentals | Foundational copywriting principles |
+| S1 | River Syntax | Авторский ритм письма и структура предложений — фирменный стиль |
+| S2 | Humanization | Техники превращения текста ИИ в живой, человеческий |
+| S3 | Three Registers | Переключение между формальным / разговорным / интимным голосом |
+| S4 | Forbidden Vocabulary | Слова и фразы, которые бот не должен использовать никогда |
+| S5 | Two-Layer Communication | Поверхностное послание + слой подтекста |
+| S6 | Addressing Rules | Как обращаться к читателю (тон, местоимения) |
+| S7 | Self-Check Sequence | Самопроверка качества перед выдачей текста |
+| S8 | Chekhov Style | Письмо «вычитанием» — сказать больше меньшим числом слов |
+| S10 | Hook Formulas | Зачины, захватывающие внимание |
+| S11 | Storytelling Frameworks | Нарративные структуры для постов и статей |
+| S12 | Persuasion Techniques | Базовая механика убеждения в тексте |
+| S13 | Emotional Triggers | Активация конкретных эмоций через письмо |
+| S14 | Post Formats | Структурные шаблоны для разных типов постов |
+| S15 | CTA Formulas | Паттерны призывов к действию и правила их размещения |
+| S16 | AI Detection Mechanics | Как работают ИИ-детекторы (чтобы их обходить) |
+| S17 | AI Sentence Patterns | Паттерны, выдающие текст как написанный ИИ |
+| S18 | Literary Masters | Техники письма, заимствованные из литературы |
+| S19 | Spontaneous Speech Markers | Маркеры, имитирующие живую разговорную речь |
+| S20 | Psycholinguistics | Техники языкового влияния |
+| S21 | Russian Style Fundamentals | Правила и паттерны письма, специфичные для русского языка |
+| S22 | Russian Literary Masters | Техники из русской литературной традиции |
+| S23 | LinkedIn — Specifications | Ограничения по символам, правила «кката», правила хэштегов |
+| S24 | LinkedIn — Formats | Шаблоны форматов постов и правила написания |
+| S25 | LinkedIn — Soft Selling & CTA | Неагрессивные техники продаж для LinkedIn |
+| S26 | Platform Restrictions | Правила политики контента по площадкам |
+| S46 | Copy Fundamentals | Базовые принципы копирайтинга |
 
 ---
 
-## Domain 2: NARRATIVE_THERAPY (6 sections)
+## Домен 2: NARRATIVE_THERAPY (6 секций)
 
-Therapeutic writing techniques adapted for marketing. Creates deeper emotional connection.
+Техники терапевтического письма, адаптированные для маркетинга. Создают более глубокую эмоциональную связь.
 
-| Section | Title | Purpose |
+| Секция | Название | Назначение |
 |---------|-------|---------|
-| S27 | Externalization | Separating person from problem in narrative |
-| S28 | Re-authoring | Helping reader rewrite their story |
-| S29 | Unique Outcomes | Finding exceptions to the problem narrative |
-| S30 | Alternative Storylines | Building new narratives from unique outcomes |
-| S31 | Thick vs Thin Description | Rich, multi-layered storytelling vs reductive labels |
-| S32 | Narrative Maps | Structured templates for therapeutic narratives |
+| S27 | Externalization | Отделение человека от проблемы в нарративе |
+| S28 | Re-authoring | Помощь читателю в переписывании своей истории |
+| S29 | Unique Outcomes | Поиск исключений в проблемном нарративе |
+| S30 | Alternative Storylines | Построение новых нарративов из уникальных исходов |
+| S31 | Thick vs Thin Description | Богатый многослойный сторителлинг против редуктивных ярлыков |
+| S32 | Narrative Maps | Структурированные шаблоны для терапевтических нарративов |
 
-**Each section includes:** Theory, process, language patterns, use cases, common mistakes.
+**Каждая секция включает:** Теорию, процесс, языковые паттерны, варианты применения, типичные ошибки.
 
 ---
 
-## Domain 3: PERSUASION (6 sections)
+## Домен 3: PERSUASION (6 секций)
 
-Psychology-based influence techniques for ethical persuasion in text.
+Техники влияния на основе психологии для этичного убеждения в тексте.
 
-| Section | Title | Purpose |
+| Секция | Название | Назначение |
 |---------|-------|---------|
-| S33 | Cialdini's 7 Principles | Reciprocity, commitment, social proof, authority, liking, scarcity, unity |
-| S34 | Trust Building | Vulnerability + authority balance, credibility markers |
-| S35 | Anti-Marketing | Selling through philosophy, indirect conversion |
-| S36 | Emotional Triggers | FOMO, validation, intellectual pleasure, belonging, hope |
-| S37 | Cognitive Biases | Memory, perception, social, decision, and emotional biases |
-| S38 | Conversion Psychology | Micro-conversions, friction reduction, momentum building |
+| S33 | Cialdini's 7 Principles | Взаимность, обязательство, социальное доказательство, авторитет, симпатия, дефицит, единство |
+| S34 | Trust Building | Баланс уязвимости и авторитета, маркеры доверия |
+| S35 | Anti-Marketing | Продажи через философию, косвенная конверсия |
+| S36 | Emotional Triggers | FOMO, признание, интеллектуальное удовольствие, принадлежность, надежда |
+| S37 | Cognitive Biases | Когнитивные искажения памяти, восприятия, социальные, принятия решений и эмоциональные |
+| S38 | Conversion Psychology | Микроконверсии, снижение трения, набор импульса |
 
 ---
 
-## Domain 4: RHETORICAL_MASTERY (5 sections)
+## Домен 4: RHETORICAL_MASTERY (5 секций)
 
-Classical and modern rhetoric techniques adapted for digital content.
+Техники классической и современной риторики, адаптированные для цифрового контента.
 
-| Section | Title | Purpose |
+| Секция | Название | Назначение |
 |---------|-------|---------|
-| S39 | Provocative Therapy | Exaggeration, reverse psychology, paradoxical intention |
-| S40 | Analogies & Metaphors | Structural analogies, extended metaphors, cross-domain mapping |
-| S41 | Rhetorical Questions | Erotesis, Socratic method, leading questions |
-| S42 | Classical Rhetoric Devices | Ethos/Pathos/Logos, anaphora, antithesis, chiasmus, tricolon |
-| S43–S45 | Advanced Rhetoric | Paradox & irony, framing & perspective, semantic precision |
+| S39 | Provocative Therapy | Преувеличение, обратная психология, парадоксальное намерение |
+| S40 | Analogies & Metaphors | Структурные аналогии, развёрнутые метафоры, межобластное отображение |
+| S41 | Rhetorical Questions | Эротесис, метод Сократа, наводящие вопросы |
+| S42 | Classical Rhetoric Devices | Этос/Пафос/Логос, анафора, антитеза, хиазм, трикалон |
+| S43–S45 | Advanced Rhetoric | Парадокс и ирония, фреймирование и перспектива, семантическая точность |
 
 ---
 
-## External Files (Add-ons)
+## Внешние файлы (дополнения)
 
-The Copywriter's KB references external specialist files loaded separately:
+KB Копирайтера ссылается на внешние специализированные файлы, загружаемые отдельно:
 
-| Add-on | Purpose | Loaded When |
+| Дополнение | Назначение | Загружается когда |
 |--------|---------|-------------|
-| Social Media Specs | Platform-specific character limits, fold rules, format rules | Writing for LinkedIn/Facebook/Telegram |
-| Russian Style Anti-AI Guide | Deep humanization techniques for Russian text | Every Russian text |
-| Milton Model Toolkit | Hypnotic language patterns (Ericksonian hypnosis) | Persuasive / therapeutic writing |
-| Psycholinguistics Toolkit | NLP-based influence techniques | Influence-heavy content |
-| Platform Restrictions | Content policy rules | Platform-specific writing |
+| Social Media Specs | Ограничения по символам, правила «ката», правила форматов для конкретных площадок | Написание для LinkedIn/Facebook/Telegram |
+| Russian Style Anti-AI Guide | Глубокие техники очеловечивания для русскоязычного текста | Каждый русский текст |
+| Milton Model Toolkit | Паттерны гипнотического языка (эриксоновский гипноз) | Убеждающее / терапевтическое письмо |
+| Psycholinguistics Toolkit | Техники влияния на основе НЛП | Контент с высокой долей влияния |
+| Platform Restrictions | Правила политики контента | Написание под конкретную площадку |
 
 ---
 
-## Scaling Notes
+## Заметки о масштабировании
 
-This KB grew from 8 sections (v1.0) to 43 sections (v11.2) over multiple iterations:
+Эта KB выросла с 8 секций (v1.0) до 43 секций (v11.2) за несколько итераций:
 
-- **v1–v5:** Flat router, single domain, basic copywriting
-- **v6:** Switched to hierarchical router, added Narrative Therapy domain
-- **v7:** Added Persuasion domain
-- **v8:** Added Rhetorical Mastery domain
-- **v10:** Extracted Milton Model to standalone file (Hub Model)
-- **v11:** Current production version
+- **v1–v5:** Плоский роутер, один домен, базовый копирайтинг
+- **v6:** Переход на иерархический роутер, добавлен домен Narrative Therapy
+- **v7:** Добавлен домен Persuasion
+- **v8:** Добавлен домен Rhetorical Mastery
+- **v10:** Milton Model выделен в отдельный файл (модель Hub)
+- **v11:** Текущая production-версия
 
-**Key lesson:** Start flat, go hierarchical when you hit ~20 sections. Extract deep topics to Add-ons when a domain gets too large.
+**Ключевой урок:** Начинайте с плоского роутера, переходите на иерархический при ~20 секциях. Выносите глубокие темы в дополнения, когда домен становится слишком большим.

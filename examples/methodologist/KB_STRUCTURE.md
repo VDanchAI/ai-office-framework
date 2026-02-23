@@ -1,17 +1,17 @@
-# KB Structure — Methodologist
+# Структура KB — Methodologist
 
-**Version:** v3.7
-**Size:** 4958 lines
-**Sections:** 10
-**Router:** Flat (v5.2) — single-level dispatch, no nested routing
+**Версия:** v3.7
+**Размер:** 4958 строк
+**Секций:** 10
+**Роутер:** Flat (v5.2) — однослойная диспетчеризация, без вложенной маршрутизации
 
 ---
 
-## Architecture Overview
+## Обзор архитектуры
 
 ```
 KB v3.7
-├── Router (flat, v5.2)          ← entry point for all queries
+├── Router (flat, v5.2)          ← точка входа для всех запросов
 │
 ├── 01  RESULT_TYPES
 ├── 02  PSYCHOTECHNICAL_MYTH
@@ -21,97 +21,97 @@ KB v3.7
 ├── 06  CHECKLISTS
 ├── 07  HANDOFFS
 ├── 08  ANTIPATTERNS
-├── 09  THERAPY_GROUPS            ← expanded: 9 subsections
+├── 09  THERAPY_GROUPS            ← расширена: 9 подсекций
 └── 10  BUSINESS_MODELS
 ```
 
-The router receives a task description and returns the section identifier(s) to activate. No intermediary classification step — direct lookup.
+Роутер получает описание задачи и возвращает идентификатор(ы) секции для активации. Без промежуточного шага классификации — прямой поиск.
 
 ---
 
-## Router: Flat v5.2
+## Роутер: Flat v5.2
 
-Single dispatch layer. Input → section tag. Examples:
+Однослойная диспетчеризация. Ввод → тег секции. Примеры:
 
-| Incoming task | Section activated |
+| Входящая задача | Активируемая секция |
 |---|---|
-| "Design a 2-hour workshop" | FORMAT_STRUCTURES, TEMPLATES |
-| "What type of result is this outcome?" | RESULT_TYPES |
-| "Create an exercise with motivation" | PSYCHOTECHNICAL_MYTH |
-| "Check if the program is ready" | CHECKLISTS |
-| "Group is stuck, no energy" | GROUP_WORK |
-| "Pass this to the copywriter" | HANDOFFS |
-| "This program has no clear outcome" | ANTIPATTERNS |
-| "Set up an online therapy group" | THERAPY_GROUPS |
-| "Price a cohort course" | BUSINESS_MODELS |
+| «Спроектировать 2-часовой воркшоп» | FORMAT_STRUCTURES, TEMPLATES |
+| «Какой тип результата у этого учебного исхода?» | RESULT_TYPES |
+| «Создать упражнение с мотивацией» | PSYCHOTECHNICAL_MYTH |
+| «Проверить, готова ли программа» | CHECKLISTS |
+| «Группа застряла, нет энергии» | GROUP_WORK |
+| «Передать это копирайтеру» | HANDOFFS |
+| «В этой программе нет чёткого результата» | ANTIPATTERNS |
+| «Настроить онлайн-терапевтическую группу» | THERAPY_GROUPS |
+| «Назначить цену на когортный курс» | BUSINESS_MODELS |
 
-Flat architecture means: if a task touches two sections, both are activated in parallel — no priority queue, no sequential resolution.
+Плоская архитектура означает: если задача затрагивает две секции, обе активируются параллельно — без очереди приоритетов, без последовательного разрешения.
 
 ---
 
-## Sections
+## Секции
 
 ### 01 RESULT_TYPES
-Classification framework for learning outcomes. Three types: Concept, Instrument, Resource. Each type has a different design logic, different exercise formats, and different success criteria. The Methodologist types every stated outcome before any design begins.
+Классификационный фреймворк для учебных результатов. Три типа: Concept, Instrument, Resource. Каждый тип имеет свою логику проектирования, форматы упражнений и критерии успеха. Methodologist типизирует каждый заявленный результат до начала любой проектной работы.
 
 ### 02 PSYCHOTECHNICAL_MYTH
-Methodology for creating motivational entry context for assignments. Every exercise has a "myth" — a narrative or situational frame that makes the learning task feel necessary before the participant engages with the content. Contains: myth templates by result type, failure patterns, debrief connection rules.
+Методология создания мотивационного входного контекста для заданий. Каждое упражнение имеет «миф» — нарративный или ситуационный фрейм, который делает учебную задачу ощущаемой необходимой до того, как участник вступает в контакт с содержанием. Содержит: шаблоны мифов по типам результатов, паттерны сбоев, правила связи с дебрифом.
 
-**This section has no equivalent in standard instructional design frameworks. It is a proprietary concept specific to this KB.**
+**Эта секция не имеет аналога в стандартных фреймворках инструктивного дизайна. Это проприетарная концепция, специфичная для данной KB.**
 
 ### 03 FORMAT_STRUCTURES
-Structural templates for four main formats:
-- Webinar
-- Masterclass
-- CBC (content-based course)
-- Cohort course
+Структурные шаблоны для четырёх основных форматов:
+- Вебинар
+- Мастеркласс
+- CBC (курс на основе контента)
+- Когортный курс
 
-Each template includes: duration brackets, engagement checkpoints, result-type compatibility, 2026 audience engagement tactics.
+Каждый шаблон включает: временны́е рамки, контрольные точки вовлечённости, совместимость с типами результатов, тактики вовлечения аудитории 2026 года.
 
 ### 04 TEMPLATES
-Formatting templates for program deliverables: program outlines, unit descriptions, exercise cards, session plans. Templates enforce the result-first structure — every template starts with an outcome field that must be filled before content fields unlock.
+Форматные шаблоны для продуктов программы: структуры программ, описания блоков, карточки упражнений, планы сессий. Шаблоны принудительно реализуют структуру «результат прежде всего» — каждый шаблон начинается с поля результата, которое должно быть заполнено до разблокировки полей контента.
 
 ### 05 GROUP_WORK
-Managing group dynamics in live program delivery. Covers: energy management, handling resistance, silence and disengagement, conflict protocols, pacing adjustments. Used when designing facilitated programs and when advising on delivery.
+Управление групповой динамикой при очном проведении программы. Охватывает: управление энергией, работу с сопротивлением, молчание и отстранённость, протоколы конфликтов, корректировку темпа. Используется при проектировании фасилитируемых программ и при консультировании по проведению.
 
 ### 06 CHECKLISTS
-Quality control instruments. Contains readiness checklists for: program design (pre-launch), single session (pre-delivery), exercise set (pre-use), handoff package (pre-delegation). Each checklist item maps to a specific failure mode documented in ANTIPATTERNS.
+Инструменты контроля качества. Содержит чеклисты готовности для: дизайна программы (до запуска), отдельной сессии (до проведения), набора упражнений (до использования), пакета передачи (до делегирования). Каждый пункт чеклиста соответствует конкретному режиму сбоя, задокументированному в ANTIPATTERNS.
 
 ### 07 HANDOFFS
-Delegation rules and brief formats for passing work to other roles: Copywriter, Marketer, Producer, Analyst. Each handoff template specifies what the Methodologist provides and what the receiving role needs to start without clarifying questions.
+Правила делегирования и форматы брифов для передачи работы другим ролям: копирайтер, маркетолог, продюсер, аналитик. Каждый шаблон передачи определяет, что предоставляет Methodologist и что нужно принимающей роли, чтобы начать без уточняющих вопросов.
 
 ### 08 ANTIPATTERNS
-Documented failure modes in educational program design. Organized by phase: design phase antipatterns, delivery phase antipatterns, business model antipatterns. Each entry: description of the pattern, why it fails, correction algorithm.
+Задокументированные режимы сбоя в дизайне образовательных программ. Организованы по фазе: антипаттерны фазы проектирования, антипаттерны фазы проведения, антипаттерны бизнес-модели. Каждая запись: описание паттерна, причина сбоя, алгоритм коррекции.
 
-**Most common antipattern:** Content-first design — starting with "what I know" rather than "what participants will be able to do."
+**Самый распространённый антипаттерн:** Проектирование от контента — начало с «что я знаю», а не с «что участники смогут делать».
 
 ### 09 THERAPY_GROUPS
-The largest expanded section. Full methodology for therapy group work. Nine subsections:
+Наиболее расширенная секция. Полная методология для работы с терапевтическими группами. Девять подсекций:
 
 ```
 09  THERAPY_GROUPS
-├── 09.1  Group Types          — classification: support, process, skills, psychoeducation
-├── 09.2  Development Stages   — forming through termination, facilitator role per stage
-├── 09.3  Selection            — intake criteria, contraindications, group composition
-├── 09.4  Cohesion             — mechanisms, measurement, facilitation techniques
-├── 09.5  Leadership           — co-facilitation models, authority dynamics
-├── 09.6  Ethics               — confidentiality, dual relationships, boundary management
-├── 09.7  Session Structure    — opening / working phase / closing, time allocation
-├── 09.8  Online / Hybrid      — platform-specific adaptations, presence simulation
-└── 09.9  Crisis Protocols     — member in crisis, group disruption, emergency referral
+├── 09.1  Типы групп          — классификация: поддерживающие, процессуальные, навыковые, психообразовательные
+├── 09.2  Стадии развития     — от формирования до завершения, роль фасилитатора на каждой стадии
+├── 09.3  Отбор               — критерии отбора, противопоказания, состав группы
+├── 09.4  Сплочённость        — механизмы, измерение, техники фасилитации
+├── 09.5  Лидерство           — модели ко-фасилитации, динамика авторитета
+├── 09.6  Этика               — конфиденциальность, двойные отношения, управление границами
+├── 09.7  Структура сессии    — открытие / рабочая фаза / закрытие, распределение времени
+├── 09.8  Онлайн / Гибрид     — адаптации под платформу, симуляция присутствия
+└── 09.9  Кризисные протоколы — участник в кризисе, нарушение работы группы, экстренное направление
 ```
 
-Scope note: therapy group design is the most methodologically dense area in the KB. The nine subsections reflect genuine complexity — each subsection has its own logic and cannot be collapsed into a general "group work" category.
+Примечание об объёме: дизайн терапевтических групп — методологически самая насыщенная область в KB. Девять подсекций отражают реальную сложность — каждая подсекция имеет свою логику и не может быть сведена к общей категории «работа с группой».
 
 ### 10 BUSINESS_MODELS
-Commercial design of educational products. Covers: pricing models (per-seat, subscription, cohort, hybrid), marketing metrics (CAC by channel), platform selection logic, financial metrics (LTV, break-even, payback period). Used when the Methodologist is consulted on product viability alongside program design.
+Коммерческое проектирование образовательных продуктов. Охватывает: модели ценообразования (посадочное место, подписка, когорта, гибрид), маркетинговые метрики (CAC по каналам), логику выбора платформы, финансовые метрики (LTV, точка безубыточности, период окупаемости). Используется, когда Methodologist консультируется по жизнеспособности продукта наряду с дизайном программы.
 
 ---
 
-## Design Principles Behind the KB
+## Принципы проектирования KB
 
-**Flat over nested.** The v5.2 router is deliberately non-hierarchical. Earlier versions (v4.x) used a two-level classification tree that introduced routing errors when tasks were ambiguous. Flat lookup with parallel section activation is more robust.
+**Плоская над вложенной.** Роутер v5.2 намеренно не иерархический. Более ранние версии (v4.x) использовали двухуровневое дерево классификации, которое давало ошибки маршрутизации при неоднозначных задачах. Плоский поиск с параллельной активацией секций более надёжен.
 
-**Antipatterns as first-class citizens.** ANTIPATTERNS is a full section, not a footnote. Knowing what not to do is as operationally important as knowing what to do.
+**Антипаттерны как объекты первого класса.** ANTIPATTERNS — полноценная секция, а не сноска. Знание того, что не следует делать, так же операционально важно, как знание того, что следует делать.
 
-**Therapy groups as separate section.** Earlier versions folded therapy groups into GROUP_WORK. The v3.x KB separates them because the methodology is distinct enough — different ethics, different session logic, different selection criteria — that merged treatment produced errors.
+**Терапевтические группы как отдельная секция.** Более ранние версии включали терапевтические группы в GROUP_WORK. KB v3.x выделяет их в отдельную секцию, поскольку методология достаточно самобытна — разная этика, разная логика сессий, разные критерии отбора — и объединённое рассмотрение приводило к ошибкам.

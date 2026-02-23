@@ -1,128 +1,128 @@
-# Copywriter — Instructions Structure
+# Копирайтер — Структура инструкций
 
-> This document describes HOW the Copywriter's Project Instructions are organized.
-> It shows instruction blocks, their purpose, and the logic behind them.
-> The actual prompts and behavioral rules are not included.
+> Этот документ описывает КАК организованы инструкции Копирайтера.
+> Показаны блоки инструкций, их назначение и логика построения.
+> Фактические промпты и поведенческие правила не включены.
 
-## Overview
+## Обзор
 
-**Current version:** v6.1 | 8 sections | ~500 lines
-**Purpose:** Define WHO the bot is, HOW it behaves, and WHAT rules it follows
+**Текущая версия:** v6.1 | 8 секций | ~500 строк
+**Назначение:** Определить КТО такой бот, КАК он ведёт себя и КАКИМ правилам следует
 
 ---
 
-## Section Map
+## Карта секций
 
-### Section 0: MANDATORY FIRST ACTION
-**Purpose:** Forces the bot to load Universal Core before doing anything.
-**Why it's first:** Without Core, the bot ignores shared protocols (clarification, self-check, etc.)
+### Секция 0: ОБЯЗАТЕЛЬНОЕ ПЕРВОЕ ДЕЙСТВИЕ
+**Назначение:** Принудительно загружает Universal Core до начала любых действий.
+**Почему первая:** Без Core бот игнорирует общие протоколы (уточнение, самопроверка и т.д.)
 
 ```
-Trigger: Session start
-Action: Read UNIVERSAL_CORE → follow S1 Session Start → then respond
+Триггер: Начало сессии
+Действие: Прочитать UNIVERSAL_CORE → следовать S1 Session Start → затем ответить
 ```
 
-### Section 1: INTEGRATION WITH CORE
-**Purpose:** Establishes where these instructions sit in the priority hierarchy.
-**Key elements:**
-- Priority stack (User Message > Core > Bot Instructions > Brandbook > KB > Judgment)
-- List of Core protocols this bot must follow
-- Error handling behavior
+### Секция 1: ИНТЕГРАЦИЯ С CORE
+**Назначение:** Устанавливает место этих инструкций в иерархии приоритетов.
+**Ключевые элементы:**
+- Стек приоритетов (Сообщение пользователя > Core > Инструкции бота > Брендбук > KB > Суждение)
+- Список протоколов Core, которым бот обязан следовать
+- Поведение при обработке ошибок
 
-### Section 2: CORE IDENTITY
-**Purpose:** Defines the bot's role, persona, and prime directive.
-**Key elements:**
-- **Role definition** — specific, not generic ("voice of the brand in text")
-- **Who You ARE / Who You Are NOT** — prevents role drift
-- **Prime directive** — one sentence, everything else serves this
-- **Communication layers** — how the bot structures messages
-- **My Card** — compact summary for cross-bot reference
+### Секция 2: ОСНОВНАЯ ИДЕНТИЧНОСТЬ
+**Назначение:** Определяет роль, персону и главную директиву бота.
+**Ключевые элементы:**
+- **Определение роли** — конкретное, не размытое («голос бренда в тексте»)
+- **Кто ТЫ ЕСТЬ / Кем ты НЕ ЯВЛЯЕШЬСЯ** — предотвращает дрейф роли
+- **Главная директива** — одно предложение, которому подчинено всё остальное
+- **Слои коммуникации** — как бот структурирует сообщения
+- **Моя карточка** — краткое резюме для ссылки между ботами
 
-**Design insight:** The "Who You Are NOT" table is critical. Without it, a creative bot starts doing analytics, a strategist starts writing copy. Clear boundaries = consistent behavior.
+**Инсайт по проектированию:** Таблица «Кем ты НЕ ЯВЛЯЕШЬСЯ» критически важна. Без неё творческий бот начинает заниматься аналитикой, а стратег — писать тексты. Чёткие границы = стабильное поведение.
 
-### Section 3: SCOPE
-**Purpose:** Lists all task types this bot handles and explicitly excludes others.
-**Key elements:**
-- **My tasks:** Content types the bot creates (posts, articles, email copy, etc.)
-- **Not my tasks:** What belongs to other bots + where to redirect
+### Секция 3: ОБЛАСТЬ ЗАДАЧ
+**Назначение:** Перечисляет все типы задач, которые берёт этот бот, и явно исключает остальные.
+**Ключевые элементы:**
+- **Мои задачи:** Типы контента, которые создаёт бот (посты, статьи, письма и т.д.)
+- **Не мои задачи:** Что относится к другим ботам + куда перенаправлять
 
-**Design insight:** Every "Not my task" points to a specific other bot. This creates natural handoff paths in a multi-bot office.
+**Инсайт по проектированию:** Каждая «Не моя задача» указывает на конкретного другого бота. Это создаёт естественные пути передачи задач в мультиботовом офисе.
 
-### Section 4: IRON RULES
-**Purpose:** Non-negotiable, role-specific behavioral rules.
-**Structure:** Numbered rules (4.1, 4.2, ...) each with: Rule + Why + Example
+### Секция 4: ЖЕЛЕЗНЫЕ ПРАВИЛА
+**Назначение:** Непереговариваемые, специфичные для роли поведенческие правила.
+**Структура:** Нумерованные правила (4.1, 4.2, ...), каждое с: Правило + Почему + Пример
 
-**Rules in this bot include:**
-- Brandbook voice adherence
-- KB consultation before writing
-- No copy-paste from sources
-- Clarification before starting
-- Surgical edits over rewrites
-- Handling knowledge gaps
-- Anti-AI detection tactics (intentional imperfections)
-- Structural diversity in content series
-- Unpredictability markers
+**Правила этого бота включают:**
+- Соблюдение голоса по брендбуку
+- Обращение к KB перед написанием
+- Запрет копи-паста из источников
+- Уточнение перед началом работы
+- Точечные правки вместо переписывания
+- Работа с пробелами в знаниях
+- Тактики обхода ИИ-детекции (намеренные несовершенства)
+- Структурное разнообразие в сериях контента
+- Маркеры непредсказуемости
 
-**Design insight:** The WHY behind each rule is crucial. A bot that understands reasoning handles edge cases better than one that just follows rules. "Don't use word X" is less effective than "Don't use word X because it's flagged by AI detectors — here's why."
+**Инсайт по проектированию:** ПОЧЕМУ за каждым правилом критически важно. Бот, который понимает логику, лучше справляется с пограничными случаями, чем тот, который просто следует правилам. «Не используй слово X» менее эффективно, чем «Не используй слово X, потому что оно помечается детекторами ИИ — вот почему».
 
-### Section 5: WORKFLOW
-**Purpose:** Step-by-step process for how the bot handles tasks.
-**Key elements:**
-- Standard task flow (receive → clarify → prepare → generate → check → deliver)
-- Task-specific workflows (new post vs editing vs series creation)
+### Секция 5: РАБОЧИЙ ПРОЦЕСС
+**Назначение:** Пошаговый процесс обработки задач ботом.
+**Ключевые элементы:**
+- Стандартный поток задачи (получить → уточнить → подготовиться → создать → проверить → выдать)
+- Рабочие процессы под конкретные задачи (новый пост / редактура / создание серии)
 
-### Section 6: OUTPUT FORMAT
-**Purpose:** Defines what deliverables look like.
-**Key elements:**
-- Default structure and formatting
-- Format variations by content type
-- Length rules (never assume — always ask or follow brief)
-- Tone/voice specifications
+### Секция 6: ФОРМАТ ВЫВОДА
+**Назначение:** Определяет, как выглядят результаты работы.
+**Ключевые элементы:**
+- Структура и форматирование по умолчанию
+- Вариации формата по типу контента
+- Правила по длине (никогда не угадывать — всегда спрашивать или следовать брифу)
+- Требования к тону и голосу
 
-### Section 7: KB USAGE
-**Purpose:** Role-specific rules for Knowledge Base interaction.
-**Key elements:**
-- Which sections to always consult for which task types
-- When to combine multiple sections
-- When KB lookup is optional (quick edits, small fixes)
+### Секция 7: ИСПОЛЬЗОВАНИЕ KB
+**Назначение:** Специфичные для роли правила взаимодействия с базой знаний.
+**Ключевые элементы:**
+- Какие секции всегда консультировать для каких типов задач
+- Когда комбинировать несколько секций
+- Когда обращение к KB необязательно (быстрые правки, мелкие исправления)
 
-### Section 8: COLLABORATION
-**Purpose:** How this bot works with other bots in the AI Office.
-**Key elements:**
-- Handoff table: When user needs X → redirect to Bot Y → pass context Z
-- REQUEST format for delegating to other bots
-- What context to include in handoffs
-
----
-
-## Design Patterns Used
-
-### Pattern: Numbered Iron Rules
-Rules are numbered (4.1, 4.2, ...) so they can be referenced in conversation:
-- Bot: "Per rule 4.3, I should not copy-paste from the source."
-- User: "Ignore rule 4.7 for this text." → Bot can selectively override.
-
-### Pattern: "Who You Are NOT" Boundary
-Explicit negation prevents the most common AI failure mode — trying to do everything.
-Each "NOT" maps to another bot, creating a delegation network.
-
-### Pattern: Mandatory First Action
-Section 0 runs before anything else. Without this, bots often skip Core loading
-and behave inconsistently (different response styles, missing clarification, etc.)
-
-### Pattern: Workflow as Protocol
-Instead of describing behavior ("the bot should..."), instructions define protocols
-("Step 1 → Step 2 → Step 3"). Protocols are more reliably followed than descriptions.
+### Секция 8: ВЗАИМОДЕЙСТВИЕ
+**Назначение:** Как этот бот работает с другими ботами ИИ-офиса.
+**Ключевые элементы:**
+- Таблица передач: Когда пользователю нужен X → перенаправить к Боту Y → передать контекст Z
+- Формат REQUEST для делегирования другим ботам
+- Что включать в контекст при передаче
 
 ---
 
-## Evolution Notes
+## Применяемые паттерны проектирования
 
-This file went through 6 major versions:
-- **v1–v2:** Basic role definition, minimal rules
-- **v3:** Added Iron Rules, scope boundaries
-- **v4:** Added KB integration rules, workflow protocols
-- **v5:** Added anti-AI detection rules, unpredictability markers
-- **v6:** Added Core integration, collaboration section, refined identity
+### Паттерн: Нумерованные железные правила
+Правила пронумерованы (4.1, 4.2, ...), чтобы на них можно было ссылаться в разговоре:
+- Бот: «Согласно правилу 4.3, я не должен копи-пастить из источника.»
+- Пользователь: «Игнорируй правило 4.7 для этого текста.» → Бот может выборочно переопределить.
 
-**Key lesson:** Instructions grow with the KB. As you add more knowledge, you need more rules for how to use it.
+### Паттерн: Граница «Кем ты НЕ ЯВЛЯЕШЬСЯ»
+Явное отрицание предотвращает самый распространённый сбой ИИ — попытку делать всё.
+Каждое «НЕ» отображается на другого бота, создавая сеть делегирования.
+
+### Паттерн: Обязательное первое действие
+Секция 0 выполняется раньше всего остального. Без этого боты часто пропускают загрузку Core
+и ведут себя непоследовательно (разные стили ответов, отсутствие уточнений и т.д.)
+
+### Паттерн: Рабочий процесс как протокол
+Вместо описания поведения («бот должен...»), инструкции определяют протоколы
+(«Шаг 1 → Шаг 2 → Шаг 3»). Протоколы соблюдаются надёжнее, чем описания.
+
+---
+
+## История развития
+
+Этот файл прошёл через 6 крупных версий:
+- **v1–v2:** Базовое определение роли, минимальные правила
+- **v3:** Добавлены железные правила, границы области задач
+- **v4:** Добавлены правила интеграции с KB, протоколы рабочего процесса
+- **v5:** Добавлены правила обхода ИИ-детекции, маркеры непредсказуемости
+- **v6:** Добавлена интеграция с Core, секция взаимодействия, уточнена идентичность
+
+**Ключевой урок:** Инструкции растут вместе с KB. По мере добавления знаний появляется больше правил о том, как ими пользоваться.

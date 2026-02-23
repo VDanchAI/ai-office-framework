@@ -1,110 +1,110 @@
-# Visionary — Knowledge Base Structure
+# Visionary — Структура базы знаний
 
-**KB version:** v5.0
-**Router version:** v5.2 (hierarchical)
-**Total sections:** 32
-**Total domains:** 6
-
----
-
-## Overview
-
-This is the broadest knowledge base in the AI Office system. No other role covers this range — from raw cognitive mechanisms (D1) through strategic frameworks (D2), innovation methods (D3), organizational dynamics (D4), influence and meaning (D5), to AI governance (D6).
-
-The KB uses a **hierarchical router** (v5.2): the router first identifies the domain, then routes to the section within that domain. This avoids flat-search performance degradation as KB size grows.
+**Версия KB:** v5.0
+**Версия роутера:** v5.2 (иерархический)
+**Всего секций:** 32
+**Всего доменов:** 6
 
 ---
 
-## Domain map
+## Обзор
 
-| Domain | Name | Sections | Priority | Coverage |
+Это самая широкая база знаний в системе AI Office. Ни одна другая роль не охватывает такой диапазон — от базовых когнитивных механизмов (D1) через стратегические фреймворки (D2), методы инноваций (D3), организационную динамику (D4), влияние и смысл (D5) до управления ИИ (D6).
+
+KB использует **иерархический роутер** (v5.2): роутер сначала определяет домен, затем маршрутизирует к секции внутри домена. Это предотвращает деградацию производительности плоского поиска по мере роста KB.
+
+---
+
+## Карта доменов
+
+| Домен | Название | Секций | Приоритет | Охват |
 |---|---|---|---|---|
-| D1 | THINKING_CORE | 5 | 10 | First principles, Bayesian thinking, decision making, cognitive biases, reasoning frameworks |
-| D2 | STRATEGY_EXECUTION | 7 | 9 | Strategic frameworks, prioritization, goals, growth, scenario planning |
-| D3 | INNOVATION | 4 | 7 | Lean Startup, MVP, creativity techniques, Design Thinking |
-| D4 | ORGANIZATIONAL | 6 | 7 | Coaching, systems thinking, communication, feedback, negotiation |
-| D5 | INFLUENCE_MEANING | 4 | 6 | Influence, persuasion, meaning/purpose, Ikigai, Stoicism |
-| D6 | AI_GOVERNANCE | 1 | 8 | AI strategy, agents, build vs buy, governance |
+| D1 | THINKING_CORE | 5 | 10 | Первые принципы, байесовское мышление, принятие решений, когнитивные искажения, фреймворки рассуждений |
+| D2 | STRATEGY_EXECUTION | 7 | 9 | Стратегические фреймворки, приоритизация, цели, рост, сценарное планирование |
+| D3 | INNOVATION | 4 | 7 | Lean Startup, MVP, техники креативности, Design Thinking |
+| D4 | ORGANIZATIONAL | 6 | 7 | Коучинг, системное мышление, коммуникация, обратная связь, переговоры |
+| D5 | INFLUENCE_MEANING | 4 | 6 | Влияние, убеждение, смысл и цель, Ikigai, стоицизм |
+| D6 | AI_GOVERNANCE | 1 | 8 | Стратегия ИИ, агенты, build vs buy, управление |
 
-**Total: 32 sections across 6 domains**
-
----
-
-## Domain detail
-
-### D1 — THINKING_CORE (priority 10, 5 sections)
-The foundation. Highest priority — these sections inform HOW Visionary thinks, not just what it knows.
-
-- First principles decomposition
-- Bayesian updating and probability calibration
-- Decision-making under uncertainty
-- Cognitive biases catalog (recognition + countermeasures)
-- Reasoning frameworks (inductive, deductive, abductive, analogical)
-
-### D2 — STRATEGY_EXECUTION (priority 9, 7 sections)
-The core toolkit for strategic work.
-
-- Strategic frameworks: SWOT (with teeth), Porter's Five Forces, Blue Ocean, Business Model Canvas, JTBD
-- Prioritization: RICE, MoSCoW, Kano model
-- Goals: OKR methodology, Balanced Scorecard
-- Growth: acquisition, retention, expansion mechanics
-- Competitive dynamics
-- Resource allocation
-- Scenario planning and stress-testing
-
-### D3 — INNOVATION (priority 7, 4 sections)
-
-- Lean Startup methodology
-- MVP design and validation
-- Creativity techniques (SCAMPER, lateral thinking, analogical reasoning)
-- Design Thinking (empathy → define → ideate → prototype → test)
-
-### D4 — ORGANIZATIONAL (priority 7, 6 sections)
-
-- Coaching frameworks (GROW, situational leadership)
-- Systems thinking (feedback loops, archetypes, leverage points)
-- Communication architecture
-- Feedback design (giving, receiving, cadence)
-- Negotiation (principled negotiation, BATNA, anchoring)
-- Organizational change dynamics
-
-### D5 — INFLUENCE_MEANING (priority 6, 4 sections)
-
-- Influence and persuasion principles (Cialdini, narrative, framing)
-- Stakeholder mapping and alignment
-- Meaning and purpose frameworks
-- Ikigai and Stoicism as strategic orientation tools
-
-### D6 — AI_GOVERNANCE (priority 8, 1 section)
-Single section, high priority — reflects current strategic importance.
-
-- AI strategy for organizations
-- Agent frameworks and orchestration patterns
-- Build vs buy vs integrate decision criteria
-- Governance, risk, and accountability
+**Итого: 32 секции в 6 доменах**
 
 ---
 
-## Router logic (v5.2)
+## Детализация доменов
+
+### D1 — THINKING_CORE (приоритет 10, 5 секций)
+Фундамент. Наивысший приоритет — эти секции определяют КАК думает Visionary, а не только что он знает.
+
+- Декомпозиция до первых принципов
+- Байесовское обновление и калибровка вероятностей
+- Принятие решений в условиях неопределённости
+- Каталог когнитивных искажений (распознавание + контрмеры)
+- Фреймворки рассуждений (индуктивные, дедуктивные, абдуктивные, аналогические)
+
+### D2 — STRATEGY_EXECUTION (приоритет 9, 7 секций)
+Основной инструментарий для стратегической работы.
+
+- Стратегические фреймворки: SWOT (с зубами), Пять сил Портера, Blue Ocean, Business Model Canvas, JTBD
+- Приоритизация: RICE, MoSCoW, модель Кано
+- Цели: методология OKR, Balanced Scorecard
+- Рост: механики привлечения, удержания, расширения
+- Конкурентная динамика
+- Распределение ресурсов
+- Сценарное планирование и стресс-тестирование
+
+### D3 — INNOVATION (приоритет 7, 4 секции)
+
+- Методология Lean Startup
+- Дизайн и валидация MVP
+- Техники креативности (SCAMPER, латеральное мышление, аналогическое рассуждение)
+- Design Thinking (эмпатия → определение → генерация идей → прототипирование → тестирование)
+
+### D4 — ORGANIZATIONAL (приоритет 7, 6 секций)
+
+- Фреймворки коучинга (GROW, ситуативное лидерство)
+- Системное мышление (петли обратной связи, архетипы, точки рычага)
+- Архитектура коммуникации
+- Дизайн обратной связи (давать, получать, ритм)
+- Переговоры (принципиальные переговоры, BATNA, якорение)
+- Динамика организационных изменений
+
+### D5 — INFLUENCE_MEANING (приоритет 6, 4 секции)
+
+- Принципы влияния и убеждения (Чалдини, нарративы, фрейминг)
+- Картирование и выравнивание стейкхолдеров
+- Фреймворки смысла и цели
+- Ikigai и стоицизм как инструменты стратегической ориентации
+
+### D6 — AI_GOVERNANCE (приоритет 8, 1 секция)
+Одна секция, высокий приоритет — отражает текущую стратегическую важность.
+
+- Стратегия ИИ для организаций
+- Фреймворки агентов и паттерны оркестрации
+- Критерии выбора: build vs buy vs integrate
+- Управление, риски и ответственность
+
+---
+
+## Логика роутера (v5.2)
 
 ```
-Input query
-    └─ Domain classifier (6 candidates)
-          ├─ D1 match → section router (5 candidates)
-          ├─ D2 match → section router (7 candidates)
-          ├─ D3 match → section router (4 candidates)
-          ├─ D4 match → section router (6 candidates)
-          ├─ D5 match → section router (4 candidates)
-          └─ D6 match → section router (1 candidate)
+Входящий запрос
+    └─ Классификатор доменов (6 кандидатов)
+          ├─ Совпадение D1 → роутер секций (5 кандидатов)
+          ├─ Совпадение D2 → роутер секций (7 кандидатов)
+          ├─ Совпадение D3 → роутер секций (4 кандидата)
+          ├─ Совпадение D4 → роутер секций (6 кандидатов)
+          ├─ Совпадение D5 → роутер секций (4 кандидата)
+          └─ Совпадение D6 → роутер секций (1 кандидат)
 ```
 
-Priority weights influence domain selection when query spans multiple domains. D1 (priority 10) is checked first for any query involving reasoning or decision-making. D6 (priority 8) is checked ahead of D3/D4/D5 for AI-related queries.
+Весовые коэффициенты приоритетов влияют на выбор домена, когда запрос охватывает несколько доменов. D1 (приоритет 10) проверяется первым для любого запроса, связанного с рассуждениями или принятием решений. D6 (приоритет 8) проверяется раньше D3/D4/D5 для запросов об ИИ.
 
 ---
 
-## Notes
+## Примечания
 
-- KB v5.0 added D6 (AI_GOVERNANCE) — previously absent
-- Router v5.2 introduced priority weighting at domain level (previously flat)
-- 32 sections is the current ceiling before performance review is triggered
-- Cross-domain integration sections (5) handle queries that genuinely span domains (e.g., "AI strategy for a team resisting change" = D6 + D4)
+- KB v5.0 добавил D6 (AI_GOVERNANCE) — ранее отсутствовал
+- Роутер v5.2 ввёл весовые коэффициенты приоритетов на уровне доменов (ранее был плоским)
+- 32 секции — текущий потолок, после которого запускается проверка производительности
+- Межмоменальные секции интеграции (5) обрабатывают запросы, реально охватывающие несколько доменов (например, «стратегия ИИ для команды, сопротивляющейся изменениям» = D6 + D4)

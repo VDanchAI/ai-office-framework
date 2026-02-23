@@ -1,15 +1,15 @@
 {
   "_meta": {
-    "description": "Flat router demo — 4 of 29 sections shown",
+    "description": "Демо плоского роутера — показаны 4 из 29 секций",
     "router_version": "5.6",
     "kb_version": "4.2",
-    "note": "Simplified for illustration. Real router contains 29 entries with extended keyword sets and multi-section activation rules."
+    "note": "Упрощено для иллюстрации. Реальный роутер содержит 29 записей с расширенными наборами ключевых слов и правилами одновременной активации нескольких секций."
   },
 
   "router": [
     {
       "section_id": "PAID_ADS",
-      "label": "Paid Advertising",
+      "label": "Платная реклама",
       "domains": ["Facebook Ads", "Instagram Ads", "Google Ads", "Telegram Ads"],
       "trigger_keywords": [
         "facebook", "instagram", "google ads", "telegram ads",
@@ -28,13 +28,13 @@
       ],
       "activates_with": ["AUDIENCES", "UNIT_ECONOMICS"],
       "lines_approx": 2800,
-      "notes": "Core acquisition section. Almost always co-activated with AUDIENCES. Co-activates UNIT_ECONOMICS when budget or ROAS is mentioned."
+      "notes": "Базовая секция привлечения. Почти всегда активируется совместно с AUDIENCES. Активирует UNIT_ECONOMICS, когда упоминается бюджет или ROAS."
     },
 
     {
       "section_id": "FUNNELS",
-      "label": "Sales Funnels & Conversion",
-      "domains": ["Funnel architecture", "Conversion optimization", "Offer structure", "Upsell/downsell logic"],
+      "label": "Воронки продаж и конверсия",
+      "domains": ["Архитектура воронок", "Оптимизация конверсии", "Структура оффера", "Логика upsell/downsell"],
       "trigger_keywords": [
         "воронка", "funnel", "конверсия", "conversion",
         "лид-магнит", "lead magnet", "tripwire", "upsell", "downsell",
@@ -52,13 +52,13 @@
       ],
       "activates_with": ["EMAIL_MARKETING", "UNIT_ECONOMICS", "LANDING_PAGES"],
       "lines_approx": 1950,
-      "notes": "Frequently the first section activated for course/product business requests. Co-activates UNIT_ECONOMICS to enforce realistic conversion benchmarks."
+      "notes": "Часто первая активируемая секция для запросов по бизнесу на курсах/продуктах. Активирует UNIT_ECONOMICS для соблюдения реалистичных конверсионных бенчмарков."
     },
 
     {
       "section_id": "UNIT_ECONOMICS",
-      "label": "Unit Economics",
-      "domains": ["CAC", "LTV", "ROAS", "Break-even", "Payback period", "Pricing psychology"],
+      "label": "Юнит-экономика",
+      "domains": ["CAC", "LTV", "ROAS", "Точка безубыточности", "Срок окупаемости", "Психология ценообразования"],
       "trigger_keywords": [
         "unit economics", "юнит-экономика", "cac", "ltv", "roas",
         "окупаемость", "payback", "break-even", "точка безубыточности",
@@ -77,13 +77,13 @@
       ],
       "activates_with": [],
       "lines_approx": 1600,
-      "notes": "Standalone section — activated directly when financial analysis is requested. Also co-activated by PAID_ADS and FUNNELS. Contains calculation templates for standardized outputs."
+      "notes": "Автономная секция — активируется напрямую при запросе финансового анализа. Также активируется совместно с PAID_ADS и FUNNELS. Содержит шаблоны расчётов для стандартизированных результатов."
     },
 
     {
       "section_id": "REFRAMING",
-      "label": "Reframing",
-      "domains": ["Cognitive reframing", "Objection handling", "Positioning reframe", "Belief change tactics"],
+      "label": "Рефрейминг",
+      "domains": ["Когнитивный рефрейминг", "Работа с возражениями", "Рефрейминг позиционирования", "Тактики изменения убеждений"],
       "trigger_keywords": [
         "рефрейминг", "reframing", "возражение", "objection",
         "не верят", "скептицизм", "skepticism", "убедить", "convince",
@@ -102,16 +102,16 @@
       ],
       "activates_with": ["POSITIONING"],
       "lines_approx": 4200,
-      "notes": "Largest single section (~25K words of domain content). Activated for positioning, objection handling, and perception-shift tasks. Almost always co-activates POSITIONING."
+      "notes": "Самая большая отдельная секция (~25K слов доменного контента). Активируется для задач по позиционированию, работе с возражениями и изменению восприятия. Почти всегда активирует POSITIONING совместно."
     }
   ],
 
   "_activation_rules": {
-    "description": "How multi-section activation works",
-    "single_match": "If only one section matches, load that section only",
-    "multi_match": "If multiple sections match independently, load all matched sections",
-    "co_activation": "If a section is listed in 'activates_with' of a matched section, load it too",
-    "conflict_resolution": "When sections give conflicting guidance, the more specific section takes precedence",
-    "fallback": "If no section matches, respond from first principles and flag that KB was not used"
+    "description": "Принцип работы одновременной активации нескольких секций",
+    "single_match": "Если совпадает только одна секция — загружается только она",
+    "multi_match": "Если несколько секций совпадают независимо — загружаются все совпавшие",
+    "co_activation": "Если секция указана в 'activates_with' совпавшей секции — она тоже загружается",
+    "conflict_resolution": "При противоречивых рекомендациях из разных секций приоритет у более специфичной",
+    "fallback": "Если ни одна секция не совпала — отвечать от первых принципов и отметить, что KB не использовалась"
   }
 }

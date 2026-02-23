@@ -1,29 +1,29 @@
-# [ADDON NAME] — [Bot Name] Add-on v1.0
+# [ADDON NAME] — Аддон [Bot Name] v1.0
 
-**Version:** 1.0
-**Date:** YYYY-MM-DD
-**Purpose:** [What specialized knowledge this add-on provides]
-**Scope:** [What it covers and what it does NOT cover]
-**Parent KB:** [BotName]_Knowledge_Base_v[X].[Y].md
+**Версия:** 1.0
+**Дата:** YYYY-MM-DD
+**Назначение:** [Какие специализированные знания предоставляет этот аддон]
+**Область:** [Что он охватывает и что НЕ охватывает]
+**Родительская KB:** [BotName]_Knowledge_Base_v[X].[Y].md
 
-> Add-on KBs extend a bot's expertise in a specific area.
-> They have their own Router and sections — same architecture as the main KB.
-> The bot loads the Add-on's Router alongside the main KB Router.
-> When a query matches an Add-on trigger, the bot reads the Add-on section.
+> Аддон-KB расширяет экспертизу бота в конкретной области.
+> У них есть собственный роутер и секции — та же архитектура, что и у основной KB.
+> Бот загружает роутер аддона вместе с роутером основной KB.
+> Когда запрос совпадает с триггером аддона, бот читает секцию аддона.
 
 <!--
-  WHEN TO CREATE AN ADD-ON (vs adding sections to main KB):
-  - Topic is deep enough to warrant 3+ sections
-  - Topic is optional (not every user/project needs it)
-  - Topic could be reused across multiple bots
-  - Main KB is getting too large (1000+ lines)
-  - You want to version this topic independently
+  КОГДА СОЗДАВАТЬ АДДОН (а не добавлять секции в основную KB):
+  - Тема достаточно глубокая, чтобы потребовать 3+ секций
+  - Тема опциональная (не каждому пользователю/проекту нужна)
+  - Тему можно повторно использовать в нескольких ботах
+  - Основная KB становится слишком большой (1000+ строк)
+  - Вы хотите версионировать эту тему независимо
 
-  EXAMPLES:
-  - Brandbook modules (Voice, Visual, Platforms) — loaded per bot
-  - Platform-specific specs (LinkedIn rules, Facebook rules)
-  - Methodology deep-dives (e.g., persuasion techniques toolkit)
-  - Industry-specific knowledge (healthcare, fintech, etc.)
+  ПРИМЕРЫ:
+  - Модули брендбука (Голос, Визуал, Платформы) — загружаются в каждый бот
+  - Специфика платформ (правила LinkedIn, правила Facebook)
+  - Детальные методологии (например, инструментарий техник убеждения)
+  - Отраслевые знания (здравоохранение, финтех и т.д.)
 -->
 
 ---
@@ -40,31 +40,31 @@
   "sections": [
     {
       "id": "S1_[TOPIC]",
-      "title": "[Section 1 Title]",
+      "title": "[Заголовок секции 1]",
       "anchor": "#S1_TOPIC",
-      "triggers": ["trigger1", "trigger2", "trigger3"],
-      "description": "What this section covers"
+      "triggers": ["триггер1", "триггер2", "триггер3"],
+      "description": "Что охватывает эта секция"
     },
     {
       "id": "S2_[TOPIC]",
-      "title": "[Section 2 Title]",
+      "title": "[Заголовок секции 2]",
       "anchor": "#S2_TOPIC",
-      "triggers": ["trigger4", "trigger5", "trigger6"],
-      "description": "What this section covers"
+      "triggers": ["триггер4", "триггер5", "триггер6"],
+      "description": "Что охватывает эта секция"
     },
     {
       "id": "S3_[TOPIC]",
-      "title": "[Section 3 Title]",
+      "title": "[Заголовок секции 3]",
       "anchor": "#S3_TOPIC",
-      "triggers": ["trigger7", "trigger8"],
-      "description": "What this section covers"
+      "triggers": ["триггер7", "триггер8"],
+      "description": "Что охватывает эта секция"
     },
     {
       "id": "S4_[TOPIC]",
-      "title": "[Section 4 Title]",
+      "title": "[Заголовок секции 4]",
       "anchor": "#S4_TOPIC",
-      "triggers": ["trigger9", "trigger10"],
-      "description": "What this section covers"
+      "triggers": ["триггер9", "триггер10"],
+      "description": "Что охватывает эта секция"
     }
   ]
 }
@@ -74,52 +74,52 @@
 
 ## <a id="S1_TOPIC"></a>S1. [SECTION TITLE]
 
-<!-- Your specialized content here -->
+<!-- Ваш специализированный контент здесь -->
 
 ---
 
 ## <a id="S2_TOPIC"></a>S2. [SECTION TITLE]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 ## <a id="S3_TOPIC"></a>S3. [SECTION TITLE]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 ## <a id="S4_TOPIC"></a>S4. [SECTION TITLE]
 
-<!-- Content -->
+<!-- Контент -->
 
 ---
 
 <!--
-  ADD-ON TIPS:
+  СОВЕТЫ ПО АДДОНАМ:
 
-  LINKING TO MAIN KB:
-  - Reference main KB sections where relevant: "See also: Main KB → S5"
-  - Don't duplicate content from main KB — reference it
-  - Add-on sections can be referenced FROM main KB router too
+  ССЫЛКИ НА ОСНОВНУЮ KB:
+  - Ссылайтесь на секции основной KB там, где уместно: «Смотрите также: Основная KB → S5»
+  - Не дублируйте контент из основной KB — ссылайтесь на него
+  - Секции аддона также могут быть указаны в роутере основной KB
 
-  LOADING:
-  - Bot loads Add-on Router alongside Main Router
-  - If query matches Add-on trigger → bot reads Add-on section
-  - If query matches both Main and Add-on → bot reads both
-  - Add-on NEVER overrides Main KB — they complement each other
+  ЗАГРУЗКА:
+  - Бот загружает роутер аддона вместе с основным роутером
+  - Если запрос совпадает с триггером аддона → бот читает секцию аддона
+  - Если запрос совпадает с обоими → бот читает оба
+  - Аддон НИКОГДА не перекрывает основную KB — они дополняют друг друга
 
-  SHARING ACROSS BOTS:
-  - Same Add-on can be loaded into multiple bots
-  - Example: Brandbook Add-on → loaded into Copywriter, Marketer, Designer
-  - Each bot uses only the sections relevant to its role
-  - Define in Bot Instructions which Add-on sections the bot should use
+  ИСПОЛЬЗОВАНИЕ В НЕСКОЛЬКИХ БОТАХ:
+  - Один аддон можно загрузить в несколько ботов
+  - Пример: Аддон брендбука → загружается в Копирайтера, Маркетолога, Дизайнера
+  - Каждый бот использует только секции, релевантные его роли
+  - Укажите в инструкциях бота, какие секции аддона он должен использовать
 
-  VERSIONING:
-  - Add-ons version independently from Main KB
-  - Update Add-on version when its content changes
-  - Main KB router may reference Add-on version for compatibility
+  ВЕРСИОНИРОВАНИЕ:
+  - Аддоны версионируются независимо от основной KB
+  - Обновляйте версию аддона при изменении его контента
+  - Роутер основной KB может ссылаться на версию аддона для совместимости
 -->
 
-**END OF [ADDON NAME]**
+**КОНЕЦ [ADDON NAME]**

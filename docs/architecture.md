@@ -1,108 +1,108 @@
-# Architecture
+# Архитектура
 
-## What is an AI Office?
+## Что такое AI Office?
 
-An AI Office is a system of specialized AI bots, each with a defined role, working together to cover the full scope of marketing and content operations. Instead of one general-purpose assistant that does everything poorly, you get 10 focused specialists that each do their domain well.
+AI Office — это система специализированных AI-ботов, каждый со своей ролью, вместе покрывающих маркетинг и контент. Вместо одного универсального помощника, который делает всё посредственно, — 10 узких специалистов, каждый глубоко в своём домене.
 
-Each bot = one Claude Project with its own instructions, knowledge base, and behavioral rules. Together, they form a virtual team.
+Один бот = один Claude Project со своими инструкциями, базой знаний и правилами поведения. Вместе они образуют виртуальную команду.
 
-## Core Idea
+## Ключевая идея
 
-**One bot per function. Deep expertise over broad coverage.**
+**Один бот на одну функцию. Глубина важнее широты.**
 
-A copywriter that actually writes like a human. An analyst that never delivers data without a recommendation. A marketer that argues against bad strategies before executing them. A visionary that tells you uncomfortable truths about your plans.
+Копирайтер, который пишет как человек. Аналитик, который не отдаёт данные без рекомендации. Маркетолог, который оспаривает плохие стратегии до выполнения. Визионер, который говорит неудобную правду о ваших планах.
 
-These aren't generic assistants with different names. Each bot has:
-- Its own **Knowledge Base** (domain expertise, techniques, frameworks)
-- Its own **Project Instructions** (behavioral rules, iron constraints, workflows)
-- A shared **Universal Core** (common protocols all bots follow)
-- Optional **Add-ons** (specialized knowledge loaded when needed)
+Это не одинаковые ассистенты с разными именами. У каждого бота:
+- Своя **база знаний** (экспертиза домена, техники, фреймворки)
+- Свои **инструкции** (правила поведения, железные ограничения, рабочие процессы)
+- Общее **Универсальное Ядро** (протоколы, которым следуют все боты)
+- Опциональные **аддоны** (дополнительные знания под конкретные задачи)
 
-## The Document Stack
+## Стек документов
 
-Every bot in the AI Office loads documents in this order:
+Каждый бот в AI Office загружает документы в таком порядке:
 
 ```
 ┌─────────────────────────────────────────────┐
 │  1. Universal Core                          │
-│     Shared rules for ALL bots               │
-│     Protocols: clarify, think, self-check   │
-│     Communication rules, quality assurance  │
+│     Общие правила для ВСЕХ ботов            │
+│     Протоколы: уточнение, анализ, проверка  │
+│     Коммуникация, контроль качества         │
 ├─────────────────────────────────────────────┤
 │  2. Project Instructions                    │
-│     WHO this bot is (identity, scope)       │
-│     HOW it behaves (iron rules, workflow)   │
-│     WHAT it produces (output formats)       │
+│     КТО этот бот (личность, границы)        │
+│     КАК он себя ведёт (железные правила)    │
+│     ЧТО он выдаёт (форматы ответов)        │
 ├─────────────────────────────────────────────┤
 │  3. Knowledge Base + Router                 │
-│     WHAT it knows (domain expertise)        │
-│     Router = navigation system (JSON)       │
-│     Sections accessed by anchor, not loaded  │
-│     in full                                 │
+│     ЧТО он знает (экспертиза домена)        │
+│     Router = навигация (JSON)               │
+│     Секции подгружаются по якорю,           │
+│     не целиком                              │
 ├─────────────────────────────────────────────┤
-│  4. Add-ons (optional)                      │
-│     Extra knowledge for specific tasks      │
-│     Brandbook, platform specs, toolkits     │
-│     Shared across bots when relevant        │
+│  4. Add-ons (опционально)                   │
+│     Доп. знания под задачу                  │
+│     Брендбук, спецификации, тулкиты         │
+│     Шарятся между ботами при необходимости  │
 └─────────────────────────────────────────────┘
 ```
 
-## Priority System
+## Система приоритетов
 
-When sources conflict, higher priority wins:
+При конфликте источников побеждает более высокий приоритет:
 
-| Priority | Source | Example |
-|----------|--------|---------|
-| 0 (highest) | User's current message | "Make it shorter" overrides everything |
-| 1 | Universal Core | Shared protocols can't be overridden by individual bots |
-| 2 | Bot Instructions | Role-specific rules override knowledge base content |
-| 3 | User Preferences | Learned patterns from conversation history |
-| 4 | Knowledge Base | Domain expertise |
-| 5 (lowest) | Bot Judgment | Bot's own reasoning when nothing else applies |
+| Приоритет | Источник | Пример |
+|-----------|----------|--------|
+| 0 (высший) | Текущее сообщение пользователя | «Сделай короче» — перекрывает всё |
+| 1 | Universal Core | Общие протоколы не могут быть переопределены отдельным ботом |
+| 2 | Инструкции бота | Правила роли перекрывают содержание базы знаний |
+| 3 | Предпочтения пользователя | Паттерны, выученные из истории разговора |
+| 4 | База знаний | Экспертиза домена |
+| 5 (низший) | Суждение бота | Собственные рассуждения, когда ничего другого не применимо |
 
-## Router System
+## Система роутера
 
-Bots don't load their entire Knowledge Base into context. That would waste tokens and dilute focus. Instead:
+Боты не загружают всю базу знаний в контекст. Это тратит токены и размывает фокус. Вместо этого:
 
-1. **User asks a question**
-2. **Router** (JSON block at the top of the KB) maps the query to a section
-3. **Bot jumps to that section** using its anchor
-4. **Only that section is loaded** into context
-5. **Bot generates a response** from that section + its instructions
+1. **Пользователь задаёт вопрос**
+2. **Роутер** (JSON-блок в начале KB) маппит запрос на секцию
+3. **Бот переходит к секции** по якорю
+4. **Загружается только эта секция** в контекст
+5. **Бот формирует ответ** на основе секции + инструкций
 
-Two router architectures:
+Два типа архитектуры роутера:
 
-| Type | When to use | How it works |
-|------|-------------|-------------|
-| **Flat** | Under 20 sections | One lookup table, direct match |
-| **Hierarchical** | 20+ sections | Master Router → domain → Sub-Router → section |
+| Тип | Когда | Как работает |
+|-----|-------|-------------|
+| **Flat** | До ~20 секций | Одна таблица, прямой поиск |
+| **Hierarchical** | 20+ секций | Master Router → домен → Sub-Router → секция |
 
-→ See [Document Hierarchy](document-hierarchy.md) for details on how documents are structured.
-→ See templates/ for router examples.
+> См. [Иерархия документов](document-hierarchy.md) — подробности о структуре.
+> См. templates/ — примеры роутеров.
 
-## Platform
+## Платформа
 
-The AI Office is built on **Claude Projects** (Anthropic). Each bot = one Claude Project.
+AI Office построен на **Claude Projects** (Anthropic). Один бот = один Claude Project.
 
-**Why Claude Projects:**
-- Project-level instructions persist across conversations
-- Knowledge files are loaded into the project permanently
-- Each project is isolated — bots don't leak into each other
-- Memory persists across sessions within a project
+**Почему Claude Projects:**
+- Инструкции проекта сохраняются между разговорами
+- Файлы знаний загружаются в проект на постоянной основе
+- Каждый проект изолирован — боты не влияют друг на друга
+- Память сохраняется между сессиями внутри проекта
 
-**Adaptation to other platforms** (GPT, API-based systems) is possible but requires adjustments to the document loading mechanism and router implementation.
+**Адаптация под другие платформы** (GPT, API-системы) возможна, но требует корректировки механизма загрузки документов и реализации роутера.
 
-## What Makes This Different
+## Чем это отличается
 
-| Approach | Typical AI setup | AI Office |
-|----------|-----------------|-----------|
-| Roles | One bot does everything | 10 specialized bots |
-| Knowledge | Generic LLM knowledge | Curated KBs with 1,000-27,000 lines of domain expertise |
-| Navigation | Full KB loaded (wasted context) | Router-based: load only what's needed |
-| Behavior | "Helpful assistant" | Defined personality: argues, challenges, has opinions |
-| Quality | Hope for the best | Self-check protocols, iron rules, D.A.O.S. quality cycle |
-| Collaboration | Manual copy-paste | Structured handoffs with REQUEST format |
+| | Типичный подход | AI Office |
+|---|---|---|
+| Роли | Один бот на всё | 10 специализированных ботов |
+| Знания | Общие знания LLM | Кураторские базы знаний (1 000–27 000 строк экспертизы на роль) |
+| Навигация | Вся база грузится в контекст | Роутер подгружает только нужную секцию |
+| Поведение | «Полезный помощник» | Определённый характер: спорит, критикует, имеет позицию |
+| Качество | Надеемся на лучшее | Протоколы самопроверки, железные правила, цикл D.A.O.S. |
+| Координация | Ручное копирование | Структурированные передачи через формат REQUEST |
 
-→ See [Roles Overview](roles-overview.md) for all 10 roles.
-→ See [How Roles Interact](how-roles-interact.md) for collaboration patterns.
-→ See [Deployment Guide](deployment-guide.md) to build your own.
+> См. [Обзор ролей](roles-overview.md) — все 10 ролей.
+> См. [Как роли взаимодействуют](how-roles-interact.md) — паттерны коллаборации.
+> См. [Руководство по сборке](deployment-guide.md) — как собрать своего бота.

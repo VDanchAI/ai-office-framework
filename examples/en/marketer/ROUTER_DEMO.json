@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "description": "Flat router demo — 4 of 29 sections shown",
+    "router_version": "5.6",
+    "kb_version": "4.2",
+    "note": "Simplified for illustration. Real router contains 29 entries with extended keyword sets and multi-section activation rules."
+  },
+
+  "router": [
+    {
+      "section_id": "PAID_ADS",
+      "label": "Paid Advertising",
+      "domains": ["Facebook Ads", "Instagram Ads", "Google Ads", "Telegram Ads"],
+      "trigger_keywords": [
+        "facebook", "instagram", "google ads", "telegram ads",
+        "кампания", "реклама", "таргетинг", "targeting",
+        "roas", "cpc", "cpm", "ctr", "creatives", "креативы",
+        "ad account", "рекламный кабинет", "lookalike", "ретаргетинг",
+        "retargeting", "scaling", "масштабирование", "медиаплан"
+      ],
+      "intent_patterns": [
+        "запустить рекламу",
+        "настроить кампанию",
+        "оптимизировать ads",
+        "почему не работает реклама",
+        "как снизить CPM",
+        "стратегия ставок"
+      ],
+      "activates_with": ["AUDIENCES", "UNIT_ECONOMICS"],
+      "lines_approx": 2800,
+      "notes": "Core acquisition section. Almost always co-activated with AUDIENCES. Co-activates UNIT_ECONOMICS when budget or ROAS is mentioned."
+    },
+
+    {
+      "section_id": "FUNNELS",
+      "label": "Sales Funnels & Conversion",
+      "domains": ["Funnel architecture", "Conversion optimization", "Offer structure", "Upsell/downsell logic"],
+      "trigger_keywords": [
+        "воронка", "funnel", "конверсия", "conversion",
+        "лид-магнит", "lead magnet", "tripwire", "upsell", "downsell",
+        "order bump", "лендинг", "landing page", "вебинар",
+        "webinar", "автоворонка", "email sequence", "касание",
+        "touchpoint", "cpa", "cost per lead", "стоимость лида"
+      ],
+      "intent_patterns": [
+        "построить воронку",
+        "починить конверсию",
+        "почему не покупают",
+        "оптимизировать воронку",
+        "какой оффер предложить",
+        "структура продающей страницы"
+      ],
+      "activates_with": ["EMAIL_MARKETING", "UNIT_ECONOMICS", "LANDING_PAGES"],
+      "lines_approx": 1950,
+      "notes": "Frequently the first section activated for course/product business requests. Co-activates UNIT_ECONOMICS to enforce realistic conversion benchmarks."
+    },
+
+    {
+      "section_id": "UNIT_ECONOMICS",
+      "label": "Unit Economics",
+      "domains": ["CAC", "LTV", "ROAS", "Break-even", "Payback period", "Pricing psychology"],
+      "trigger_keywords": [
+        "unit economics", "юнит-экономика", "cac", "ltv", "roas",
+        "окупаемость", "payback", "break-even", "точка безубыточности",
+        "маржа", "margin", "прибыль", "profit", "бюджет", "budget",
+        "сколько стоит клиент", "стоимость привлечения", "возврат инвестиций",
+        "roi", "средний чек", "average order value", "aov",
+        "ценообразование", "pricing", "цена", "price"
+      ],
+      "intent_patterns": [
+        "считать юнит-экономику",
+        "выгодно ли запускать",
+        "какой бюджет нужен",
+        "сколько тратить на рекламу",
+        "окупится ли кампания",
+        "установить цену"
+      ],
+      "activates_with": [],
+      "lines_approx": 1600,
+      "notes": "Standalone section — activated directly when financial analysis is requested. Also co-activated by PAID_ADS and FUNNELS. Contains calculation templates for standardized outputs."
+    },
+
+    {
+      "section_id": "REFRAMING",
+      "label": "Reframing",
+      "domains": ["Cognitive reframing", "Objection handling", "Positioning reframe", "Belief change tactics"],
+      "trigger_keywords": [
+        "рефрейминг", "reframing", "возражение", "objection",
+        "не верят", "скептицизм", "skepticism", "убедить", "convince",
+        "позиционирование", "как подать", "восприятие", "perception",
+        "аудитория не понимает", "не покупают потому что",
+        "смена нарратива", "narrative", "как переформулировать",
+        "они думают что", "belief", "убеждение"
+      ],
+      "intent_patterns": [
+        "как преодолеть возражение",
+        "аудитория не верит в продукт",
+        "изменить восприятие оффера",
+        "перепозиционировать",
+        "почему не доверяют",
+        "как переформулировать ценность"
+      ],
+      "activates_with": ["POSITIONING"],
+      "lines_approx": 4200,
+      "notes": "Largest single section (~25K words of domain content). Activated for positioning, objection handling, and perception-shift tasks. Almost always co-activates POSITIONING."
+    }
+  ],
+
+  "_activation_rules": {
+    "description": "How multi-section activation works",
+    "single_match": "If only one section matches, load that section only",
+    "multi_match": "If multiple sections match independently, load all matched sections",
+    "co_activation": "If a section is listed in 'activates_with' of a matched section, load it too",
+    "conflict_resolution": "When sections give conflicting guidance, the more specific section takes precedence",
+    "fallback": "If no section matches, respond from first principles and flag that KB was not used"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "_comment": [
-    "SIMPLIFIED DEMO of the Copywriter's hierarchical router.",
-    "The real router has 43 sections, complex trigger patterns,",
-    "and multi-level cascading. This shows the STRUCTURE only.",
-    "See TEMPLATE_ROUTER.json for a full hierarchical template."
+    "УПРОЩЁННОЕ ДЕМО иерархического роутера Копирайтера.",
+    "Реальный роутер содержит 43 секции, сложные паттерны триггеров",
+    "и многоуровневое каскадирование. Здесь показана только СТРУКТУРА.",
+    "Полный иерархический шаблон см. в TEMPLATE_ROUTER.json."
   ],
 
   "router_version": "demo",
@@ -15,51 +15,51 @@
   "architecture": {
     "type": "hierarchical",
     "domains": 4,
-    "routing": "Master Router → Sub-Router → Section Anchor"
+    "routing": "Мастер-роутер → Суб-роутер → Якорь секции"
   },
 
   "ai_instructions": {
     "routing_strategy": [
-      "STAGE 1: Master Router matches query to a domain",
-      "STAGE 2: Sub-Router finds the exact section",
-      "Multi-domain: if query spans domains, route to ALL relevant"
+      "ЭТАП 1: Мастер-роутер сопоставляет запрос с доменом",
+      "ЭТАП 2: Суб-роутер находит точную секцию",
+      "Несколько доменов: если запрос охватывает несколько доменов, маршрутизировать КО ВСЕМ релевантным"
     ],
-    "fallback": "CORE_COPYWRITING domain, S1 (River Syntax)"
+    "fallback": "Домен CORE_COPYWRITING, S1 (River Syntax)"
   },
 
   "domains": {
     "CORE_COPYWRITING": {
-      "description": "Writing style, techniques, hooks, platforms, AI detection",
+      "description": "Стиль письма, техники, хуки, площадки, ИИ-детекция",
       "section_count": 26,
       "priority": 10,
-      "when_to_use": "Any question about writing, style, persuasion, platforms",
+      "when_to_use": "Любой вопрос о написании текстов, стиле, убеждении, площадках",
       "context_tags": ["copywriting", "style", "hooks", "AI detection", "platforms"]
     },
     "NARRATIVE_THERAPY": {
-      "description": "Therapeutic narrative techniques adapted for marketing",
+      "description": "Техники терапевтического нарратива, адаптированные для маркетинга",
       "section_count": 6,
       "priority": 8,
-      "when_to_use": "Deep emotional content, transformation stories, problem-solution narratives",
+      "when_to_use": "Глубокий эмоциональный контент, истории трансформации, нарративы проблема-решение",
       "context_tags": ["narrative", "therapy", "externalization", "re-authoring"]
     },
     "PERSUASION": {
-      "description": "Psychology-based influence and conversion techniques",
+      "description": "Техники влияния и конверсии на основе психологии",
       "section_count": 6,
       "priority": 7,
-      "when_to_use": "Influence, trust building, sales psychology, conversion",
+      "when_to_use": "Влияние, построение доверия, психология продаж, конверсия",
       "context_tags": ["persuasion", "Cialdini", "trust", "conversion", "biases"]
     },
     "RHETORICAL_MASTERY": {
-      "description": "Classical and modern rhetoric for digital content",
+      "description": "Классическая и современная риторика для цифрового контента",
       "section_count": 5,
       "priority": 6,
-      "when_to_use": "Provocative writing, metaphors, rhetorical devices",
+      "when_to_use": "Провокативное письмо, метафоры, риторические приёмы",
       "context_tags": ["rhetoric", "metaphor", "provocation", "classical"]
     }
   },
 
   "sub_router_demo": {
-    "_comment": "Showing 3 sections from CORE_COPYWRITING as example",
+    "_comment": "Показаны 3 секции из CORE_COPYWRITING в качестве примера",
     "domain": "CORE_COPYWRITING",
     "sections": [
       {
@@ -67,7 +67,7 @@
         "title": "River Syntax",
         "anchor": "#S1_RIVER_SYNTAX",
         "triggers": ["style", "rhythm", "sentence structure", "how to write", "author voice"],
-        "description": "Author's signature writing rhythm and flow",
+        "description": "Авторский ритм письма и поток — фирменный стиль",
         "priority": 10
       },
       {
@@ -75,7 +75,7 @@
         "title": "Hook Formulas",
         "anchor": "#S10_HOOKS",
         "triggers": ["hook", "opening line", "first sentence", "attention", "начало поста"],
-        "description": "Opening patterns that capture attention",
+        "description": "Паттерны зачинов, захватывающих внимание",
         "priority": 8
       },
       {
@@ -83,7 +83,7 @@
         "title": "AI Detection Mechanics",
         "anchor": "#S16_AI_DETECTION",
         "triggers": ["AI detection", "GPTZero", "звучит как AI", "обнаружение", "humanize"],
-        "description": "How AI detectors work and how to avoid flagging",
+        "description": "Как работают ИИ-детекторы и как избежать пометки",
         "priority": 8
       }
     ]

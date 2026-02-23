@@ -1,75 +1,75 @@
-# Knowledge Base Structure — Analyst KB v2.0
+# Структура базы знаний — Analyst KB v2.0
 
-**Version:** 2.0
-**Size:** 1318 lines
-**Router type:** Flat (v5.2)
-**Sections:** 8
-
----
-
-## Router type note
-
-A **flat router** is used when the KB has fewer than ~20 sections and queries map cleanly to one section at a time. The router reads the query, identifies a section ID, and loads only that section — keeping context window usage low.
-
-For more complex KBs (20+ sections, overlapping domains, multi-step retrieval), a hierarchical or semantic router would be more appropriate. At 8 sections, flat routing is the right call here.
+**Версия:** 2.0
+**Размер:** 1318 строк
+**Тип роутера:** Плоский (v5.2)
+**Секций:** 8
 
 ---
 
-## Section table
+## Заметка о типе роутера
 
-| # | ID | Title | Purpose |
+**Плоский роутер** используется, когда в KB менее ~20 секций и запросы однозначно соответствуют одной секции за раз. Роутер читает запрос, определяет идентификатор секции и загружает только её — сохраняя экономное использование контекстного окна.
+
+Для более сложных KB (20+ секций, перекрывающиеся домены, многошаговое извлечение) подошёл бы иерархический или семантический роутер. При 8 секциях плоская маршрутизация — правильный выбор.
+
+---
+
+## Таблица секций
+
+| # | ID | Название | Назначение |
 |---|---|---|---|
-| 1 | `FORMULAS` | Core Metrics Formulas | Definitions and calculation formulas for all key metrics: conversion rate, CAC, LTV, churn, ROI, ROAS, email metrics |
-| 2 | `BENCHMARKS` | Industry Benchmarks | Reference values by industry and channel for contextualizing client numbers |
-| 3 | `ATTRIBUTION` | Attribution Models | Attribution model descriptions, UTM tracking conventions, multi-touch logic |
-| 4 | `DASHBOARDS` | Dashboard Structure | Dashboard layout patterns, visualization choice by metric type, refresh cadence |
-| 5 | `REPORTS` | Report Templates | Standard report formats for weekly/monthly/ad-hoc analysis |
-| 6 | `FUNNELS` | Funnel Analysis | Funnel stage definitions, conversion benchmarks, drop-off diagnosis |
-| 7 | `RED_FLAGS` | Warning Signs | Thresholds and patterns that signal problems requiring immediate attention |
-| 8 | `QUICK_REFERENCE` | Quick Reference | Fast lookup for common one-question queries (e.g. "what is a good open rate?") |
+| 1 | `FORMULAS` | Формулы ключевых метрик | Определения и расчётные формулы для всех ключевых метрик: коэффициент конверсии, CAC, LTV, churn, ROI, ROAS, метрики email |
+| 2 | `BENCHMARKS` | Отраслевые бенчмарки | Референсные значения по отраслям и каналам для контекстуализации показателей клиента |
+| 3 | `ATTRIBUTION` | Модели атрибуции | Описание моделей атрибуции, соглашения по UTM-разметке, логика мультиканальной атрибуции |
+| 4 | `DASHBOARDS` | Структура дашбордов | Паттерны компоновки дашбордов, выбор визуализации по типу метрики, периодичность обновления |
+| 5 | `REPORTS` | Шаблоны отчётов | Стандартные форматы отчётов для еженедельного/ежемесячного/разового анализа |
+| 6 | `FUNNELS` | Анализ воронки | Определения этапов воронки, бенчмарки конверсии, диагностика точек отвала |
+| 7 | `RED_FLAGS` | Тревожные сигналы | Пороговые значения и паттерны, сигнализирующие о проблемах, требующих немедленного внимания |
+| 8 | `QUICK_REFERENCE` | Быстрый справочник | Быстрый поиск ответа на частые однозначные вопросы (например, «какой хороший показатель открываемости?») |
 
 ---
 
-## How the router is used
+## Как используется роутер
 
 ```
-User query
+Запрос пользователя
     │
     ▼
-Router v5.2 reads query
+Роутер v5.2 читает запрос
     │
-    ├── keyword / intent match
-    │
-    ▼
-Section ID selected (e.g. "BENCHMARKS")
+    ├── совпадение по ключевым словам / намерению
     │
     ▼
-Only that section is loaded into context
+Выбран идентификатор секции (например, «BENCHMARKS»)
     │
     ▼
-Analyst applies CIRI framework to produce output
+В контекст загружается только эта секция
+    │
+    ▼
+Аналитик применяет фреймворк CIRI для формирования вывода
 ```
 
 ---
 
-## CIRI framework (applied at output stage)
+## Фреймворк CIRI (применяется на этапе вывода)
 
-The KB provides raw reference material. The Analyst always wraps KB content in the CIRI structure before delivering it to the user:
+KB предоставляет сырой справочный материал. Аналитик всегда оборачивает содержимое KB в структуру CIRI перед выдачей пользователю:
 
-| Step | What it contains |
+| Шаг | Что содержит |
 |---|---|
-| **C** — Context | What was the situation / what data was provided |
-| **I** — Insight | What the data actually means |
-| **R** — Recommendation | What to do about it |
-| **I** — Impact | What the expected result of that action is |
+| **C** — Context (Контекст) | Какова была ситуация / какие данные были предоставлены |
+| **I** — Insight (Инсайт) | Что данные на самом деле означают |
+| **R** — Recommendation (Рекомендация) | Что с этим делать |
+| **I** — Impact (Эффект) | Каков ожидаемый результат этого действия |
 
-The KB does not enforce CIRI — the Instructions file does. The KB only stores factual reference content.
+CIRI не обеспечивается KB — это задача файла инструкций. KB хранит только фактический справочный контент.
 
 ---
 
-## Design notes
+## Заметки по проектированию
 
-- Sections are self-contained: each can be loaded independently without requiring another section
-- `QUICK_REFERENCE` intentionally duplicates some content from other sections for speed — this is by design
-- `RED_FLAGS` is the only section with hard thresholds; all other sections use ranges and context-dependent values
-- `FORMULAS` is the most frequently loaded section and is kept concise for this reason
+- Секции самодостаточны: каждую можно загрузить независимо, без обращения к другим секциям
+- `QUICK_REFERENCE` намеренно дублирует часть содержимого других секций ради скорости — это сделано осознанно
+- `RED_FLAGS` — единственная секция с жёсткими пороговыми значениями; все остальные секции используют диапазоны и контекстно-зависимые значения
+- `FORMULAS` — наиболее часто загружаемая секция, поэтому намеренно сохраняется лаконичной

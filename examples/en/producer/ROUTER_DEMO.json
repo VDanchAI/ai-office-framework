@@ -1,0 +1,74 @@
+{
+  "router_version": "5.2",
+  "architecture": "flat",
+  "description": "Simplified flat router demo — 4 sections shown out of 31 total. Each entry maps a section key to its metadata and subsection index. Subsection content is stored inline in the KB file; the router holds only the lookup map.",
+  "resolution_order": ["exact_key_match", "subsection_key_match", "priority_rank_fallback"],
+  "sections": {
+    "LAUNCH_PHASES": {
+      "description": "Pre-launch, launch, and post-launch stage definitions with checklists and transition conditions",
+      "subsections": {
+        "PRE_LAUNCH": {
+          "description": "Stages and checkpoints before the cart opens: audience warm-up, content seeding, channel preparation"
+        },
+        "LAUNCH_DAY": {
+          "description": "Launch day sequence: timing, channel fire order, escalation triggers"
+        },
+        "POST_LAUNCH": {
+          "description": "Post-launch stages: delivery, upsell window, retrospective, metrics collection"
+        }
+      }
+    },
+    "BACKWARD_PLANNING": {
+      "description": "Timeline construction from fixed deadline backward. Critical path identification and dependency mapping rules.",
+      "subsections": {
+        "CRITICAL_PATH": {
+          "description": "How to identify which tasks block the deadline. Critical path definition and calculation method."
+        },
+        "DEPENDENCY_MAP": {
+          "description": "Dependency types (hard/soft), mapping format, and rules for sequencing bot delegations"
+        },
+        "BUFFER_RULES": {
+          "description": "Where to place time buffers in the plan. Minimum buffer sizes by stage type."
+        }
+      }
+    },
+    "BOT_COORDINATION": {
+      "description": "Rules for delegating tasks to specialist bots. Brief creation protocol, handoff format, sequencing logic.",
+      "subsections": {
+        "BRIEF_FORMAT": {
+          "description": "Required and optional fields in a delegation brief. Field definitions and validation rules."
+        },
+        "DELEGATION_SEQUENCE": {
+          "description": "Which bots are briefed in which order. Dependency-driven sequencing rules."
+        },
+        "REBRIEF_TRIGGERS": {
+          "description": "Conditions that require updating or replacing an existing brief rather than appending to it."
+        }
+      }
+    },
+    "COMMON_MISTAKES": {
+      "description": "Risk patterns observed across launches. Early warning signals and mitigation approaches.",
+      "subsections": {
+        "TIMELINE_RISKS": {
+          "description": "Most common causes of timeline slippage. Detection signals and escalation thresholds."
+        },
+        "COORDINATION_FAILURES": {
+          "description": "Failure modes in multi-bot coordination: conflicting briefs, missed handoffs, scope drift."
+        },
+        "SCOPE_CREEP": {
+          "description": "How scope creep enters launches, how to detect it early, and how Producer responds without executing."
+        }
+      }
+    }
+  },
+  "router_notes": {
+    "total_sections": 31,
+    "total_subsections": 77,
+    "sections_shown_here": 4,
+    "subsections_shown_here": 12,
+    "key_format": "UPPER_SNAKE_CASE",
+    "subsection_address_format": "SECTION_KEY.SUBSECTION_KEY",
+    "stateless": true,
+    "ambiguity_resolution": "priority_rank_defined_in_router_config_not_in_kb"
+  }
+}

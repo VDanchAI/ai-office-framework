@@ -1,52 +1,52 @@
-# Deployment Guide — How to Build Your Own Bot
+# Руководство по развёртыванию — как собрать своего бота
 
-This guide walks you through deploying one bot or an entire AI Office using the framework in this repo. Follow the steps in order. Skip nothing the first time through.
-
----
-
-## 1. Prerequisites
-
-Before you start building, make sure you have:
-
-- **Claude Pro or Team account** — required for Claude Projects (the hosting mechanism for each bot)
-- **Your domain expertise** — the bot amplifies what you already know; it cannot replace knowledge you don't have
-- **A clear role and boundaries** — know what this bot does and, equally important, what it does not do
-
-If you are unclear on the role, read `docs/architecture.md` first.
+Это руководство проведёт вас через развёртывание одного бота или целого ИИ-офиса с использованием фреймворка из этого репозитория. Следуйте шагам по порядку. При первом прохождении ничего не пропускайте.
 
 ---
 
-## 2. Step-by-Step: Building One Bot
+## 1. Предварительные требования
 
-### Step 1: Define the Role
+Перед началом сборки убедитесь, что у вас есть:
 
-Start here, not with content. A bot with a blurry role will drift and fail.
+- **Аккаунт Claude Pro или Team** — необходим для Claude Projects (механизм хостинга каждого бота)
+- **Экспертиза в вашей предметной области** — бот усиливает то, что вы уже знаете; он не может заменить знания, которых у вас нет
+- **Чёткая роль и границы** — понимайте, что этот бот делает, и, не менее важно, что он не делает
 
-1. Write a **2-3 sentence role description** — who this bot is, what domain it covers
-2. Write one **prime directive** — the single most important goal this bot exists to achieve
-3. List **what the bot DOES** (5-10 concrete actions)
-4. List **what the bot does NOT do** (at least 3 explicit exclusions)
-
-> **Starting point:** `templates/TEMPLATE_INSTRUCTIONS.md`
-
-**Tip:** If you cannot write the prime directive in one sentence, the role is not defined yet. Keep thinking.
+Если роль ещё не ясна, сначала прочитайте `docs/architecture.md`.
 
 ---
 
-### Step 2: Build the Knowledge Base
+## 2. Пошаговая инструкция: сборка одного бота
 
-The KB is where the bot's expertise lives. Structure matters as much as content.
+### Шаг 1: Определите роль
 
-1. Identify **5-10 core topics** the bot needs to know to do its job
-2. For each topic, write a section with:
-   - The rule or principle
-   - Why it matters
-   - Actionable technique or checklist
-   - One concrete example
-3. Create a **Router** at the top of the KB — a JSON block that maps user query triggers to the right section
-4. Use **anchors** to link Router entries to sections: `#S1_TOPIC_NAME`
+Начните отсюда, а не с контента. Бот с размытой ролью будет дрейфовать и давать сбои.
 
-**Router structure (flat, for up to ~20 sections):**
+1. Напишите **описание роли из 2-3 предложений** — кто этот бот, какой домен покрывает
+2. Сформулируйте одну **главную директиву** — единственную важнейшую цель, ради которой существует этот бот
+3. Перечислите **что бот ДЕЛАЕТ** (5-10 конкретных действий)
+4. Перечислите **что бот НЕ делает** (не менее 3 явных исключений)
+
+> **Отправная точка:** `templates/TEMPLATE_INSTRUCTIONS.md`
+
+**Совет:** Если вы не можете сформулировать главную директиву в одном предложении — роль ещё не определена. Продолжайте думать.
+
+---
+
+### Шаг 2: Соберите базу знаний
+
+KB — это место, где живёт экспертиза бота. Структура важна не меньше, чем контент.
+
+1. Определите **5-10 ключевых тем**, которые боту нужно знать для работы
+2. Для каждой темы напишите секцию с:
+   - Правилом или принципом
+   - Объяснением, почему это важно
+   - Практической техникой или чеклистом
+   - Одним конкретным примером
+3. Создайте **роутер** в начале KB — JSON-блок, который сопоставляет триггеры пользовательских запросов с нужной секцией
+4. Используйте **якоря** для связи записей роутера с секциями: `#S1_TOPIC_NAME`
+
+**Структура роутера (плоский роутер, для до ~20 секций):**
 
 ```json
 {
@@ -54,175 +54,175 @@ The KB is where the bot's expertise lives. Structure matters as much as content.
     {
       "trigger": ["keyword1", "keyword2", "phrase"],
       "section": "#S1_TOPIC_NAME",
-      "description": "When to use this section"
+      "description": "Когда использовать эту секцию"
     }
   ]
 }
 ```
 
-> **Starting point:** `templates/TEMPLATE_KB.md`
+> **Отправная точка:** `templates/TEMPLATE_KB.md`
 
-> **When to switch:** If you reach 20+ sections, move to a hierarchical router. See `templates/TEMPLATE_ROUTER.json`.
+> **Когда переключаться:** Если вы достигли 20+ секций, переходите на иерархический роутер. См. `templates/TEMPLATE_ROUTER.json`.
 
-**Warning:** A KB without a Router forces the bot to load everything on every query. This wastes tokens and degrades response quality. Always include the Router.
+**Предупреждение:** KB без роутера заставляет бота загружать всё при каждом запросе. Это расходует токены и снижает качество ответов. Всегда включайте роутер.
 
 ---
 
-### Step 3: Write the Instructions
+### Шаг 3: Напишите инструкции
 
-The Instructions file defines the bot's identity, behavior, and constraints. This is what goes into Claude's "Custom Instructions" field.
+Файл инструкций определяет личность бота, его поведение и ограничения. Именно это вставляется в поле Custom Instructions в Claude.
 
-Fill in `templates/TEMPLATE_INSTRUCTIONS.md`. Pay close attention to these three sections:
+Заполните `templates/TEMPLATE_INSTRUCTIONS.md`. Особое внимание уделите этим трём секциям:
 
-| Section | What it controls | Getting it wrong costs you |
+| Секция | Что контролирует | Чего стоит ошибка |
 |---|---|---|
-| **Identity** | Who the bot is, its voice and role | Role drift — bot tries to be everything |
-| **Scope** | What the bot handles and what it refers elsewhere | Scope creep — bot does work it shouldn't |
-| **Iron Rules** | Non-negotiable constraints, always followed | Unpredictable behavior, inconsistent output |
+| **Личность** | Кто такой бот, его голос и роль | Дрейф роли — бот пытается быть всем сразу |
+| **Область действия** | Что бот обрабатывает, а что передаёт другим | Расширение области — бот делает работу, которую не должен |
+| **Железные правила** | Неоспоримые ограничения, всегда соблюдаются | Непредсказуемое поведение, непоследовательный результат |
 
-**Iron Rules guidance:**
-- Aim for 5-10 rules (fewer = gaps, more = confusion)
-- Each rule must be **testable** — you can look at a response and verify whether the rule was followed or broken
-- Bad rule: "Be helpful" — not testable
-- Good rule: "Never write copy without a defined target audience in the brief" — testable
+**Рекомендации по железным правилам:**
+- Стремитесь к 5-10 правилам (меньше = пробелы, больше = путаница)
+- Каждое правило должно быть **проверяемым** — вы можете посмотреть на ответ и убедиться, выполнено правило или нарушено
+- Плохое правило: "Будь полезным" — не проверяемо
+- Хорошее правило: "Никогда не писать текст без определённой целевой аудитории в брифе" — проверяемо
 
-**Always include a "Who You Are NOT" section.** List 3-5 roles this bot does not play. This single addition prevents most role drift issues.
-
----
-
-### Step 4: Set Up Universal Core
-
-The Universal Core is a shared file that goes into every bot in your office. It carries rules and protocols that apply everywhere.
-
-1. Copy `templates/TEMPLATE_CORE.md`
-2. Set your **language** (the language all bots communicate in)
-3. Define your **communication style** (tone, format preferences, response length defaults)
-4. Configure **quality protocols** (self-check steps the bot runs before responding)
-5. Add any **org-wide constraints** that apply to all roles
-
-> If you are building only one bot, the Universal Core still matters — it gives you a clean separation between role-specific rules (Instructions) and universal rules (Core).
+**Всегда включайте секцию "Кем я НЕ являюсь".** Перечислите 3-5 ролей, которые этот бот не выполняет. Это одно дополнение предотвращает большинство проблем с дрейфом роли.
 
 ---
 
-### Step 5: Create the Claude Project
+### Шаг 4: Настройте Universal Core
 
-1. Go to **Claude → Projects → New Project**
-2. Name the project after the bot's role (e.g., "Copywriter", "Analyst")
-3. Paste your completed Instructions into the **"Custom Instructions"** field
-4. Upload files to the project:
-   - `universal-core.md` (required)
-   - Your Knowledge Base file (required)
-   - Any Add-on files relevant to this role (optional)
-5. Run **5+ real queries** — queries you would actually send in production
+Universal Core — это общий файл, который входит в каждый бот вашего офиса. Он содержит правила и протоколы, применимые везде.
 
-**Tip:** Use queries that cover edge cases, not just ideal cases. Test the boundaries on the first pass.
+1. Скопируйте `templates/TEMPLATE_CORE.md`
+2. Задайте **язык** (язык, на котором общаются все боты)
+3. Определите **стиль общения** (тон, предпочтения формата, настройки длины ответов по умолчанию)
+4. Настройте **протоколы качества** (шаги самопроверки, которые бот выполняет перед ответом)
+5. Добавьте любые **общеорганизационные ограничения**, применимые ко всем ролям
+
+> Если вы собираете только одного бота, Universal Core всё равно важен — он обеспечивает чёткое разделение между специфическими для роли правилами (инструкции) и универсальными правилами (Core).
 
 ---
 
-### Step 6: Test and Iterate
+### Шаг 5: Создайте проект Claude
 
-Run each of these checks before calling the bot production-ready:
+1. Перейдите в **Claude → Projects → New Project**
+2. Назовите проект по роли бота (например, "Copywriter", "Analyst")
+3. Вставьте готовые инструкции в поле **"Custom Instructions"**
+4. Загрузите файлы в проект:
+   - `universal-core.md` (обязательно)
+   - Файл вашей базы знаний (обязательно)
+   - Любые файлы аддонов, релевантные для этой роли (опционально)
+5. Запустите **5+ реальных запросов** — запросы, которые вы реально отправите в продакшене
 
-| Test | What to check | Fix if failing |
+**Совет:** Используйте запросы, которые покрывают граничные случаи, а не только идеальные. Тестируйте границы при первом прогоне.
+
+---
+
+### Шаг 6: Тестируйте и итерируйте
+
+Выполните каждую из этих проверок, прежде чем считать бота готовым к продакшену:
+
+| Тест | Что проверяем | Как исправить при сбое |
 |---|---|---|
-| **Router test** | Does the bot find and load the right KB section? | Add or tighten trigger keywords in Router |
-| **Constraint test** | Does the bot follow every Iron Rule? | Rewrite vague rules to be testable |
-| **Boundary test** | Does the bot stay in scope and decline out-of-scope requests? | Strengthen "Who You Are NOT" and Scope section |
-| **Delegation test** | Does the bot hand off correctly to other roles? | Add or fix handoff triggers and REQUEST format |
-| **Quality test** | Is output quality consistent across query types? | Improve self-check steps in Universal Core |
+| **Тест роутера** | Находит ли бот и загружает ли правильную секцию KB? | Добавьте или уточните ключевые слова-триггеры в роутере |
+| **Тест ограничений** | Выполняет ли бот каждое железное правило? | Перепишите расплывчатые правила, сделав их проверяемыми |
+| **Тест границ** | Остаётся ли бот в области действия и отклоняет ли запросы вне неё? | Усильте секцию "Кем я НЕ являюсь" и секцию области действия |
+| **Тест делегирования** | Корректно ли бот передаёт задачи другим ролям? | Добавьте или исправьте триггеры передачи и формат REQUEST |
+| **Тест качества** | Стабильно ли качество вывода по разным типам запросов? | Улучшите шаги самопроверки в Universal Core |
 
-Iterate in this order: adjust triggers → tighten rules → add examples → re-test. Do not add more content until the Router and Iron Rules are working correctly.
-
----
-
-## 3. Scaling to Multiple Bots (AI Office)
-
-Building an AI Office is an additive process. Do not try to design the whole system upfront.
-
-**The sequence that works:**
-
-1. **Build one bot.** Get it working well. Ship it. Use it.
-2. **Add a second bot** with a clearly defined boundary from the first. Document which queries go where.
-3. **Create the Universal Core** — extract the rules that apply to both bots, centralize them. Both bots now share this file.
-4. **Add the AI Office Map** — a JSON file listing all active roles, their prime directives, and when to route to each. See [how-roles-interact.md](how-roles-interact.md) for the AI Office Map concept.
-5. **Build handoff protocols** — define the REQUEST format bots use when delegating to each other. Consistent format prevents broken handoffs.
-6. **Add more bots one at a time.** Test each new handoff path before adding the next bot.
-
-**Tip:** The AI Office Map becomes the navigation layer for the whole system. Keep it updated every time you add a role.
+Итерируйте в таком порядке: скорректируйте триггеры → ужесточьте правила → добавьте примеры → протестируйте снова. Не добавляйте больше контента, пока роутер и железные правила не работают корректно.
 
 ---
 
-## 4. Common Mistakes
+## 3. Масштабирование до нескольких ботов (ИИ-офис)
 
-These are the failure modes that appear most often. Read them before you build, not after.
+Создание ИИ-офиса — аддитивный процесс. Не пытайтесь проектировать всю систему заранее.
 
-**1. Starting with content, not role definition**
-You write 2,000 words of KB content before deciding what the bot's prime directive is. The content ends up scattered and the Router cannot organize it.
-Fix: Define role, prime directive, and scope first. Start the KB only after Step 1 is locked.
+**Последовательность, которая работает:**
 
-**2. Making the KB too broad**
-You try to cover everything tangentially related to the role. The bot becomes a generalist with shallow knowledge.
-Fix: Deep expertise in a narrow domain beats wide coverage. Cut any section that is not essential to the prime directive.
+1. **Соберите одного бота.** Добейтесь хорошей работы. Запустите. Используйте.
+2. **Добавьте второго бота** с чётко определённой границей от первого. Задокументируйте, какие запросы куда идут.
+3. **Создайте Universal Core** — извлеките правила, применимые к обоим ботам, централизуйте их. Оба бота теперь используют этот файл.
+4. **Добавьте карту ИИ-офиса** — JSON-файл со списком всех активных ролей, их главными директивами и указанием, когда роутить к каждой. Концепцию карты ИИ-офиса см. в [how-roles-interact.md](how-roles-interact.md).
+5. **Создайте протоколы передачи** — определите формат REQUEST, который боты используют при делегировании задач друг другу. Единый формат предотвращает сбои при передаче.
+6. **Добавляйте ботов по одному.** Тестируйте каждый новый путь передачи перед добавлением следующего бота.
 
-**3. No Router**
-The bot loads the entire KB on every query. Token usage is high, responses are slow, and relevance drops.
-Fix: Always include a Router. Even a 3-section KB benefits from one. It is not optional.
-
-**4. Vague Iron Rules**
-Rules like "be professional" or "give good advice" sound reasonable but cannot be enforced.
-Fix: Rewrite every Iron Rule so you can look at a response and say definitively: followed or broken. If you cannot do that, the rule needs rewriting.
-
-**5. No "Who You Are NOT" section**
-Without explicit exclusions, the bot attempts tasks outside its scope — slowly at first, then consistently.
-Fix: Add at least 3 explicit "I am not a \_\_\_, I do not do \_\_\_" statements to the Instructions.
-
-**6. Skipping the self-check protocol**
-The bot produces output without reviewing it against quality criteria.
-Fix: Add a self-check section to Universal Core. Even a 3-step check (accuracy, tone, completeness) measurably improves output consistency.
-
-**7. Too many bots too fast**
-You design 6 bots before the first one is working. Handoffs break, roles overlap, and debugging is a nightmare.
-Fix: One bot, fully working, in real use. Then a second. Then a third. The compounding value of the office only appears when each component is solid.
+**Совет:** Карта ИИ-офиса становится навигационным слоем всей системы. Обновляйте её каждый раз при добавлении роли.
 
 ---
 
-## 5. Recommended Build Order
+## 4. Типичные ошибки
 
-If you are building a full AI Office from scratch, this order delivers the fastest path to value:
+Это наиболее частые точки отказа. Прочитайте их до начала сборки, а не после.
 
-| Priority | Role | Why this order |
+**1. Начало с контента, а не с определения роли**
+Вы пишете 2000 слов контента KB до того, как решили, какова главная директива бота. Контент получается разрозненным, и роутер не может его организовать.
+Исправление: сначала определите роль, главную директиву и область действия. Начинайте KB только после того, как Шаг 1 зафиксирован.
+
+**2. Слишком широкая KB**
+Вы пытаетесь охватить всё, косвенно связанное с ролью. Бот становится универсалом с поверхностными знаниями.
+Исправление: глубокая экспертиза в узком домене лучше широкого охвата. Убирайте любую секцию, которая не является необходимой для главной директивы.
+
+**3. Нет роутера**
+Бот загружает всю KB при каждом запросе. Расход токенов высок, ответы медленные, релевантность снижается.
+Исправление: всегда включайте роутер. Даже KB из 3 секций выигрывает от него. Это не опция.
+
+**4. Расплывчатые железные правила**
+Правила вроде "будь профессиональным" или "давай хорошие советы" звучат разумно, но не поддаются контролю.
+Исправление: перепишите каждое железное правило так, чтобы вы могли посмотреть на ответ и однозначно сказать: выполнено или нарушено. Если не получается — правило нужно переписать.
+
+**5. Нет секции "Кем я НЕ являюсь"**
+Без явных исключений бот берётся за задачи вне своей области — сначала редко, потом систематически.
+Исправление: добавьте не менее 3 явных утверждений "Я не \_\_\_, я не делаю \_\_\_" в инструкции.
+
+**6. Пропуск протокола самопроверки**
+Бот выдаёт результат без проверки его на соответствие критериям качества.
+Исправление: добавьте секцию самопроверки в Universal Core. Даже 3-шаговая проверка (точность, тон, полнота) заметно улучшает стабильность вывода.
+
+**7. Слишком много ботов слишком быстро**
+Вы проектируете 6 ботов до того, как первый заработал. Передачи ломаются, роли перекрываются, отладка превращается в кошмар.
+Исправление: один бот, полностью рабочий, в реальном использовании. Затем второй. Затем третий. Совокупная ценность офиса появляется только тогда, когда каждый компонент надёжен.
+
+---
+
+## 5. Рекомендуемый порядок сборки
+
+Если вы строите полный ИИ-офис с нуля, этот порядок даёт самый быстрый путь к результату:
+
+| Приоритет | Роль | Почему в таком порядке |
 |---|---|---|
-| 1 | **Copywriter** | Highest immediate ROI — content production is always needed, results are visible fast |
-| 2 | **Marketer** | Adds strategy layer to the content the Copywriter produces; the two roles amplify each other |
-| 3 | **Analyst** | Measures what the first two produce; closes the feedback loop |
-| 4 | **Producer** | Coordination becomes valuable once you have 3+ roles to coordinate |
-| 5+ | Remaining roles | Add based on your actual bottlenecks, not a theoretical org chart |
+| 1 | **Копирайтер** | Максимальный немедленный ROI — производство контента нужно всегда, результаты видны быстро |
+| 2 | **Маркетолог** | Добавляет стратегический слой к контенту, который производит Копирайтер; две роли усиливают друг друга |
+| 3 | **Аналитик** | Измеряет то, что производят первые двое; замыкает петлю обратной связи |
+| 4 | **Продюсер** | Координация становится ценной, когда есть 3+ роли для координации |
+| 5+ | Остальные роли | Добавляйте исходя из реальных узких мест, а не теоретической оргсхемы |
 
-**Warning:** Do not add the Producer before you have multiple bots running. A coordinator with nothing to coordinate is wasted effort.
+**Предупреждение:** Не добавляйте Продюсера до запуска нескольких ботов. Координатор без объектов координации — впустую потраченные усилия.
 
 ---
 
-## 6. Quick Reference
+## 6. Краткий справочник
 
-| I want to... | Start with... | Template to use |
+| Хочу... | Начать с... | Шаблон |
 |---|---|---|
-| Build one bot | Steps 1-6 in Section 2 | `TEMPLATE_KB.md` + `TEMPLATE_INSTRUCTIONS.md` |
-| Build a full AI Office | Section 3 (scaling sequence) | All templates + `TEMPLATE_CORE.md` |
-| Add a specialty to an existing bot | Add-on file for that specialty | `TEMPLATE_ADDON.md` |
-| Scale a large KB (20+ sections) | Hierarchical router | `TEMPLATE_ROUTER.json` |
-| Debug a bot that drifts | Constraint and boundary tests (Section 2, Step 6) | Review `TEMPLATE_INSTRUCTIONS.md` Iron Rules |
-| Set up shared rules across bots | Universal Core (Section 2, Step 4) | `TEMPLATE_CORE.md` |
+| Собрать одного бота | Шаги 1-6 в Секции 2 | `TEMPLATE_KB.md` + `TEMPLATE_INSTRUCTIONS.md` |
+| Собрать полный ИИ-офис | Секция 3 (последовательность масштабирования) | Все шаблоны + `TEMPLATE_CORE.md` |
+| Добавить специализацию существующему боту | Файл аддона для этой специализации | `TEMPLATE_ADDON.md` |
+| Масштабировать большую KB (20+ секций) | Иерархический роутер | `TEMPLATE_ROUTER.json` |
+| Отладить дрейфующего бота | Тесты ограничений и границ (Секция 2, Шаг 6) | Проверьте железные правила в `TEMPLATE_INSTRUCTIONS.md` |
+| Настроить общие правила для всех ботов | Universal Core (Секция 2, Шаг 4) | `TEMPLATE_CORE.md` |
 
 ---
 
-## Related Documentation
+## Связанная документация
 
-- [architecture.md](architecture.md) — how the framework components fit together
-- [document-hierarchy.md](document-hierarchy.md) — deep dive on document structure and Router design
-- [roles-overview.md](roles-overview.md) — all 10 roles and their specializations
-- [how-roles-interact.md](how-roles-interact.md) — collaboration patterns and REQUEST format
-- `templates/TEMPLATE_INSTRUCTIONS.md` — instructions template with inline comments
-- `templates/TEMPLATE_KB.md` — flat KB template with Router example
-- `templates/TEMPLATE_CORE.md` — Universal Core template
-- `templates/TEMPLATE_ADDON.md` — Add-on module template
-- `templates/TEMPLATE_ROUTER.json` — hierarchical router for large KBs
+- [architecture.md](architecture.md) — как компоненты фреймворка связаны между собой
+- [document-hierarchy.md](document-hierarchy.md) — детальный разбор структуры документов и дизайна роутера
+- [roles-overview.md](roles-overview.md) — все 10 ролей и их специализации
+- [how-roles-interact.md](how-roles-interact.md) — паттерны взаимодействия и формат REQUEST
+- `templates/TEMPLATE_INSTRUCTIONS.md` — шаблон инструкций со встроенными комментариями
+- `templates/TEMPLATE_KB.md` — шаблон плоской KB с примером роутера
+- `templates/TEMPLATE_CORE.md` — шаблон Universal Core
+- `templates/TEMPLATE_ADDON.md` — шаблон модуля-аддона
+- `templates/TEMPLATE_ROUTER.json` — иерархический роутер для больших KB

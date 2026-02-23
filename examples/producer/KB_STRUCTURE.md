@@ -1,68 +1,68 @@
-# Producer KB — Structure Overview
+# KB Продюсера — Обзор структуры
 
-## File Stats
+## Параметры файла
 
-| Property | Value |
+| Свойство | Значение |
 |---|---|
-| Version | v2.4 |
-| Total lines | 3182 |
-| Main sections | 31 |
-| Subsections | 77 |
-| Router version | v5.2 (flat) |
+| Версия | v2.4 |
+| Всего строк | 3182 |
+| Основных секций | 31 |
+| Подсекций | 77 |
+| Версия роутера | v5.2 (плоский) |
 
-## Architecture: Main Sections + Contextual Subsections
+## Архитектура: основные секции + контекстные подсекции
 
-The KB uses a **flat router architecture** (v5.2). Every section is a named block retrievable by exact key. Subsections are embedded within their parent section and addressed via dotted notation (e.g., `LAUNCH_PHASES.PRE_LAUNCH`).
+KB использует **архитектуру плоского роутера** (v5.2). Каждая секция — именованный блок, извлекаемый по точному ключу. Подсекции встроены внутрь родительских секций и адресуются через точечную нотацию (например, `LAUNCH_PHASES.PRE_LAUNCH`).
 
-This means:
-- No nested files or folders — everything lives in one flat KB
-- The router resolves section keys at query time, not at load time
-- Subsections are contextual: they activate only when the parent section is retrieved and the query matches a subsection key
+Это означает:
+- Нет вложенных файлов или папок — всё хранится в одной плоской KB
+- Роутер разрешает ключи секций в момент запроса, а не при загрузке
+- Подсекции контекстные: активируются только при извлечении родительской секции и совпадении запроса с ключом подсекции
 
-## Section Map
+## Карта секций
 
-### Core Planning Sections
+### Основные секции планирования
 
-| # | Section Key | Description | Subsections |
+| № | Ключ секции | Описание | Подсекций |
 |---|---|---|---|
-| 1 | `AUTOMATION_OVERVIEW` | What can be automated in launches; n8n and Airtable patterns | 3 |
-| 2 | `LAUNCH_PHASES` | Pre-launch / launch / post-launch structure and stage definitions | 6 |
-| 3 | `BACKWARD_PLANNING` | Timeline planning from deadline, critical path, dependency mapping | 4 |
-| 4 | `CHANNEL_MATRIX` | Multi-channel campaign coordination: which channels, sequencing, sync rules | 5 |
-| 5 | `BOT_COORDINATION` | Delegation rules, brief creation protocols, handoff sequencing | 4 |
-| 6 | `LAUNCH_BRIEF_TEMPLATE` | Master template for the central planning document | 7 |
+| 1 | `AUTOMATION_OVERVIEW` | Что можно автоматизировать в запусках; паттерны n8n и Airtable | 3 |
+| 2 | `LAUNCH_PHASES` | Структура и определения этапов пре-лонча, лонча, пост-лонча | 6 |
+| 3 | `BACKWARD_PLANNING` | Построение таймлайна от дедлайна, критический путь, картирование зависимостей | 4 |
+| 4 | `CHANNEL_MATRIX` | Координация многоканальной кампании: какие каналы, последовательность, правила синхронизации | 5 |
+| 5 | `BOT_COORDINATION` | Правила делегирования, протоколы создания брифов, последовательность передачи задач | 4 |
+| 6 | `LAUNCH_BRIEF_TEMPLATE` | Мастер-шаблон центрального документа планирования | 7 |
 
-### Operational Sections
+### Операционные секции
 
-| # | Section Key | Description | Subsections |
+| № | Ключ секции | Описание | Подсекций |
 |---|---|---|---|
-| 7 | `METRICS` | KPI definitions, tracking checkpoints, reporting formats | 4 |
-| 8 | `COMMON_MISTAKES` | Risk identification patterns, failure modes, early warning signals | 5 |
-| 9 | `COMMUNICATION_TEMPLATES` | Session communication protocols, status update formats | 3 |
-| 10–31 | *(additional sections)* | Supporting reference material, checklists, edge case handling | 36 |
+| 7 | `METRICS` | Определения KPI, контрольные точки отслеживания, форматы отчётности | 4 |
+| 8 | `COMMON_MISTAKES` | Паттерны выявления рисков, сценарии провалов, сигналы раннего предупреждения | 5 |
+| 9 | `COMMUNICATION_TEMPLATES` | Протоколы коммуникации в сессии, форматы статусных обновлений | 3 |
+| 10–31 | *(дополнительные секции)* | Вспомогательные справочные материалы, чеклисты, обработка нестандартных случаев | 36 |
 
-**Total subsections across all sections: 77**
+**Итого подсекций по всем секциям: 77**
 
-## Flat Router Logic (v5.2)
+## Логика плоского роутера (v5.2)
 
 ```
-query → router → section key match → retrieve section block
-                                   → if subsection key present → retrieve subsection block
-                                   → return to context window
+запрос → роутер → совпадение ключа секции → извлечение блока секции
+                                           → если присутствует ключ подсекции → извлечение блока подсекции
+                                           → возврат в контекстное окно
 ```
 
-Key properties of the flat router:
+Ключевые свойства плоского роутера:
 
-- **Single-level resolution**: The router does not recurse. It matches one key per query.
-- **Subsection passthrough**: If a query contains both a section key and a subsection key, the router returns the subsection block, not the full section.
-- **No ambiguity resolution**: If a query matches multiple keys, the router selects by priority rank (defined in the router config, not in the KB).
-- **Stateless**: The router carries no session state. Each retrieval is independent.
+- **Одноуровневое разрешение**: роутер не рекурсирует. Он сопоставляет один ключ на запрос.
+- **Сквозная передача подсекций**: если запрос содержит и ключ секции, и ключ подсекции, роутер возвращает блок подсекции, а не полную секцию.
+- **Без разрешения неоднозначностей**: если запрос совпадает с несколькими ключами, роутер выбирает по приоритетному рангу (задаётся в конфигурации роутера, а не в KB).
+- **Без состояния**: роутер не хранит состояние сессии. Каждое извлечение независимо.
 
-## Subsection Naming Convention
+## Соглашение об именовании подсекций
 
-Subsections follow the pattern: `PARENT_KEY.SUBSECTION_NAME`
+Подсекции следуют паттерну: `КЛЮЧ_РОДИТЕЛЯ.ИМЯ_ПОДСЕКЦИИ`
 
-Examples:
+Примеры:
 - `LAUNCH_PHASES.PRE_LAUNCH`
 - `LAUNCH_PHASES.LAUNCH_DAY`
 - `LAUNCH_PHASES.POST_LAUNCH`
@@ -70,11 +70,11 @@ Examples:
 - `BOT_COORDINATION.BRIEF_FORMAT`
 - `LAUNCH_BRIEF_TEMPLATE.RISK_REGISTER`
 
-## Design Rationale
+## Обоснование дизайна
 
-The flat architecture was chosen over hierarchical file structures because:
+Плоская архитектура была выбрана вместо иерархической файловой структуры по следующим причинам:
 
-1. **Retrieval speed** — Single key lookup, no directory traversal
-2. **Transparency** — The full section map is visible in one place
-3. **Maintainability** — Adding a section does not change the router logic
-4. **Predictability** — The bot always knows exactly what it retrieved and why
+1. **Скорость извлечения** — Поиск по единственному ключу, без обхода директорий
+2. **Прозрачность** — Полная карта секций видна в одном месте
+3. **Простота поддержки** — Добавление секции не меняет логику роутера
+4. **Предсказуемость** — Бот всегда точно знает, что и почему было извлечено

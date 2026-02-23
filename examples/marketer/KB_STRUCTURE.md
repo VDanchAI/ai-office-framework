@@ -1,137 +1,126 @@
-# Marketer KB — Knowledge Base Structure
+# KB Маркетолога — Структура базы знаний
 
-## Overview
+## Обзор
 
-| Attribute | Value |
+| Атрибут | Значение |
 |---|---|
-| Version | v4.2 |
-| Total lines | 26,681 |
-| Sections | 29 |
-| Router type | Flat (v5.6) |
-| Notable | One of the largest KBs in the AI Office suite |
+| Версия | v4.2 |
+| Всего строк | 26 681 |
+| Секций | 29 |
+| Тип роутера | Плоский (v5.6) |
+| Особенность | Одна из крупнейших KB в наборе ИИ Офиса |
 
-The KB is a single large document with a **flat router** — a lookup table at the top that
-maps keywords and intent signals to section anchors. The model does not traverse the file
-linearly; it pattern-matches the request against the router and jumps directly to the
-relevant section(s). Multiple sections can be activated for a single request.
+KB — это единый большой документ с **плоским роутером**: таблица поиска в начале файла, которая сопоставляет ключевые слова и сигналы намерения с якорями секций. Модель не читает файл линейно — она сопоставляет запрос с роутером и переходит напрямую к нужной секции (или нескольким). Один запрос может активировать несколько секций одновременно.
 
 ---
 
-## Section Map (29 sections, grouped by theme)
+## Карта секций (29 секций, сгруппированы по теме)
 
-### Paid Acquisition (4 sections)
+### Платное привлечение (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
 | 1 | `PAID_ADS` | Facebook Ads, Instagram Ads, Google Ads, Telegram Ads |
-| 2 | `AUDIENCES` | Audience architecture, lookalikes, segmentation |
-| 3 | `CREATIVES` | Creative strategy, hook frameworks, brief structure |
-| 4 | `BIDDING` | Bid strategies, budget allocation, scaling playbooks |
+| 2 | `AUDIENCES` | Архитектура аудиторий, lookalike, сегментация |
+| 3 | `CREATIVES` | Стратегия креативов, фреймворки хуков, структура брифа |
+| 4 | `BIDDING` | Стратегии ставок, распределение бюджета, плейбуки масштабирования |
 
-### Email & CRM (3 sections)
+### Email и CRM (3 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 5 | `EMAIL_MARKETING` | Sequences, newsletters, automation, deliverability |
-| 6 | `CRM_SYSTEMS` | CRM setup, pipeline stages, lead scoring |
-| 7 | `SEGMENTATION` | List segmentation, behavioral triggers, tagging logic |
+| 5 | `EMAIL_MARKETING` | Цепочки, рассылки, автоматизация, доставляемость |
+| 6 | `CRM_SYSTEMS` | Настройка CRM, этапы пайплайна, лид-скоринг |
+| 7 | `SEGMENTATION` | Сегментация базы, поведенческие триггеры, логика тегирования |
 
-### Funnels & Conversion (4 sections)
+### Воронки и конверсия (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 8 | `FUNNELS` | Funnel architecture, stage logic, conversion rates |
-| 9 | `LANDING_PAGES` | LP structure, offer framing, CTA optimization |
-| 10 | `UPSELLS` | Upsell/downsell/cross-sell mechanics |
-| 11 | `CHECKOUT` | Cart abandonment, checkout optimization |
+| 8 | `FUNNELS` | Архитектура воронок, логика этапов, конверсия |
+| 9 | `LANDING_PAGES` | Структура лендинга, подача оффера, оптимизация CTA |
+| 10 | `UPSELLS` | Механика upsell/downsell/cross-sell |
+| 11 | `CHECKOUT` | Брошенные корзины, оптимизация оформления заказа |
 
-### Launches (2 sections)
+### Запуски (2 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 12 | `LAUNCHES` | Full launch strategy: pre-launch, launch, post-launch |
-| 13 | `WEBINARS` | Webinar funnels, show-up rates, conversion tactics |
+| 12 | `LAUNCHES` | Полная стратегия запуска: пре-лонч, лонч, пост-лонч |
+| 13 | `WEBINARS` | Воронки вебинаров, показатели доходимости, тактики конверсии |
 
-### Strategy & Positioning (4 sections)
+### Стратегия и позиционирование (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 14 | `POSITIONING` | Market differentiation, messaging architecture |
-| 15 | `COMPETITOR_ANALYSIS` | Competitive research, gap analysis, counter-positioning |
-| 16 | `PRICING_PSYCHOLOGY` | Pricing tiers, anchoring, value framing |
-| 17 | `OFFERS` | Offer construction, value stacks, guarantees |
+| 14 | `POSITIONING` | Дифференциация на рынке, архитектура месседжа |
+| 15 | `COMPETITOR_ANALYSIS` | Конкурентный анализ, анализ пробелов, контрпозиционирование |
+| 16 | `PRICING_PSYCHOLOGY` | Ценовые уровни, якорение, фреймирование ценности |
+| 17 | `OFFERS` | Конструирование оффера, стек ценностей, гарантии |
 
-### Economics & Analytics (4 sections)
+### Экономика и аналитика (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 18 | `UNIT_ECONOMICS` | CAC, LTV, ROAS, break-even, payback period |
-| 19 | `ANALYTICS` | GA4, Meta Pixel, UTM architecture, attribution |
-| 20 | `AB_TESTING` | Test design, statistical significance, interpretation |
-| 21 | `REPORTING` | Dashboard structure, KPI selection, reporting cadence |
+| 18 | `UNIT_ECONOMICS` | CAC, LTV, ROAS, точка безубыточности, срок окупаемости |
+| 19 | `ANALYTICS` | GA4, Meta Pixel, архитектура UTM, атрибуция |
+| 20 | `AB_TESTING` | Дизайн тестов, статистическая значимость, интерпретация |
+| 21 | `REPORTING` | Структура дашборда, выбор KPI, периодичность отчётности |
 
-### Retention & Growth (4 sections)
+### Удержание и рост (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 22 | `RETENTION_LTV` | Retention tactics, churn analysis, LTV optimization |
-| 23 | `REFERRAL` | Referral program design, mechanics, incentive structure |
-| 24 | `REACTIVATION` | Win-back campaigns, dormant segment strategies |
-| 25 | `LOYALTY` | Loyalty loops, community-as-retention |
+| 22 | `RETENTION_LTV` | Тактики удержания, анализ оттока, оптимизация LTV |
+| 23 | `REFERRAL` | Разработка реферальных программ, механика, структура стимулов |
+| 24 | `REACTIVATION` | Win-back кампании, стратегии для неактивных сегментов |
+| 25 | `LOYALTY` | Петли лояльности, сообщество как инструмент удержания |
 
-### Non-Standard Tactics (4 sections)
+### Нестандартные тактики (4 секции)
 
-| # | Section ID | Domain |
+| № | Section ID | Домен |
 |---|---|---|
-| 26 | `GUERRILLA` | Non-standard acquisition: PR stunts, virality, growth hacks |
-| 27 | `REFRAMING` | Complete reframing research (~25,000 words) |
-| 28 | `LINKEDIN` | LinkedIn marketing, B2B acquisition tactics |
-| 29 | `YOUTUBE` | YouTube strategy, organic growth, ad integration |
+| 26 | `GUERRILLA` | Нестандартное привлечение: PR-акции, вирусность, growth hacks |
+| 27 | `REFRAMING` | Полное исследование по рефреймингу (~25 000 слов) |
+| 28 | `LINKEDIN` | LinkedIn-маркетинг, B2B-привлечение |
+| 29 | `YOUTUBE` | Стратегия на YouTube, органический рост, интеграция рекламы |
 
 ---
 
-## Flat Router — How It Works
+## Плоский роутер — принцип работы
 
 ```
-[Request arrives]
+[Запрос получен]
        ↓
-[Router scans for keywords + intent signals]
+[Роутер сканирует ключевые слова + сигналы намерения]
        ↓
-[Matches 1–N section anchors]
+[Сопоставляет 1–N якорей секций]
        ↓
-[Relevant sections loaded into context]
+[Соответствующие секции загружаются в контекст]
        ↓
-[Response generated from matched content]
+[Ответ генерируется из найденного контента]
 ```
 
-The router is defined as a structured lookup block at the top of the KB file. Each entry
-contains: trigger keywords, intent patterns, and target section ID(s). A single request
-for "launch Facebook campaign for course" would activate: `PAID_ADS`, `AUDIENCES`,
-`FUNNELS`, and potentially `LAUNCHES` — all simultaneously.
+Роутер определён как структурированный блок поиска в начале файла KB. Каждая запись содержит: ключевые слова-триггеры, паттерны намерений и целевой Section ID. Один запрос «запустить Facebook-кампанию для курса» активирует: `PAID_ADS`, `AUDIENCES`, `FUNNELS` и, вероятно, `LAUNCHES` — всё одновременно.
 
 ---
 
-## Notable Sections
+## Примечательные секции
 
-**`REFRAMING`** (~25,000 words) is the largest single section — a complete domain on
-cognitive reframing techniques applied to marketing, objection handling, and positioning.
-It is the most referenced section in the KB for complex positioning tasks.
+**`REFRAMING`** (~25 000 слов) — самая большая отдельная секция: полный домен по техникам когнитивного рефрейминга применительно к маркетингу, работе с возражениями и позиционированию. Наиболее часто запрашиваемая секция KB для сложных задач по позиционированию.
 
-**`UNIT_ECONOMICS`** contains standardized calculation templates for CAC, LTV, ROAS,
-break-even, and payback period. These are referenced in the Instructions to enforce
-the "realistic numbers only" iron rule.
+**`UNIT_ECONOMICS`** содержит стандартизированные шаблоны расчётов для CAC, LTV, ROAS, точки безубыточности и срока окупаемости. На них ссылаются Инструкции для соблюдения железного правила «только реалистичные цифры».
 
-**`LAUNCHES`** contains a full launch playbook structure with phase-by-phase breakdowns,
-typical conversion benchmarks by product type, and common failure patterns.
+**`LAUNCHES`** содержит полную структуру плейбука запуска с пофазовой разбивкой, типичными конверсионными бенчмарками по типам продуктов и распространёнными паттернами провалов.
 
 ---
 
-## Size Context
+## Контекст размера
 
 ```
-Total lines: 26,681
-Equivalent to: ~200–220 pages of dense professional content
-Largest KB in AI Office: Yes (Reframing section alone is ~25K words)
-Update cadence: Version bumped when any section gets major revision
-Current version: v4.2
+Всего строк: 26 681
+Эквивалент: ~200–220 страниц плотного профессионального контента
+Крупнейшая KB в ИИ Офисе: Да (секция Reframing одна ~25K слов)
+Периодичность обновлений: Версия повышается при значительной правке любой секции
+Текущая версия: v4.2
 ```

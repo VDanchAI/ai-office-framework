@@ -1,121 +1,121 @@
-# Producer Instructions — Structure Overview
+# Инструкции Продюсера — Обзор структуры
 
-## File Stats
+## Параметры файла
 
-| Property | Value |
+| Свойство | Значение |
 |---|---|
-| Version | v2.6 |
-| Total sections | 9 |
-| Section numbering | 0–8 |
+| Версия | v2.6 |
+| Всего секций | 9 |
+| Нумерация секций | 0–8 |
 
-## Design Philosophy of the Instructions
+## Философия дизайна инструкций
 
-The instructions are built around two structural pillars:
+Инструкции построены на двух структурных столпах:
 
-1. **NO_EXECUTION pattern** — Producer never performs work. Every section reinforces the boundary between coordination and execution.
-2. **Launch Brief as central document** — All workflows converge on the Launch Brief. It is the artifact that validates that coordination is happening correctly.
+1. **Паттерн NO_EXECUTION** — Продюсер никогда не выполняет работу сам. Каждая секция укрепляет границу между координацией и исполнением.
+2. **Launch Brief как центральный документ** — Все рабочие процессы сходятся на Launch Brief. Это артефакт, который подтверждает, что координация происходит правильно.
 
-## Section Map
+## Карта секций
 
-### Section 0 — Mandatory First Action
+### Секция 0 — Обязательное первое действие
 
-Defines what the bot must do before anything else in a session. Establishes the activation sequence: identify the launch intent, check for an existing Launch Brief, create one if absent.
+Определяет, что бот должен сделать в первую очередь в сессии. Устанавливает последовательность активации: определить намерение запуска, проверить наличие Launch Brief, создать его при отсутствии.
 
-No exceptions. This section fires on every new session.
+Без исключений. Эта секция срабатывает в каждой новой сессии.
 
-### Section 1 — Integration with Core
+### Секция 1 — Интеграция с Core
 
-How Producer integrates with the Core system prompt shared across all bots. Defines which Core rules are inherited, which are overridden, and which are extended. Establishes Producer's position in the multi-bot hierarchy.
+Как Продюсер интегрируется с системным промптом Core, общим для всех ботов. Определяет, какие правила Core наследуются, какие переопределяются, какие расширяются. Устанавливает позицию Продюсера в иерархии нескольких ботов.
 
-### Section 2 — Core Identity
+### Секция 2 — Базовая идентичность
 
-The coordinator stance. Key framing:
+Позиция координатора. Ключевые установки:
 
-- Producer is a **process thinker**, not a task executor
-- Every request is translated into: phases, dependencies, assignments, timeline
-- Producer's output is always a **plan or a brief**, never a finished deliverable
-- The bot speaks in terms of: "Stage 1 requires X before Stage 2 can begin"
+- Продюсер — **мыслитель процессами**, а не исполнитель задач
+- Каждый запрос переводится в: фазы, зависимости, назначения, таймлайн
+- Результат Продюсера — всегда **план или бриф**, никогда готовый артефакт
+- Бот говорит в терминах: «Этап 1 требует X до того, как может начаться Этап 2»
 
-This section also defines how Producer communicates: structured, milestone-oriented, risk-aware.
+Эта секция также определяет стиль коммуникации Продюсера: структурированный, ориентированный на вехи, с учётом рисков.
 
-### Section 3 — Scope
+### Секция 3 — Область ответственности
 
-The 5 domains Producer operates in:
+5 доменов, в которых работает Продюсер:
 
-1. Launch phase management
-2. Backward planning and timeline construction
-3. Multi-channel coordination
-4. Bot delegation and brief creation
-5. Metrics tracking and progress reporting
+1. Управление фазами запуска
+2. Обратное планирование и построение таймлайна
+3. Многоканальная координация
+4. Делегирование ботам и создание брифов
+5. Отслеживание метрик и отчётность о прогрессе
 
-Also defines explicit **out-of-scope** items (writing, design, analysis, course structure) and the rule: if a request falls outside scope, Producer identifies the correct specialist bot and creates a delegation brief.
+Также определяет явные **задачи вне области ответственности** (написание текстов, дизайн, анализ, структура курса) и правило: если запрос выходит за рамки области, Продюсер определяет правильного специалиста и создаёт бриф на делегирование.
 
-### Section 4 — Iron Rules
+### Секция 4 — Железные правила
 
-Four non-negotiable rules with enforcement logic:
+Четыре неотменяемых правила с логикой применения:
 
-| Rule | Trigger condition | Bot behavior on violation |
+| Правило | Условие срабатывания | Поведение бота при нарушении |
 |---|---|---|
-| `NO_EXECUTION` | User asks Producer to write/design/analyze | Refuse, identify correct bot, offer to create brief |
-| `LAUNCH_BRIEF_REQUIRED` | Any launch discussion without a Brief | Stop workflow, create Brief first |
-| `ALWAYS_DOCUMENT` | Any decision or delegation | Record in Launch Brief before proceeding |
-| `DEPENDENCIES_FIRST` | Any timeline request | Map dependencies before assigning dates |
+| `NO_EXECUTION` | Пользователь просит Продюсера написать/разработать/проанализировать | Отказать, определить правильного бота, предложить создать бриф |
+| `LAUNCH_BRIEF_REQUIRED` | Любое обсуждение запуска без Brief | Остановить рабочий процесс, сначала создать Brief |
+| `ALWAYS_DOCUMENT` | Любое решение или делегирование | Зафиксировать в Launch Brief перед продолжением |
+| `DEPENDENCIES_FIRST` | Любой запрос на таймлайн | Картировать зависимости до назначения дат |
 
-### Section 5 — Workflow
+### Секция 5 — Рабочий процесс
 
-The standard session flow:
+Стандартный поток сессии:
 
 ```
-Receive request
-  → Assess scope and type
-  → Check for Launch Brief (create if missing)
-  → Identify phases and dependencies
-  → Create delegation briefs for specialist bots
-  → Set tracking checkpoints
-  → Report status to user
+Получить запрос
+  → Оценить масштаб и тип
+  → Проверить наличие Launch Brief (создать при отсутствии)
+  → Определить фазы и зависимости
+  → Создать брифы на делегирование для специализированных ботов
+  → Установить контрольные точки отслеживания
+  → Сообщить пользователю о статусе
 ```
 
-Each step has defined inputs, outputs, and failure conditions.
+Каждый шаг имеет определённые входные данные, результаты и условия отказа.
 
-### Section 6 — Launch Brief Protocol
+### Секция 6 — Протокол Launch Brief
 
-The most detailed section. Covers:
+Наиболее детализированная секция. Охватывает:
 
-- When a Launch Brief must be created (always)
-- Minimum required fields before any delegation can begin
-- How to populate the Brief from a vague user request
-- How to update the Brief as the launch progresses
-- The Brief as the single source of truth for all status reports
+- Когда должен быть создан Launch Brief (всегда)
+- Минимально необходимые поля перед началом любого делегирования
+- Как заполнить Brief из расплывчатого запроса пользователя
+- Как обновлять Brief по мере продвижения запуска
+- Brief как единственный источник истины для всех статусных отчётов
 
-The Launch Brief template itself lives in KB section `LAUNCH_BRIEF_TEMPLATE`. This instructions section defines the *rules* for using it.
+Сам шаблон Launch Brief находится в секции KB `LAUNCH_BRIEF_TEMPLATE`. Эта инструктивная секция определяет *правила* его использования.
 
-### Section 7 — Bot Coordination Rules
+### Секция 7 — Правила координации ботов
 
-How Producer creates briefs for other bots. Defines:
+Как Продюсер создаёт брифы для других ботов. Определяет:
 
-- Brief format (required fields, optional fields)
-- Sequencing rules (which bots are briefed first, dependency order)
-- Handoff protocol (what information must be passed, in what format)
-- Re-briefing rules (what triggers a brief update vs. a new brief)
+- Формат брифа (обязательные и необязательные поля)
+- Правила последовательности (каким ботам ставятся задачи в первую очередь, порядок зависимостей)
+- Протокол передачи (какая информация должна быть передана, в каком формате)
+- Правила перевыставления брифа (что запускает обновление брифа в отличие от создания нового)
 
-Explicit rule: Producer never sends a brief to a bot that contains ambiguous instructions. If the brief cannot be written without clarifying questions, Producer asks the user first.
+Явное правило: Продюсер никогда не отправляет боту бриф, содержащий неоднозначные инструкции. Если бриф нельзя написать без уточняющих вопросов — Продюсер сначала спрашивает пользователя.
 
-### Section 8 — Collaboration (Handoff Rules)
+### Секция 8 — Взаимодействие (правила передачи задач)
 
-How Producer hands off to and receives from other bots mid-session. Covers:
+Как Продюсер принимает задачи от других ботов и передаёт им задачи в середине сессии. Охватывает:
 
-- Inbound handoffs: when another bot passes a request to Producer
-- Outbound handoffs: when Producer passes execution to a specialist
-- Status sync: how Producer stays informed without doing the work itself
-- Escalation: when Producer flags a risk to the user vs. handles it internally
+- Входящие передачи: когда другой бот передаёт запрос Продюсеру
+- Исходящие передачи: когда Продюсер передаёт исполнение специалисту
+- Синхронизация статуса: как Продюсер остаётся в курсе, не выполняя работу сам
+- Эскалация: когда Продюсер сообщает пользователю о риске, а когда обрабатывает его внутри
 
-## The NO_EXECUTION Pattern in Practice
+## Паттерн NO_EXECUTION на практике
 
-Every section of the instructions contains at least one explicit boundary statement. Examples:
+Каждая секция инструкций содержит минимум одно явное ограничительное утверждение. Примеры:
 
-- Section 2: "Producer describes the plan. It does not write the copy."
-- Section 3: "If the user asks for a funnel, Producer creates a brief for the Funnel bot."
-- Section 4: "NO_EXECUTION is an iron rule. It cannot be overridden by user request."
-- Section 7: "The brief tells the specialist bot what to do. Producer does not do it for them."
+- Секция 2: «Продюсер описывает план. Тексты он не пишет.»
+- Секция 3: «Если пользователь просит воронку, Продюсер создаёт бриф для бота Воронок.»
+- Секция 4: «NO_EXECUTION — железное правило. Его нельзя переопределить запросом пользователя.»
+- Секция 7: «Бриф говорит специализированному боту, что делать. Продюсер не делает это за него.»
 
-This repetition is intentional. The instructions treat NO_EXECUTION as a guard that must be reinforced at every decision point, not just declared once.
+Такое повторение намеренно. Инструкции трактуют NO_EXECUTION как ограничение, которое необходимо усиливать в каждой точке принятия решений, а не просто декларировать один раз.

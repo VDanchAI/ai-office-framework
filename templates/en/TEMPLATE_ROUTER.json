@@ -1,0 +1,181 @@
+{
+  "_comment": [
+    "HIERARCHICAL ROUTER TEMPLATE",
+    "Use this when your KB has 20+ sections.",
+    "Architecture: Master Router (domain level) → Sub-Routers (section level).",
+    "Stage 1: Master decides which domain the query belongs to.",
+    "Stage 2: Sub-Router finds the exact section within that domain.",
+    "",
+    "For KBs under 20 sections, use the flat router inside TEMPLATE_KB.md instead.",
+    "",
+    "HOW TO USE THIS TEMPLATE:",
+    "1. Define your domains (3-5 thematic groups of sections)",
+    "2. Fill in the Master Router below (domain-level routing)",
+    "3. Create Sub-Routers for each domain (section-level routing)",
+    "4. Embed the complete JSON at the top of your KB file under ## ROUTER",
+    "5. Ensure every anchor in the router matches a heading in KB content"
+  ],
+
+  "router_version": "1.0.0",
+  "router_type": "hierarchical_master",
+  "kb_name": "[BOT_NAME]_Knowledge_Base",
+  "kb_version": "1.0",
+  "total_sections": 18,
+  "total_domains": 3,
+  "last_updated": "YYYY-MM-DD",
+
+  "architecture": {
+    "type": "hierarchical",
+    "domains": 3,
+    "sub_routers": 3,
+    "master_routing": "Domain-level decision → delegate to Sub-Router",
+    "benefits": [
+      "Scalable to hundreds of sections",
+      "Clear domain separation",
+      "Faster routing (two-stage)",
+      "Independent domain evolution"
+    ]
+  },
+
+  "maintenance": {
+    "changelog": [
+      "1.0.0 - Initial router setup"
+    ],
+    "update_instructions": {
+      "when_section_added_to_existing_domain": [
+        "1. Add anchor in KB content",
+        "2. Update appropriate Sub-Router (not Master)",
+        "3. Update domain section_count in Master",
+        "4. Increment Sub-Router version +0.1"
+      ],
+      "when_new_domain_added": [
+        "1. Create new Sub-Router for domain",
+        "2. Add domain to Master Router",
+        "3. Add domain to ai_decision_tree",
+        "4. Increment Master version +1.0"
+      ]
+    }
+  },
+
+  "ai_instructions": {
+    "routing_strategy": [
+      "STAGE 1 (Master): Determine which domain the query belongs to",
+      "STAGE 2 (Sub-Router): Find the exact section within that domain",
+      "If query spans multiple domains: route to ALL relevant domains",
+      "If uncertain: use fallback"
+    ],
+    "execution_order": [
+      "1. Analyze query intent and context",
+      "2. Match against domain descriptions and context_tags",
+      "3. If matched → read that domain's Sub-Router",
+      "4. Sub-Router matches query to specific section(s)",
+      "5. Jump to section anchor(s), read content",
+      "6. If no match → apply fallback"
+    ],
+    "fallback": "Route to DOMAIN_A (foundational domain)"
+  },
+
+  "domains": {
+    "DOMAIN_A": {
+      "description": "Core expertise — foundational skills and knowledge",
+      "sections": ["S1", "S2", "S3", "S4", "S5", "S6"],
+      "section_count": 6,
+      "sub_router": "domain_a_router",
+      "priority": 10,
+      "when_to_use": "Any query about [core topic], [basic skill], [fundamental concept]",
+      "context_tags": ["tag1", "tag2", "tag3", "tag4"]
+    },
+
+    "DOMAIN_B": {
+      "description": "Specialized expertise — advanced techniques",
+      "sections": ["S7", "S8", "S9", "S10", "S11", "S12"],
+      "section_count": 6,
+      "sub_router": "domain_b_router",
+      "priority": 8,
+      "when_to_use": "Queries about [advanced topic], [specialized technique]",
+      "context_tags": ["tag5", "tag6", "tag7"]
+    },
+
+    "DOMAIN_C": {
+      "description": "Applied expertise — practical application",
+      "sections": ["S13", "S14", "S15", "S16", "S17", "S18"],
+      "section_count": 6,
+      "sub_router": "domain_c_router",
+      "priority": 6,
+      "when_to_use": "Queries about [practical application], [real-world use]",
+      "context_tags": ["tag8", "tag9", "tag10"]
+    }
+  },
+
+  "sub_routers": {
+
+    "domain_a_router": {
+      "version": "1.0",
+      "domain": "DOMAIN_A",
+      "sections": [
+        {
+          "id": "S1",
+          "title": "[Foundations]",
+          "anchor": "#S1_FOUNDATIONS",
+          "triggers": ["keyword1", "keyword2", "phrase one"],
+          "description": "Core principles and fundamentals",
+          "priority": 10
+        },
+        {
+          "id": "S2",
+          "title": "[Key Skill]",
+          "anchor": "#S2_KEY_SKILL",
+          "triggers": ["keyword3", "keyword4"],
+          "description": "Primary skill set",
+          "priority": 8
+        },
+        {
+          "id": "S3",
+          "title": "[Methods]",
+          "anchor": "#S3_METHODS",
+          "triggers": ["keyword5", "keyword6"],
+          "description": "Methods and approaches",
+          "priority": 6
+        },
+        {
+          "id": "S4",
+          "title": "[Rules]",
+          "anchor": "#S4_RULES",
+          "triggers": ["keyword7", "keyword8"],
+          "description": "Domain-specific rules",
+          "priority": 6
+        },
+        {
+          "id": "S5",
+          "title": "[Formats]",
+          "anchor": "#S5_FORMATS",
+          "triggers": ["keyword9", "keyword10"],
+          "description": "Output formats and templates",
+          "priority": 4
+        },
+        {
+          "id": "S6",
+          "title": "[Examples]",
+          "anchor": "#S6_EXAMPLES",
+          "triggers": ["keyword11", "keyword12", "example", "show me"],
+          "description": "Examples and references",
+          "priority": 4
+        }
+      ]
+    },
+
+    "domain_b_router": {
+      "version": "1.0",
+      "domain": "DOMAIN_B",
+      "_comment": "Fill in following the same pattern as domain_a_router",
+      "sections": []
+    },
+
+    "domain_c_router": {
+      "version": "1.0",
+      "domain": "DOMAIN_C",
+      "_comment": "Fill in following the same pattern as domain_a_router",
+      "sections": []
+    }
+  }
+}

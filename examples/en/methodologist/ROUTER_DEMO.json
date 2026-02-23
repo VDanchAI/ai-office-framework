@@ -1,0 +1,104 @@
+{
+  "router": {
+    "version": "5.2",
+    "type": "flat",
+    "description": "Single-level dispatch. Input maps directly to section(s). No nested routing, no priority queue. Multiple sections activate in parallel when task spans domains.",
+    "note": "This is a structural demo showing 4 of 10 sections. Full router covers all KB sections."
+  },
+
+  "sections_demo": [
+    {
+      "id": "RESULT_TYPES",
+      "section_number": "01",
+      "trigger_patterns": [
+        "what type of result",
+        "is this a concept or instrument",
+        "outcome classification",
+        "what will participants be able to do",
+        "formulate the result",
+        "check the result statement"
+      ],
+      "always_active": true,
+      "note": "Activates on every design task regardless of other triggers. Result typing is mandatory before structure begins.",
+      "output": "Typed result: Concept | Instrument | Resource + rationale"
+    },
+
+    {
+      "id": "PSYCHOTECHNICAL_MYTH",
+      "section_number": "02",
+      "trigger_patterns": [
+        "create an exercise",
+        "design an assignment",
+        "make participants want to",
+        "motivational frame",
+        "entry context for task",
+        "why would they do this exercise"
+      ],
+      "always_active": true,
+      "note": "Activates on every exercise design task. No exercise is produced without a myth frame. Iron rule.",
+      "output": "Exercise card: myth narrative + task + debrief structure"
+    },
+
+    {
+      "id": "FORMAT_STRUCTURES",
+      "section_number": "03",
+      "trigger_patterns": [
+        "design a webinar",
+        "structure a masterclass",
+        "cohort course",
+        "how long should this be",
+        "online format",
+        "what format fits",
+        "2-hour workshop",
+        "engagement tactics"
+      ],
+      "always_active": false,
+      "activates_with": ["RESULT_TYPES", "TEMPLATES"],
+      "note": "Format selection is always downstream of result typing. Activates after RESULT_TYPES confirms the outcome type.",
+      "output": "Format recommendation with structure template and result-type compatibility note"
+    },
+
+    {
+      "id": "ANTIPATTERNS",
+      "section_number": "08",
+      "trigger_patterns": [
+        "something feels wrong",
+        "this program doesn't work",
+        "participants aren't engaging",
+        "the outcome isn't clear",
+        "started with content",
+        "no results after the course",
+        "check this program",
+        "what am I doing wrong"
+      ],
+      "always_active": false,
+      "activates_with": ["CHECKLISTS"],
+      "note": "Diagnostic section. Activated when a program is already designed and showing failure signals, or when a request arrives with a pre-built structure that needs review.",
+      "output": "Antipattern identification + correction algorithm + redesign entry point"
+    }
+  ],
+
+  "dispatch_logic": {
+    "description": "How the router resolves a real request",
+    "steps": [
+      "1. Receive task text",
+      "2. Match against trigger_patterns across all sections (parallel scan)",
+      "3. Collect all matching section IDs",
+      "4. Add always_active sections (RESULT_TYPES, PSYCHOTECHNICAL_MYTH) if not already present",
+      "5. Activate all matched sections simultaneously",
+      "6. Compose response from activated sections"
+    ],
+    "conflict_resolution": "No conflicts in flat architecture. All activated sections contribute independently. Synthesis is the role's responsibility, not the router's."
+  },
+
+  "example_dispatch": {
+    "input": "I want to create an exercise for my webinar where participants practice giving feedback",
+    "matched_sections": [
+      "RESULT_TYPES",
+      "PSYCHOTECHNICAL_MYTH",
+      "FORMAT_STRUCTURES"
+    ],
+    "reasoning": "Exercise creation → PSYCHOTECHNICAL_MYTH. Webinar context → FORMAT_STRUCTURES. Result typing mandatory → RESULT_TYPES always active.",
+    "first_action": "Clarify result type before exercise design. Is 'giving feedback' a Concept (understand what good feedback is), Instrument (apply a specific feedback model), or Resource (habitual practice)? Answer changes exercise design."
+  }
+}

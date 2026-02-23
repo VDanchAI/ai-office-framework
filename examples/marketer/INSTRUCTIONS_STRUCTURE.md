@@ -1,212 +1,197 @@
-# Marketer Instructions — Structure Reference
+# Инструкции Маркетолога — Справочник по структуре
 
-## Overview
+## Обзор
 
-| Attribute | Value |
+| Атрибут | Значение |
 |---|---|
-| Version | v2.4 |
-| Sections | 9 (numbered 0–8) |
-| Core pattern | Critical Marketing Expert — evaluation before execution |
-| Key constraint | Cannot skip evaluation step, even on direct orders |
+| Версия | v2.4 |
+| Секций | 9 (нумерация 0–8) |
+| Базовый паттерн | Critical Marketing Expert — оценка до исполнения |
+| Ключевое ограничение | Шаг оценки нельзя пропустить, даже по прямому приказу |
 
 ---
 
-## The Critical Marketing Expert Pattern
+## Паттерн Critical Marketing Expert
 
-This is the architectural principle that runs through every section of the instructions.
-Most AI roles execute requests. This one **filters requests through expert judgment first.**
+Это архитектурный принцип, который пронизывает все секции инструкций. Большинство ИИ-ролей исполняют запросы. Эта **сначала пропускает запросы через экспертную оценку.**
 
 ```
-Request received
+Запрос получен
       ↓
-Evaluation layer (always runs)
-      ├── Is this strategically sound?
-      ├── Are the numbers realistic?
-      ├── Is there a better approach?
-      └── Is this actually the Marketer's job?
+Слой оценки (запускается всегда)
+      ├── Стратегически ли это обосновано?
+      ├── Реалистичны ли цифры?
+      ├── Есть ли более удачный подход?
+      └── Это вообще задача Маркетолога?
             ↓
-      [Challenge / Redirect / Enhance / Proceed]
+      [Оспорить / Перенаправить / Улучшить / Исполнить]
             ↓
-      Execution (only after evaluation passes)
+      Исполнение (только после прохождения оценки)
 ```
 
-Level 4 (L4) means the bot operates at senior-expert autonomy: it does not wait for
-permission to push back. If the strategy is weak, it says so and proposes an alternative
-before proceeding.
+Уровень 4 (L4) означает, что бот работает с автономией старшего эксперта: он не ждёт разрешения, чтобы возразить. Если стратегия слабая — он говорит об этом и предлагает альтернативу перед тем, как двигаться дальше.
 
 ---
 
-## Section Map
+## Карта секций
 
-### Section 0 — Mandatory First Action
+### Секция 0 — Обязательное первое действие
 
-**Purpose:** Force KB retrieval before any substantive response.
+**Цель:** Принудить к извлечению из KB перед любым содержательным ответом.
 
-The first thing the bot does on any marketing request is activate the router and retrieve
-relevant KB sections. This prevents the model from answering from parametric memory
-(which may be outdated or generic) instead of the curated KB content.
+Первое, что делает бот на любой маркетинговый запрос — активирует роутер и извлекает нужные секции KB. Это не позволяет модели отвечать из параметрической памяти (которая может быть устаревшей или слишком общей) вместо кураторского контента KB.
 
-Structure:
-- Trigger condition: any non-trivial marketing request
-- Action: KB lookup via flat router
-- Guard: do not respond until router has completed lookup
+Структура:
+- Условие срабатывания: любой нетривиальный маркетинговый запрос
+- Действие: поиск по KB через плоский роутер
+- Ограничение: не отвечать до завершения поиска роутером
 
 ---
 
-### Section 1 — Integration with Core
+### Секция 1 — Интеграция с Core
 
-**Purpose:** Define how the Marketer connects to the shared AI Office infrastructure.
+**Цель:** Определить, как Маркетолог подключается к общей инфраструктуре ИИ Офиса.
 
-Covers:
-- How role-level instructions layer on top of the Core system prompt
-- Priority resolution when Core and role instructions conflict
-- Shared utilities available to all roles (memory, delegation protocol, etc.)
-- Version compatibility requirements
-
----
-
-### Section 2 — Core Identity
-
-**Purpose:** Establish the Critical Marketing Expert persona and philosophy.
-
-This is the most important section for behavior shaping. It defines:
-
-- **L4 Autonomy** — acts on judgment, not just instructions
-- **Expert stance** — improves the question, not just answers it
-- **Challenge protocol** — when and how to argue against a request
-- **Alternative proposal format** — how to present a better option
-- **Non-negotiable behaviors** — what cannot be turned off by the user
-
-Key principle encoded here:
-> The bot is not an order taker. It is the equivalent of a senior marketing strategist
-> who will tell a CEO "that's a bad idea and here's why" — respectfully, with data,
-> and with an alternative ready.
+Охватывает:
+- Как ролевые инструкции накладываются поверх системного промпта Core
+- Разрешение приоритетов при конфликте Core и ролевых инструкций
+- Общие утилиты, доступные всем ролям (память, протокол делегирования и т.д.)
+- Требования к совместимости версий
 
 ---
 
-### Section 3 — Scope
+### Секция 2 — Базовая идентичность
 
-**Purpose:** Define exactly what this role handles and what it delegates.
+**Цель:** Сформировать персону и философию Critical Marketing Expert.
 
-Contains a domain table with three columns:
+Это самая важная секция для формирования поведения. Она определяет:
 
-| Column | Content |
+- **Автономия L4** — действует по собственному суждению, а не только по инструкциям
+- **Экспертная позиция** — улучшает вопрос, а не просто отвечает на него
+- **Протокол возражений** — когда и как оспаривать запрос
+- **Формат предложения альтернатив** — как представить лучший вариант
+- **Неотключаемые поведения** — что нельзя отключить по запросу пользователя
+
+Ключевой принцип:
+> Бот — не исполнитель. Он эквивалент старшего маркетинг-стратега, который скажет CEO «это плохая идея, и вот почему» — уважительно, с данными и с готовой альтернативой.
+
+---
+
+### Секция 3 — Область ответственности
+
+**Цель:** Точно определить, что эта роль выполняет, а что делегирует.
+
+Содержит таблицу доменов с тремя столбцами:
+
+| Столбец | Содержимое |
 |---|---|
-| In scope | What the Marketer handles directly |
-| Delegate to | Which role receives the task |
-| Reason | Why the boundary exists there |
+| В области ответственности | Что Маркетолог выполняет напрямую |
+| Делегировать | Какая роль получает задачу |
+| Причина | Почему граница проходит именно здесь |
 
-Key boundaries encoded:
-- Copy writing → Copywriter (not Marketer's job)
-- Content calendar → Content Manager
-- Course structure → Methodologist
-- Business model → Visionary
-- Russian ad platforms → out of scope entirely
-
----
-
-### Section 4 — Iron Rules
-
-**Purpose:** Hard constraints that cannot be overridden by user instruction.
-
-Rules in this section apply regardless of how the user frames the request. They are
-labeled "iron" because they represent failure modes the bot has been explicitly trained
-to avoid.
-
-Selected rules (structural description, not full content):
-- Rule on platform scope (which ad platforms are in/out)
-- Rule on number realism (benchmark sources, rejection of inflated claims)
-- Rule on critical evaluation (cannot be skipped or bypassed)
-- Rule on Copywriter brief format (structured REQUEST, not verbal)
-- Rule on claim validation (marketing claims require supporting logic)
+Ключевые границы:
+- Написание текстов → Копирайтер (не задача Маркетолога)
+- Контент-план → Контент-менеджер
+- Структура курса → Методолог
+- Бизнес-модель → Визионер
+- Российские рекламные платформы → полностью вне области ответственности
 
 ---
 
-### Section 5 — Workflow
+### Секция 4 — Железные правила
 
-**Purpose:** Define the standard operating procedure for request handling.
+**Цель:** Жёсткие ограничения, которые нельзя переопределить инструкцией пользователя.
 
-The workflow is a sequential decision tree:
+Правила этой секции применяются независимо от того, как пользователь формулирует запрос. Они названы «железными», потому что представляют сценарии провала, которых бот явно обучен избегать.
+
+Избранные правила (структурное описание, не полный текст):
+- Правило о платформах (какие рекламные платформы в зоне ответственности, а какие нет)
+- Правило о реализме цифр (источники бенчмарков, отклонение раздутых утверждений)
+- Правило о критической оценке (нельзя пропустить или обойти)
+- Правило о формате брифа для Копирайтера (структурированный REQUEST, не устный)
+- Правило о валидации утверждений (маркетинговые заявления требуют обосновывающей логики)
+
+---
+
+### Секция 5 — Рабочий процесс
+
+**Цель:** Определить стандартную операционную процедуру обработки запросов.
+
+Рабочий процесс — последовательное дерево решений:
 
 ```
-Step 1: Classify request (strategy / execution / delegation / out of scope)
-Step 2: Evaluate quality of request (sound / weak / misframed)
-Step 3: If weak → challenge with data + propose alternative
-Step 4: Enhance request if needed (surface missing context)
-Step 5: Activate relevant KB sections via router
-Step 6: Generate output using ALL available resources
-Step 7: Flag any assumptions made
+Шаг 1: Классифицировать запрос (стратегия / исполнение / делегирование / вне зоны)
+Шаг 2: Оценить качество запроса (обоснованный / слабый / неверно сформулированный)
+Шаг 3: Если слабый → оспорить с данными + предложить альтернативу
+Шаг 4: При необходимости улучшить запрос (выявить недостающий контекст)
+Шаг 5: Активировать нужные секции KB через роутер
+Шаг 6: Сформировать ответ, используя ВСЕ доступные ресурсы
+Шаг 7: Отметить все сделанные допущения
 ```
 
-The "use ALL resources" instruction in Step 6 means: KB + reasoning + benchmarks +
-cross-referencing multiple sections. Not the first match — the best answer.
+Инструкция «использовать ВСЕ ресурсы» в шаге 6 означает: KB + рассуждение + бенчмарки + перекрёстные ссылки на несколько секций. Не первое совпадение — лучший ответ.
 
 ---
 
-### Section 6 — Output Formats
+### Секция 6 — Форматы вывода
 
-**Purpose:** Standardize how the Marketer presents its outputs.
+**Цель:** Стандартизировать, как Маркетолог представляет свои результаты.
 
-Defined formats:
+Определённые форматы:
 
-| Format name | When used | Structure |
+| Название формата | Когда используется | Структура |
 |---|---|---|
-| Campaign Strategy | Full campaign planning | Objective → Audience → Channels → Budget → KPIs → Timeline |
-| Funnel Audit | Analyzing existing funnels | Stage-by-stage breakdown with conversion benchmarks |
-| Media Plan | Paid ads planning | Channel allocations, targeting, creative requirements, budget |
-| Launch Plan | Product/course launches | Phase breakdown with milestones and triggers |
-| Copywriter Brief (REQUEST) | Handing off to Copywriter | Structured template: audience, message, format, tone, CTA |
-| Unit Economics Model | Financial analysis | Inputs → Calculations → Sensitivity analysis → Recommendation |
+| Campaign Strategy | Полное планирование кампании | Цель → Аудитория → Каналы → Бюджет → KPI → Таймлайн |
+| Funnel Audit | Анализ существующих воронок | Пофазовая разбивка с конверсионными бенчмарками |
+| Media Plan | Планирование платной рекламы | Распределение по каналам, таргетинг, требования к креативам, бюджет |
+| Launch Plan | Запуск продукта/курса | Пофазовая разбивка с вехами и триггерами |
+| Copywriter Brief (REQUEST) | Передача задачи Копирайтеру | Структурированный шаблон: аудитория, месседж, формат, тон, CTA |
+| Unit Economics Model | Финансовый анализ | Исходные данные → Расчёты → Анализ чувствительности → Рекомендация |
 
 ---
 
-### Section 7 — KB Usage Rules
+### Секция 7 — Правила использования KB
 
-**Purpose:** Define how the bot interacts with the knowledge base.
+**Цель:** Определить, как бот взаимодействует с базой знаний.
 
-Covers:
-- When to use KB vs. when to reason from first principles
-- How to handle conflicts between KB content and current best practices
-- Version freshness — how to flag potentially outdated KB content
-- Multi-section activation — how to combine insights from multiple sections
-- Citing KB sections in responses (when to be explicit about source)
-
----
-
-### Section 8 — Collaboration
-
-**Purpose:** Define handoff protocols to other AI Office roles.
-
-The most structured part is the **REQUEST format** — the template used when briefing
-the Copywriter. It ensures the Copywriter receives everything needed without back-and-forth.
-
-REQUEST template fields (structural):
-- Task type (ad / email / LP / other)
-- Target audience (specific segment, not generic)
-- Core message (one sentence)
-- Desired action (specific CTA)
-- Tone and style parameters
-- Format and length constraints
-- Context (where this appears in the funnel)
-- Constraints (what to avoid)
-
-Also covers:
-- When to loop in the Analyst (data requests)
-- When to escalate to Visionary (strategic repositioning)
-- How to receive briefs from other roles
+Охватывает:
+- Когда использовать KB, а когда рассуждать от первых принципов
+- Как обрабатывать противоречия между содержимым KB и актуальными практиками
+- Свежесть версии — как отмечать потенциально устаревший контент KB
+- Активация нескольких секций — как объединять инсайты из разных секций
+- Ссылки на секции KB в ответах (когда явно указывать источник)
 
 ---
 
-## Instruction Design Principles
+### Секция 8 — Взаимодействие
 
-The v2.4 instructions reflect three design choices worth noting for the demo:
+**Цель:** Определить протоколы передачи задач другим ролям ИИ Офиса.
 
-1. **Evaluation is structural, not stylistic.** It is encoded as a step in the workflow,
-   not as a personality trait. This means it cannot be prompted away.
+Наиболее структурированная часть — **формат REQUEST**: шаблон, используемый при постановке задачи Копирайтеру. Он гарантирует, что Копирайтер получает всё необходимое без лишних уточнений.
 
-2. **Scope boundaries are explicit tables.** Rather than prose descriptions, the scope
-   section uses a domain table. This reduces ambiguity and makes boundary cases
-   easier to resolve.
+Поля шаблона REQUEST (структурно):
+- Тип задачи (реклама / email / лендинг / другое)
+- Целевая аудитория (конкретный сегмент, не общий)
+- Ключевой месседж (одно предложение)
+- Желаемое действие (конкретный CTA)
+- Параметры тона и стиля
+- Ограничения по формату и объёму
+- Контекст (где это находится в воронке)
+- Ограничения (чего избегать)
 
-3. **Output formats are templates, not examples.** Each format is a reusable structure.
-   This keeps outputs consistent across sessions and users.
+Также охватывает:
+- Когда подключать Аналитика (запросы данных)
+- Когда эскалировать к Визионеру (стратегическое репозиционирование)
+- Как получать брифы от других ролей
+
+---
+
+## Принципы дизайна инструкций
+
+Инструкции v2.4 отражают три проектных решения, заслуживающих внимания в рамках демо:
+
+1. **Оценка — структурная, а не стилистическая.** Она закодирована как шаг в рабочем процессе, а не как черта личности. Это означает, что её нельзя убрать через промпт.
+
+2. **Границы области ответственности — явные таблицы.** Вместо текстовых описаний в секции области используется таблица доменов. Это снижает неоднозначность и упрощает разрешение пограничных случаев.
+
+3. **Форматы вывода — шаблоны, а не примеры.** Каждый формат — переиспользуемая структура. Это обеспечивает единообразие результатов в разных сессиях и у разных пользователей.

@@ -1,40 +1,40 @@
-# How Roles Interact
+# Как взаимодействуют роли
 
-See also: [architecture.md](./architecture.md) | [roles-overview.md](./roles-overview.md)
-
----
-
-## 1. Interaction Model
-
-Each role in the AI Office is an **independent Claude Project**. There is no automatic agent-to-agent communication. No role can call another role directly. No orchestration layer runs in the background.
-
-The user is the orchestrator.
-
-Workflow:
-1. User opens Role A's Project, provides input, gets output
-2. User copies relevant output (or a formatted REQUEST) to Role B's Project
-3. Role B picks up from there
-
-This design is intentional. Each role stays focused on its domain. Context crosses role boundaries only when the user decides it should — and only as much context as is needed.
+См. также: [architecture.md](./architecture.md) | [roles-overview.md](./roles-overview.md)
 
 ---
 
-## 2. The REQUEST Format
+## 1. Модель взаимодействия
 
-To make handoffs structured and unambiguous, each role generates a standardized REQUEST block when passing work to another role. The user copies this block into the receiving role's conversation.
+Каждая роль в AI Office — это **независимый Claude Project**. Автоматической коммуникации между агентами нет. Ни одна роль не может напрямую вызвать другую. Никакого оркестрационного слоя в фоне не существует.
+
+Пользователь — оркестратор.
+
+Рабочий процесс:
+1. Пользователь открывает Project роли A, даёт входные данные, получает результат
+2. Пользователь копирует нужный результат (или оформленный REQUEST) в Project роли B
+3. Роль B продолжает работу с этого места
+
+Такой дизайн выбран намеренно. Каждая роль остаётся сфокусированной на своём домене. Контекст пересекает границы ролей только когда пользователь решает, что это нужно — и ровно в том объёме, который необходим.
+
+---
+
+## 2. Формат REQUEST
+
+Чтобы передача была структурированной и однозначной, каждая роль формирует стандартизированный блок REQUEST при передаче работы другой роли. Пользователь копирует этот блок в диалог принимающей роли.
 
 ```
 ## REQUEST
-**From:** [Bot Name]
-**To:** [Bot Name]
-**Task:** [What needs to be done]
-**Context:** [Why this is needed, what came before]
-**Inputs:** [Deliverables from the sending bot]
-**Output:** [What the receiving bot should produce]
-**Deadline:** [When]
+**From:** [Название бота]
+**To:** [Название бота]
+**Task:** [Что нужно сделать]
+**Context:** [Зачем это нужно, что было до]
+**Inputs:** [Материалы от отправляющего бота]
+**Output:** [Что должен произвести принимающий бот]
+**Deadline:** [Когда]
 ```
 
-**Example:**
+**Пример:**
 
 ```
 ## REQUEST
@@ -47,138 +47,138 @@ To make handoffs structured and unambiguous, each role generates a standardized 
 **Deadline:** 2026-02-25
 ```
 
-The sending role produces the REQUEST as part of its output. The receiving role treats it as a complete task specification and proceeds without needing additional clarification.
+Отправляющая роль формирует REQUEST как часть своего результата. Принимающая роль воспринимает его как полную спецификацию задачи и приступает к работе без дополнительных уточнений.
 
 ---
 
-## 3. Common Collaboration Patterns
+## 3. Типовые сценарии взаимодействия
 
-### Content Creation Flow
+### Создание контента
 
 ```
 Marketer
-  |-- strategy + content brief
+  |-- стратегия + контент-бриф
   v
 Copywriter
-  |-- written content
+  |-- готовый текст
   v
 Content Manager
-  |-- scheduled, formatted, ready to publish
+  |-- запланировано, отформатировано, готово к публикации
 ```
 
-Marketer defines what to say and why. Copywriter writes it. Content Manager handles delivery.
+Маркетолог определяет, что и зачем говорить. Копирайтер пишет. Контент-менеджер берёт на себя публикацию.
 
 ---
 
-### Course Launch Flow
+### Запуск курса
 
 ```
 Methodologist
-  |-- program structure + learning outcomes
+  |-- структура программы + результаты обучения
   v
 Producer
-  |-- launch plan + team delegation
+  |-- план запуска + распределение задач
   v
 Marketer ──────────────────── Copywriter
-  |-- campaign strategy         |-- sales page, emails
-  v                             v
+  |-- стратегия кампании         |-- продающая страница, письма
+  v                              v
           Analyst
-            |-- metrics tracking + post-launch report
+            |-- отслеживание метрик + отчёт после запуска
 ```
 
-Methodologist builds the product. Producer coordinates the launch. Marketer and Copywriter run in parallel on campaign and copy. Analyst closes the loop.
+Методолог строит продукт. Продюсер координирует запуск. Маркетолог и копирайтер работают параллельно — над кампанией и текстами. Аналитик закрывает цикл.
 
 ---
 
-### Campaign Optimization
+### Оптимизация кампании
 
 ```
 Analyst
-  |-- performance data + insights
+  |-- данные о результатах + инсайты
   v
 Marketer
-  |-- strategy adjustment
+  |-- корректировка стратегии
   v
 Copywriter
-  |-- new creative brief + revised messaging
+  |-- новый креативный бриф + обновлённые сообщения
 ```
 
-Starts with data, ends with updated creative. No guessing.
+Начинается с данных, заканчивается обновлённым контентом. Никаких догадок.
 
 ---
 
-### Strategic Pivot
+### Стратегический разворот
 
 ```
 Visionary
-  |-- market analysis + strategic recommendation
+  |-- анализ рынка + стратегическая рекомендация
   v
 Marketer
-  |-- new positioning + audience targeting
+  |-- новое позиционирование + таргетинг аудитории
   v
 Copywriter
-  |-- new messaging framework + tone of voice
+  |-- новый мессенджинг-фреймворк + tone of voice
 ```
 
-Used when direction changes — new niche, new offer, new market segment.
+Используется при смене направления — новая ниша, новый оффер, новый рыночный сегмент.
 
 ---
 
-### Full Office Cycle
+### Полный цикл офиса
 
 ```
 Visionary
-  |-- direction + priorities
+  |-- направление + приоритеты
   v
 Marketer
-  |-- strategy + campaigns
+  |-- стратегия + кампании
   v
 Producer
-  |-- project plan + assignments
+  |-- план проекта + назначения
   v
 Methodologist   Copywriter   Designer
-  |-- content      |-- copy     |-- visuals
+  |-- контент      |-- тексты   |-- визуалы
   v                v            v
           Content Manager
-            |-- publishing schedule
+            |-- план публикаций
             v
           Analyst
-            |-- results + recommendations
+            |-- результаты + рекомендации
             v
-          Visionary  (loop)
+          Visionary  (цикл)
 ```
 
-This is the complete cycle for a product or campaign from strategic intent to measurement and back. Not every project needs every role — use what the task requires.
+Это полный цикл для продукта или кампании — от стратегического замысла до измерения результатов и обратно. Не каждый проект требует всех ролей — используйте то, что нужно для задачи.
 
 ---
 
-## 4. AI Office Map
+## 4. Карта AI Office
 
-The AI Office Map is a JSON configuration file loaded into every role's Project as a reference document.
+Карта AI Office — это JSON-файл конфигурации, который загружается в Project каждой роли как справочный документ.
 
-It contains:
-- All 10 roles with their names and short descriptions
-- Each role's domain and primary responsibilities
-- What inputs each role accepts and what outputs it produces
-- When to use each role (trigger conditions)
-- Which roles a given role typically hands off to
+Он содержит:
+- Все 10 ролей с их названиями и краткими описаниями
+- Домен и основные обязанности каждой роли
+- Какие входные данные принимает каждая роль и какой результат производит
+- Когда использовать каждую роль (триггеры)
+- Каким ролям та или иная роль обычно передаёт работу
 
-Every bot reads this map, which means every bot knows who else exists and where to redirect when a task falls outside its domain. A Copywriter receiving a request about analytics knows to redirect to the Analyst. A Producer receiving a strategic question knows to redirect to the Visionary or Marketer.
+Каждый бот читает эту карту — а значит, каждый бот знает, кто ещё существует и куда перенаправить, если задача выходит за рамки его домена. Копирайтер, получивший запрос про аналитику, знает, что нужно перенаправить к аналитику. Продюсер, получивший стратегический вопрос, знает, что нужно обратиться к визионеру или маркетологу.
 
-The map does not enable direct communication — it enables accurate redirection.
+Карта не обеспечивает прямую коммуникацию — она обеспечивает точное перенаправление.
 
 ---
 
-## 5. What This Means in Practice
+## 5. Что это означает на практике
 
-**No single bot needs to know everything.**
-Each role has a defined scope. Depth within that scope matters more than breadth across all scopes.
+**Ни одному боту не нужно знать всё.**
+У каждой роли есть чётко определённый охват. Глубина внутри этого охвата важнее ширины охвата по всем областям.
 
-**Each bot stays focused on its domain.**
-When a task arrives that belongs elsewhere, the bot says so and generates a REQUEST for the right role. It does not attempt to cover ground outside its expertise.
+**Каждый бот остаётся сфокусированным на своём домене.**
+Когда приходит задача, которая относится к другому специалисту, бот говорит об этом и формирует REQUEST для нужной роли. Он не пытается покрыть область за пределами своей экспертизы.
 
-**Quality comes from depth, not breadth.**
-A Copywriter that only writes copy — and does it with full concentration — produces better output than a generalist trying to do everything. Same for every role.
+**Качество — от глубины, не от широты.**
+Копирайтер, который только пишет тексты — и делает это с полной концентрацией — производит лучший результат, чем универсал, пытающийся делать всё. То же самое для каждой роли.
 
-**The user is the conductor; bots are the orchestra.**
-The user decides what gets done, in what order, and when context moves from one role to another. The bots execute with precision inside their lanes. The system produces coherent output because the user holds the overall view.
+**Пользователь — дирижёр; боты — оркестр.**
+Пользователь решает, что делается, в каком порядке и когда контекст переходит от одной роли к другой. Боты работают точно в рамках своей зоны. Система производит связный результат, потому что пользователь держит общую картину.
