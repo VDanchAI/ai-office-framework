@@ -4,7 +4,7 @@
 
 > From Claude to GPT — and beyond
 
-> Unified architecture. Built on Claude Projects.
+> Unified architecture. Not just Claude Projects.
 
 > 🇷🇺 [Русская версия](README.md)
 
