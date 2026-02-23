@@ -4,7 +4,7 @@
 
 > From Claude to GPT — and beyond
 
-> 10 roles. Unified architecture. Built on Claude Projects.
+> Unified architecture. Built on Claude Projects.
 
 > 🇷🇺 [Русская версия](README.md)
 
